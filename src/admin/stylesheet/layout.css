@@ -1,0 +1,270 @@
+.layout{
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    position: relative;
+    font-family: var(--mont) !important;
+
+}
+.layout .cide{
+  height: 100%;
+  background: white;
+  position: fixed;
+}
+
+.component{
+    width: calc(100% - 18rem);
+    display: flex;
+   flex-direction: column;
+    flex: 1;
+  
+    margin-left: 18rem;
+}
+
+
+.close-side{
+  margin-left: 5rem;
+  width: 100%;
+    display: flex;
+   flex-direction: column;
+    flex: 1;
+
+}
+.pages{
+  width: 100%;
+    background: #f2f3f7;
+    padding: 1rem 2.5rem;
+    padding-right: 1rem;
+    min-height: 100vh !important;
+}
+.homes{
+ display: flex;
+  flex-direction: column;  
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.top_home{
+  display: flex;
+  justify-content: space-between;
+    gap: 2rem;
+    width: 100%;
+}
+
+.homes_head{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.homes_head h2{
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.rev{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  padding-top: 2rem;
+}
+
+.rev> div{
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rev  span{
+  padding: 0.8rem;
+  border-radius: 7px;
+  background: var(--blu);
+}
+.rev svg{
+  color: white;
+  font-size: 3rem;
+}
+
+.rev div div{
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.rev h3{
+  font-weight: 400;
+}
+
+.rev p{
+  font-size: 2.5rem;
+  font-weight: 600;
+
+}
+
+.inst{
+  width: 30%;
+
+  height: inherit;
+ 
+  
+}
+
+.inst > div{ 
+  margin-top: 2rem;
+  border-radius: 14px;
+   background: white;
+   padding: 2rem;
+   display: flex;
+  align-items: center;
+   flex-direction: column;
+}
+
+.inst h2{
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+
+.inst img{
+  width: 9rem;
+  border-radius: 50%;
+}
+
+.inst_name{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inst_name h3{ padding-top: 1rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  text-align: center;
+  
+}
+.inst_name p{
+  text-align: center;
+ 
+
+}
+
+.inst_name span{
+  text-align: center;
+  color: blue !important;
+
+}
+
+.cs{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem !important;
+  padding:0 3rem;
+  border-top: 1px solid #8c8c8c79;
+  ;
+}
+.cs p{
+  font-size: 1.7rem;
+  font-weight: 500;
+  color: var(--yell);
+}
+
+.cs div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width:inherit;
+  
+
+
+}
+
+.cs div:nth-child(1){
+  border-right: 1px solid #8c8c8c7e;
+  padding-right: 1rem;
+
+}
+
+.cs div:nth-child(2){
+  padding-left: 1rem;
+
+}
+.home_bottoms{
+  
+   display: flex;
+   justify-content: space-between;
+   flex-direction: row;
+   gap: 2rem;
+   padding-top: 0 !important;
+  
+ }
+ .bar_admin{
+   height: fit-content;
+   background: white;
+   border-radius: 10px;
+   width: 100%;
+   padding: 2rem 1rem 3rem 1rem;
+ }
+ .bar_div{
+   height: 450px;
+ }
+
+
+ @media screen and (max-width: 1200px) {
+  .top_home{
+    flex-direction: column;
+  }
+
+  .homes_head{
+    width: 100%;
+  }
+  .inst{
+    width: 90%
+    ;
+  }
+ }
+
+
+@media screen and (max-width: 1020px) {
+  
+  .bar_admin{
+    height: fit-content;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  
+  .component{
+    width: 100%;
+    display: flex;
+   flex-direction: column;
+    flex: 1;
+    
+    margin-left: 0;
+}
+
+.close-side{
+  width: calc(100% - 3.5rem);
+  display: flex;
+ flex-direction: column;
+  flex: 1;
+  
+  margin-left: 3.5rem;
+}
+
+}
+  
+@media screen and (max-width: 550px) {
+  .rev{
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .inst{
+    width: 100%;
+  }
+}
+
+

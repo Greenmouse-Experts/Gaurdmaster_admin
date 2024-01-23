@@ -1,0 +1,50 @@
+@media screen and (max-width: 1024px){
+    
+  html{
+      font-size: 90%;
+  }
+}
+
+
+
+
+@media screen and (max-width: 850px){
+  
+  html{
+    font-size: 85%;
+  }
+}
+
+
+
+@media screen and (max-width: 640px){
+  
+  html{
+      font-size: 80%;
+  }
+
+}
+
+@media screen and (max-width: 550px){
+  
+  html{
+      font-size: 75%;
+  }
+
+ 
+}
+p{
+  padding: 0 ;
+}
+
+*{
+  font-family: var(--font) !important;
+  margin: 0;   
+  padding: 0;
+  outline: 0;
+  list-style: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+
+}
