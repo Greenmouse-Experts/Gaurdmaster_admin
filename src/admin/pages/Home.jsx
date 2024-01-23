@@ -2,7 +2,7 @@ import React from "react";
 import "../stylesheet/layout.css";
 import { Line } from "react-chartjs-2";
 // eslint-disable-next-line
-import { Chart as chartjs } from "chart.js/auto";
+// import { Chart as chartjs } from "chart.js/auto";
 import { FaUsers, FaUserCheck } from "react-icons/fa";
 import { GiBookshelf } from "react-icons/gi";
 import logo from "../../assets/profile.png";
@@ -127,11 +127,11 @@ const Home = () => {
         <div className="bar_admin">
           <h2>This Year Revenue</h2>
           <div className="bar_div">
-            <Line
+            {/* <Line
               data={data}
               options={options}
               style={{ width: "inherit", height: "100%" }}
-            />
+            /> */}
           </div>
         </div>
       </div>

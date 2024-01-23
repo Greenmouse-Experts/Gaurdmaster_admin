@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidenav from "../components/Sidenav";
 import { Topnav } from "../components/Topnav";
-import { Route, Routes } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import "../stylesheet/layout.css";
-import { adminRoutes } from "../../routes/routes";
 
 
 const Dashboard = () => {
@@ -24,6 +23,16 @@ const Dashboard = () => {
     setShowIdMenu(false)
     setshowPaymentMenu(false)
   };
+  const token = localStorage.getItem('guardAdmin_token')
+  const navigate = useNavigate()
+  useEffect(() => {
+    if(!token){
+      navigate("/login");
+    }
+  }, [])
+  if (!token) {
+    return;
+  }
 
   return (
     <div className="layout">
@@ -54,13 +63,7 @@ const Dashboard = () => {
           />
         </div>
         <div className="pages">
-          <Routes>
-          {adminRoutes.map((item) => {
-            return (
-              <Route path={item.path} element={item.component} key={item.id} />
-            );
-          })}
-          </Routes>
+          <Outlet/>
         </div>
       </div>
     </div>
