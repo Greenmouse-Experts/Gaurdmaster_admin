@@ -173,7 +173,7 @@ const Sidebar = ({
                 </span>
                 {showUsersMenu && (
                   <div className="nav">
-                    <NavLink onClick={closeSidebar} to="alluser">
+                    <NavLink onClick={closeSidebar} to="admins">
                       Admin
                     </NavLink>
                     <NavLink onClick={closeSidebar} to="activeuser">

@@ -121,3 +121,77 @@ font-size: 1.8rem;
     border: 0;
     font-weight: 600;
 }
+
+.adminman{
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+    margin-right: 1rem;
+}
+.admin_head{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.card_table{
+    width: 100% !important;
+    overflow-x: auto;
+    border: black 1px solid;
+     margin-top: 2rem;
+     font-family: var(--mont) !important;
+}
+.card_table table{
+   margin-top: 0;
+    overflow-x: auto;
+   background: var(--blu);
+    color: white;
+    /* margin-top: 2rem; */
+    width: 100%;
+    border: none;
+    border-bottom: none;
+    overflow-x: auto;
+}
+
+.card_table th:not(:last-child){
+    border-right:  black 1px solid ;
+    text-align: left;
+    padding: 1rem;
+
+}
+
+.card_table td:not(:last-child){
+    border-right:  black 1px solid ;
+    
+}
+
+
+.card_table td{
+    margin-top: 5rem;
+    text-align: left;
+    border-bottom:black 1px solid;
+    padding: 1rem;
+    color: black;
+}
+
+.card_table th{
+    border-bottom:black 1px solid;
+    text-align: left;
+    padding: 1rem;
+    white-space: nowrap;
+    padding-right: 2.5rem  !important;
+}
+
+.card_table tr{
+    border-bottom:black 1px solid;
+    display: table-row; 
+}
+
+.card_table p{
+    width: inherit;
+    padding: 1.3rem;
+
+    border-top: none;
+}
