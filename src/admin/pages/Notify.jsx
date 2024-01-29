@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../stylesheet/pages.css";
+import "../stylesheet/adminstyles.css";
 import { BsTrash3Fill } from "react-icons/bs";
 import {GoBell} from "react-icons/go"
 

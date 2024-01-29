@@ -9,12 +9,12 @@ const Profile = () => {
   return (
     <div className="profile">
       <div className="profile_left">
-        <h2>My Profile</h2>
+        <h2>Admin Details</h2>
         <div className="profile_head">
           <img src={profile} alt="" />
           <div>
             <h3>Admin</h3>
-            <button>Upload Photo</button>
+            <button>Update Photo</button>
           </div>
         </div>
         <div className="profile_body">
@@ -36,15 +36,7 @@ const Profile = () => {
               <h3>Administrator</h3>
             </div>
           </div>
-          <div>
-            <span>
-              <MdOutlineAdminPanelSettings />
-            </span>
-            <div className="prof_card">
-              <label htmlFor="register">Level</label>
-              <h3>Super</h3>
-            </div>
-          </div>
+         
          
         </div>
       </div>
@@ -53,7 +45,7 @@ const Profile = () => {
         <form action="submit">
           <h2>Update Profile</h2>
 
-          <div className="input_log">
+          <div className="input">
             <label htmlFor="firstname">Name</label>
             <div>
               <input
@@ -64,7 +56,7 @@ const Profile = () => {
             </div>
             </div>
           
-          <div className="input_log">
+          <div className="input">
             <label htmlFor="phone">Email</label>
             <div>
               <input
@@ -80,7 +72,7 @@ const Profile = () => {
         <form action="submit">
           <h2>Change Password</h2>
 
-          <div className="input_log">
+          <div className="input">
             <label htmlFor="newwpass">New Password</label>
             <div>
               <input
@@ -90,7 +82,7 @@ const Profile = () => {
               />
             </div>
           </div>
-          <div className="input_log">
+          <div className="input">
             <label htmlFor="confirmnew">Confirm New Password</label>
             <div>
               <input

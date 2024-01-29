@@ -43,15 +43,17 @@ export const Topnav = ({ toggleSidebar }) => {
 
       <div className="icon_menu">
         <div onClick={popup} ref={bellIconRef} className="bell">
+         <div className="bell_icon"><GoBell /> 
+           <span> 6</span>
+         </div>
          
-          <span> <GoBell /> 6</span>
           {activeDropdown && (
             <div className="bell_drop">
               {datas.length > 0 ? (
                 datas.data.map((item) => (
                   <div key={item.id}>
                     <div className="add_head">
-                      <p>Recent Notification</p>{" "}
+                      <p>Notification</p>{" "}
                     </div>
                     <div className="bell_body">
                       <GoBell />
@@ -67,12 +69,12 @@ export const Topnav = ({ toggleSidebar }) => {
                 <div>
                   {" "}
                   <div className="add_head">
-                    <p>Recent Notification</p>{" "}
+                    <p>Notification</p>{" "}
                   </div>{" "}
                   <p className="no_body">No Notifications</p>
                 </div>
               )}
-              <Link to="/admindash/notify">View Details</Link>
+              <Link to="/notify">View All Notificaton</Link>
             </div>
           )}
         </div>

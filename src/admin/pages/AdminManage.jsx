@@ -9,8 +9,8 @@ const AdminManage = () => {
   return (
     <div className="adminman">
         <div className="admin_head">
-            <h2>User Create</h2>
-            <Link to="/admin/admins"><FaPlus /> Show All User</Link>
+        <h2>All Admin</h2>
+            <Link to="/adduser"><FaPlus />Add New Admin User</Link>
         </div>
 
         <div className="card_table">
