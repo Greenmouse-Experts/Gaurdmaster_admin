@@ -47,7 +47,7 @@ const Login = () => {
     <div className="main_login">
       <div className="side1">
         <div>
-          <img src={'https://res.cloudinary.com/greenmouse-tech/image/upload/v1706009611/GuardMaster/Guardmaster_transparent_1_ucddxt.png'} alt="" />
+          <img src={'https://res.cloudinary.com/greenmouse-tech/image/upload/v1706278834/rsh/logo2-removebg-preview_fcvxwc.png'} alt="" />
           <div>
             <h3>Welcome Admin!</h3>
             <p>
