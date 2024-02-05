@@ -2,16 +2,16 @@ import React, { useEffect, useRef,useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/wlogo.png";
 import { FiSettings, FiLogOut } from "react-icons/fi";
-import { BsCalendar4Event, BsBellFill, BsCashCoin } from "react-icons/bs";
+import { BsCalendar4Event,  BsCashCoin } from "react-icons/bs";
 import { LuLayoutDashboard } from "react-icons/lu";
 import "../stylesheet/component.css";
-import { GoVerified } from "react-icons/go";
 import {  FaUsers, FaUser, FaWallet } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowUp, IoIosArrowDown,IoIosChatbubbles } from "react-icons/io";
 import { GiBookshelf } from "react-icons/gi";
 import { IoSyncSharp } from "react-icons/io5";
+import useAuth from "../../hooks/useAuth";
+import useModal from "../../hooks/useModal";
 
 const Sidebar = ({
   showSidebar,
@@ -123,15 +123,15 @@ const Sidebar = ({
   const handleClick = () => {
     setPopup(true);
   };
-
+  
+  const {signOut} = useAuth()
   const handlePopup = () => {
     setPopup(false);
   };
-
-  const Navigate = useNavigate()
   const logout =()=> {
-    Navigate('/login')
+    signOut()
   }
+  const {Modal, setShowModal} = useModal()
 
   return (
     <div
@@ -139,7 +139,7 @@ const Sidebar = ({
       className={showSidebar ? "sidebar" : "sidebar closed"}
     >
       <div className={showSidebar ? "side_img" : "img-side"}>
-        <img className="img-logo" src={logo} alt="Logo" />{" "}
+        <img className="img-logo" src={'https://res.cloudinary.com/greenmouse-tech/image/upload/v1706278834/rsh/logo2-removebg-preview_fcvxwc.png'} alt="Logo" />{" "}
         <div className="men" onClick={toggleSidebar}>
           <AiOutlineClose />
         </div>
@@ -321,7 +321,7 @@ const Sidebar = ({
 
           
           <li className="nav-item">
-            <span onClick={handleClick} className="nav-link">
+            <span onClick={() => setShowModal(true)} className="nav-link">
               <span className="nav-icon">
                 <span>
                   {" "}
@@ -332,8 +332,8 @@ const Sidebar = ({
           </li>
         </ul>
       </nav>
-      {popup && (
-        <div className="popup">
+      {/* {popup && (
+        <div className="popup z-[2000]">
           <div className="modal" onClick={handlePopup}></div>
           <div className="pop_up">
             <div className="pop_head">
@@ -345,7 +345,18 @@ const Sidebar = ({
             </div>
           </div>
         </div>
-      )}
+      )} */}
+      <Modal title={''} size={'sm'} >
+          <div>
+          <div className="">
+              <h3 className="text-black fw-500 text-center">Are you Sure you want to Logout?</h3>
+            </div>
+            <div className="mt-12 flex justify-between px-3">
+            <button className="bg-red-600 text-white px-6 py-2 rounded-lg" onClick={() => setShowModal(false)}>No</button>
+              <button className="bg-primary text-white px-6 py-2 rounded-lg" onClick={logout}>Yes</button>
+            </div>
+          </div>
+      </Modal>
     </div>
   );
 };
