@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import ScrollToTop from "./components/ScrollToTop";
+// import ScrollToTop from "./components/ScrollToTop";
 import Admin from "./admin/pages/Admin"
 import "./App.css";
 import Login from "./pages/Login"
@@ -12,6 +12,7 @@ import Student from "./admin/pages/Student";
 import Studentdetails from "./admin/pages/Studentdetails";
 import Notify from "./admin/pages/Notify";
 import Support from "./admin/pages/Support";
+import ScrollToTop from "./Components/ScrollToTop";
 
 function App() {
   return (
