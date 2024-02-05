@@ -38,7 +38,6 @@ p{
 }
 
 *{
-  font-family: var(--font) !important;
   margin: 0;   
   padding: 0;
   outline: 0;

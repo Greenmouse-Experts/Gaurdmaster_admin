@@ -23,7 +23,7 @@ const Dashboard = () => {
     setShowIdMenu(false)
     setshowPaymentMenu(false)
   };
-  const token = localStorage.getItem('guardAdmin_token')
+  const token = localStorage.getItem('guardadmin_token')
   const navigate = useNavigate()
   useEffect(() => {
     if(!token){

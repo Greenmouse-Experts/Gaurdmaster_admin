@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import logo from "../assets/wlogo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { AiFillEye } from "react-icons/ai";
 import "../Stylesheet/login.css";
-import log from "../assets/logo.png";
 import { AdminLogin } from "../services/api/authApi";
 import { toast } from "react-toastify";
+import useAuthStore from "../store/userStore";
 
 const Login = () => {
+  const saveUser = useAuthStore((state) => state.saveUser);
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => {
-    setShowPassword(!showPassword); // Toggle the showPassword state
+    setShowPassword(!showPassword); 
   };
   const [isBusy, setIsBusy] = useState(false);
   const [userDetail, setUserDetail] = useState({
@@ -32,10 +32,24 @@ const Login = () => {
       password: userDetail.password,
     };
     await AdminLogin(payload)
-      .then(() => {
+      .then((data) => {
         toast.success("Login Successful");
         setIsBusy(false);
-        navigate("/");
+        // navigate("/");
+        console.log(data);
+        saveUser({
+          firstName: data.data.firstName,
+          lastName: data.data.lastName,
+          email: data.data.email,
+          token: data.accessToken,
+          phone: data.data.phone,
+          id: data.data.id,
+          image: data.data.picture,
+        });
+        localStorage.setItem('guardadmin_token', data.accessToken)
+        if(data.data.role === "admin"){
+          navigate('/')
+        }
       })
       .catch((error) => {
         toast.error(error?.response?.data?.message);
@@ -47,7 +61,12 @@ const Login = () => {
     <div className="main_login">
       <div className="side1">
         <div>
-          <img src={'https://res.cloudinary.com/greenmouse-tech/image/upload/v1706009611/GuardMaster/Guardmaster_transparent_1_ucddxt.png'} alt="" />
+          <img
+            src={
+              "https://res.cloudinary.com/greenmouse-tech/image/upload/v1706278834/rsh/logo2-removebg-preview_fcvxwc.png"
+            }
+            alt=""
+          />
           <div>
             <h3>Welcome Admin!</h3>
             <p>
@@ -60,7 +79,12 @@ const Login = () => {
       <div className="side2">
         <div className="login">
           <div className="login_logo">
-            <img src={'https://res.cloudinary.com/greenmouse-tech/image/upload/v1706009611/GuardMaster/Guardmaster_transparent_1_ucddxt.png'} alt="logo" />
+            <img
+              src={
+                "https://res.cloudinary.com/greenmouse-tech/image/upload/v1706009611/GuardMaster/Guardmaster_transparent_1_ucddxt.png"
+              }
+              alt="logo"
+            />
             <h3>Welcome Back!</h3>
           </div>
           <h2>Admin Login</h2>
@@ -93,7 +117,7 @@ const Login = () => {
                 </span>
               </div>
             </div>
-            <button>{isBusy? "Logging In..." : "Login"}</button>
+            <button>{isBusy ? "Logging In..." : "Login"}</button>
           </form>
         </div>
       </div>
