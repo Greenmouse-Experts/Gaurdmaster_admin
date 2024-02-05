@@ -269,9 +269,7 @@
   color: white;
 }
   
-.bel{
-  position: relative !important;z-index: 0 !important ;
-}
+
   .bell{
     padding: 0.5rem;
     border-radius: 7px;
@@ -306,7 +304,22 @@
     font-size: 1.2rem;
 }
 
+.bell_icon{
+  display: flex;
+  background: var(--yell);
+  padding: 8px 15px;
+  border-radius: 40px;
+  align-items: center;
+  gap: 0.2rem;
+  color: black;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+
+
   .bell_drop{
+    margin-top: 1rem;
     color: black;
     position: absolute;
     right: 10rem;
@@ -352,28 +365,25 @@
     justify-content: center;
   
   }
-  .modal{    
-    position: absolute;
-    background: #8C8C8C;
-    min-width: 100vw !important;
-    height: 100vh !important;
-  }
+  
   .pop_up{
-    height: 100%;
-    background: bisque;
+    
+    background: whitesmoke;
     width: 50%;
     padding: 3rem;
-    color: white;
+    color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2.5rem;
-    z-index: 5000;
+    z-index: 5000;border-radius: 10px;
   }
   
   .pop_up h3{
-    font-size: 1.7rem;
+    font-size: 2rem;
+    font-weight: 600;
+
   }
   
   .pop_btn{
@@ -395,7 +405,7 @@
   }
   
   .pop_btn button:nth-child(2){
-    background: white;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     color: black;
   
     border-radius: 5px;

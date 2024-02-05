@@ -150,7 +150,7 @@ const Sidebar = ({
             <li className="nav-item">
               <NavLink
                 onClick={closeSidebar}
-                to="/admin"
+                to="/"
                 className="nav-lin"
               >
                 <LuLayoutDashboard /> {showSidebar && "Dashboard"}
@@ -173,13 +173,13 @@ const Sidebar = ({
                 </span>
                 {showUsersMenu && (
                   <div className="nav">
-                    <NavLink onClick={closeSidebar} to="alluser">
+                    <NavLink onClick={closeSidebar} to="/admins">
                       Admin
                     </NavLink>
                     <NavLink onClick={closeSidebar} to="activeuser">
                       Instructors
                     </NavLink>
-                    <NavLink onClick={closeSidebar} to="sususer">
+                    <NavLink to="student" onClick={closeSidebar}>
                       Students
                     </NavLink>
                   </div>
@@ -250,7 +250,7 @@ const Sidebar = ({
             </li>
 
             <li className="nav-item">
-              <NavLink onClick={closeSidebar} to="notify" className="nav-link">
+              <NavLink onClick={closeSidebar} to="/uni"  className="nav-link">
                 <span className="nav-icon">
                   <span>
                   <FaWallet />
@@ -261,7 +261,7 @@ const Sidebar = ({
             </li>
 
             <li className="nav-item">
-              <NavLink onClick={closeSidebar} to="notify" className="nav-link">
+              <NavLink onClick={closeSidebar} to="/uni" className="nav-link">
                 <span className="nav-icon">
                   <span>
                   <IoSyncSharp />
@@ -271,7 +271,7 @@ const Sidebar = ({
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink onClick={closeSidebar} to="notify" className="nav-link">
+              <NavLink onClick={closeSidebar}  to="/uni"className="nav-link">
                 <span className="nav-icon">
                   <span>
                   <BsCashCoin />
@@ -311,9 +311,7 @@ const Sidebar = ({
                     <NavLink onClick={closeSidebar} to="profile">
                       My Profile
                     </NavLink>
-                    <NavLink onClick={closeSidebar} to="subpay">
-                      
-                    </NavLink>
+                    
                   </div>
                 )}
               </span>
@@ -323,7 +321,7 @@ const Sidebar = ({
 
           
           <li className="nav-item">
-            <span onClick={logout} className="nav-link">
+            <span onClick={handleClick} className="nav-link">
               <span className="nav-icon">
                 <span>
                   {" "}
@@ -334,7 +332,7 @@ const Sidebar = ({
           </li>
         </ul>
       </nav>
-      {/* {popup && (
+      {popup && (
         <div className="popup">
           <div className="modal" onClick={handlePopup}></div>
           <div className="pop_up">
@@ -347,7 +345,7 @@ const Sidebar = ({
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   );
 };

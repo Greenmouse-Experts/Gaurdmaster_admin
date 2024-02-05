@@ -214,6 +214,7 @@
  }
 
 
+
  @media screen and (max-width: 1200px) {
   .top_home{
     flex-direction: column;
@@ -234,6 +235,15 @@
   .bar_admin{
     height: fit-content;
   }
+  .close-side{
+    width: calc(100% - 3.5rem);
+    display: flex;
+   flex-direction: column;
+    flex: 1;
+    
+    margin-left: 4rem;
+  }
+  
 }
 
 @media screen and (max-width: 650px) {
@@ -248,12 +258,12 @@
 }
 
 .close-side{
-  width: calc(100% - 3.5rem);
+  width: calc(100% - 4.5rem);
   display: flex;
  flex-direction: column;
   flex: 1;
   
-  margin-left: 3.5rem;
+  margin-left: 4.5rem;
 }
 
 }

@@ -25,14 +25,14 @@ const Dashboard = () => {
   };
   const token = localStorage.getItem('guardAdmin_token')
   const navigate = useNavigate()
-  useEffect(() => {
-    if(!token){
-      navigate("/login");
-    }
-  }, [])
-  if (!token) {
-    return;
-  }
+  // useEffect(() => {
+  //   if(!token){
+  //     navigate("/login");
+  //   }
+  // }, [])
+  // if (!token) {
+  //   return;
+  // }
 
   return (
     <div className="layout">

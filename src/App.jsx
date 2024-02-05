@@ -6,6 +6,12 @@ import Login from "./pages/Login"
 import Home from "./admin/pages/Home";
 import Profile from "./admin/pages/Profile";
 import Dashboard from "./admin/pages/Admin";
+import AdminManage from "./admin/pages/AdminManage";
+import Usercreate from "./admin/pages/Usercreate";
+import Student from "./admin/pages/Student";
+import Studentdetails from "./admin/pages/Studentdetails";
+import Notify from "./admin/pages/Notify";
+import Support from "./admin/pages/Support";
 
 function App() {
   return (
@@ -15,6 +21,12 @@ function App() {
         <Route element={<Dashboard/>}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/admins" element={<AdminManage/>}/>
+          <Route path="/adduser" element={<Usercreate/>}/>
+          <Route path="/student" element={<Student/>}  />
+          <Route path="/studentdetails" element={<Studentdetails/>}/>
+          <Route path="/notify" element={<Notify/>}/>
+          <Route path="/support" element={<Support/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
       </Routes>
