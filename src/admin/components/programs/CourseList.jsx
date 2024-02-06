@@ -42,22 +42,22 @@ const CoursesList = ({ data, refetch }) => {
   const [isBusy, setIsBusy] = useState(false);
   const updateProgramStatus = (val) => {
     const payload = {
-      isPublished: val === "active"? true : false
-    }
-    setIsBusy(true)
+      isPublished: val === "active" ? true : false,
+    };
+    setIsBusy(true);
     updateProgram(selectedId, payload)
-    .then((data) => {
-      toast.success(data.message);
-      setIsBusy(false);
-      refetch();
-      ShowPublish(false)
-      ShowRetract(false)
-    })
-    .catch((error) => {
-      toast.error(error.response.data.message);
-      setIsBusy(false);
-    });
-  }
+      .then((data) => {
+        toast.success(data.message);
+        setIsBusy(false);
+        refetch();
+        ShowPublish(false);
+        ShowRetract(false);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        setIsBusy(false);
+      });
+  };
   const columnHelper = createColumnHelper();
   const columns = [
     columnHelper.accessor((row) => row.title, {
@@ -66,25 +66,27 @@ const CoursesList = ({ data, refetch }) => {
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.shortDesc, {
-        id: "Description",
-        cell: (info) => <>{info.getValue()}</>,
-        header: (info) => info.column.id,
-      }),
-      columnHelper.accessor((row) => row.price, {
-        id: "Price",
-        cell: (info) => <>{`$${info.getValue()}.00`}</>,
-        header: (info) => info.column.id,
-      }),
-      columnHelper.accessor((row) => row.program, {
-        id: "Program",
-        cell: (info) => <>{info.getValue()?.title}</>,
-        header: (info) => info.column.id,
-      }),
-      columnHelper.accessor((row) => row.instructor, {
-        id: "Instructor",
-        cell: (info) => <>{`${info.getValue()?.firstName} ${info.getValue()?.lastName}`}</>,
-        header: (info) => info.column.id,
-      }),
+      id: "Description",
+      cell: (info) => <>{info.getValue()}</>,
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.price, {
+      id: "Price",
+      cell: (info) => <>{`$${info.getValue()}.00`}</>,
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.program, {
+      id: "Program",
+      cell: (info) => <>{info.getValue()?.title}</>,
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.instructor, {
+      id: "Instructor",
+      cell: (info) => (
+        <>{`${info.getValue()?.firstName} ${info.getValue()?.lastName}`}</>
+      ),
+      header: (info) => info.column.id,
+    }),
     columnHelper.accessor((row) => row.createdDate, {
       id: "Created At",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
@@ -160,23 +162,23 @@ const CoursesList = ({ data, refetch }) => {
           refetch={refetch}
         />
       </Edit>
-      <Publish title={''} size={'sm'}>
+      <Publish title={""} size={"sm"}>
         <ReusableModal
           title={"Are you sure you want to publish this program"}
           actionTitle={"Publish"}
           cancelTitle={"Cancel"}
           closeModal={() => ShowPublish(false)}
-          action={() => updateProgramStatus('active')}
+          action={() => updateProgramStatus("active")}
           isBusy={isBusy}
         />
       </Publish>
-      <Retract title={''} size={'sm'}>
-      <ReusableModal
+      <Retract title={""} size={"sm"}>
+        <ReusableModal
           title={"Are you sure you want to retract this program"}
           actionTitle={"Retract"}
           cancelTitle={"Cancel"}
           closeModal={() => ShowRetract(false)}
-          action={() => updateProgramStatus('inactive')}
+          action={() => updateProgramStatus("inactive")}
           isBusy={isBusy}
         />
       </Retract>

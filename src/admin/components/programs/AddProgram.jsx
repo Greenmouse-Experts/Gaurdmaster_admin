@@ -44,7 +44,7 @@ const AddProgram = ({ close, refetch }) => {
               <input
                 type="text"
                 placeholder="Enter Program Title"
-                value={userDetail.firstName}
+                value={userDetail.title}
                 required
                 onChange={(e) => handleChange("title", e.target.value)}
               />

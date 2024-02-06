@@ -1,15 +1,23 @@
 import React, { useState } from "react";
-import { createProgram } from "../../../services/api/programsApi";
-import { useMutation } from "@tanstack/react-query";
+import { createCourse } from "../../../services/api/programsApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const AddCourse = ({ close, refetch }) => {
   const create = useMutation({
-    mutationFn: createProgram,
-    mutationKey: ["addProgram"],
+    mutationFn: createCourse,
+    mutationKey: ["addCourse"],
+  });
+  const { data } = useQuery({
+    queryKey: ["getPrograms"],
+    queryFn: getPrograms,
   });
   const [isBusy, setIsBusy] = useState(false);
   const [userDetail, setUserDetail] = useState({
     title: "",
+    shortDesc: "",
+    fullDesc: "",
+    price: "",
+    program: ""
   });
   const handleChange = (name, value) => {
     setUserDetail({ ...userDetail, [name]: value });
@@ -38,12 +46,26 @@ const AddCourse = ({ close, refetch }) => {
     <>
       <div className="px-4">
         <form action="" onSubmit={submitAction}>
+          <div className="grid gap-5 lg:grid-cols-2">
           <div className="input">
-            <label>Program Title</label>
+            <label>Course Title</label>
             <div>
               <input
                 type="text"
-                placeholder="Enter Program Title"
+                placeholder="Enter Course Title"
+                value={userDetail.title}
+                required
+                onChange={(e) => handleChange("title", e.target.value)}
+              />
+            </div>
+          </div>
+          </div>
+          <div className="input">
+            <label>Course Title</label>
+            <div>
+              <input
+                type="text"
+                placeholder="Enter Course Title"
                 value={userDetail.firstName}
                 required
                 onChange={(e) => handleChange("title", e.target.value)}
