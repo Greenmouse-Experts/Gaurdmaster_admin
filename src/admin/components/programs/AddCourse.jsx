@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { createCourse } from "../../../services/api/programsApi";
+import { createCourse, getPrograms } from "../../../services/api/programsApi";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 const AddCourse = ({ close, refetch }) => {
   const create = useMutation({
@@ -17,7 +18,7 @@ const AddCourse = ({ close, refetch }) => {
     shortDesc: "",
     fullDesc: "",
     price: "",
-    program: ""
+    program: "",
   });
   const handleChange = (name, value) => {
     setUserDetail({ ...userDetail, [name]: value });
@@ -29,7 +30,11 @@ const AddCourse = ({ close, refetch }) => {
       return;
     }
     setIsBusy(true);
-    create.mutate(userDetail, {
+    const payload = {
+      ...userDetail,
+      price: Number(userDetail.price)
+    }
+    create.mutate(payload, {
       onSuccess: (data) => {
         toast.success(data.message);
         setIsBusy(false);
@@ -47,33 +52,77 @@ const AddCourse = ({ close, refetch }) => {
       <div className="px-4">
         <form action="" onSubmit={submitAction}>
           <div className="grid gap-5 lg:grid-cols-2">
-          <div className="input">
-            <label>Course Title</label>
-            <div>
-              <input
-                type="text"
-                placeholder="Enter Course Title"
-                value={userDetail.title}
-                required
-                onChange={(e) => handleChange("title", e.target.value)}
-              />
+            <div className="input">
+              <label>Course Title</label>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Enter Course Title"
+                  value={userDetail.title}
+                  required
+                  onChange={(e) => handleChange("title", e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="input">
+              <label>Course Program</label>
+              <div>
+                <select
+                  name="program"
+                  className="p-[15px] w-full"
+                  onChange={(e) => handleChange("program", e.target.value)}
+                >
+                  <option value=" ">select an option</option>
+                  {!!data?.data?.length &&
+                    data?.data.map((item) => (
+                      <option value={item.id} key={item.id}>
+                        {item.title}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            </div>
+            <div className="input">
+              <label>Course Price</label>
+              <div>
+                <input
+                  type="number"
+                  placeholder="Enter Course Price"
+                  value={userDetail.price}
+                  required
+                  onChange={(e) => handleChange("price", e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="input">
+              <label>Short Description</label>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Enter Short Description"
+                  value={userDetail.shortDesc}
+                  required
+                  onChange={(e) => handleChange("shortDesc", e.target.value)}
+                />
+              </div>
             </div>
           </div>
-          </div>
-          <div className="input">
-            <label>Course Title</label>
+          <div className="input mt-3">
+            <label>Course Description</label>
             <div>
-              <input
-                type="text"
-                placeholder="Enter Course Title"
-                value={userDetail.firstName}
+              <textarea
+                placeholder="Enter Course Description"
+                value={userDetail.fullDesc}
                 required
-                onChange={(e) => handleChange("title", e.target.value)}
+                className="h-24 w-full"
+                onChange={(e) => handleChange("fullDesc", e.target.value)}
               />
             </div>
           </div>
           <div className="mt-12 flex justify-end">
-            <button className="btn-primary w-full py-3 fw-500 lg:text-lg">{isBusy? "Submiting..." : "Submit"}</button>
+            <button className="btn-primary w-full py-3 fw-500 lg:text-lg">
+              {isBusy ? "Submiting..." : "Submit"}
+            </button>
           </div>
         </form>
       </div>

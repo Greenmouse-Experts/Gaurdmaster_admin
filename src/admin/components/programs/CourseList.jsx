@@ -123,7 +123,7 @@ const CoursesList = ({ data, refetch }) => {
               </Button>
             </MenuHandler>
             <MenuList className="">
-              <MenuItem
+              {/* <MenuItem
                 className="my-1 fw-500 flex items-center gap-x-2 pt-1"
                 onClick={() => openEdit(info.row.original)}
               >
@@ -143,7 +143,7 @@ const CoursesList = ({ data, refetch }) => {
                 >
                   <MdOutlinePublishedWithChanges /> Publish
                 </MenuItem>
-              )}
+              )} */}
             </MenuList>
           </Menu>
         </>
