@@ -3,12 +3,11 @@ import StudentList from "../components/users/studentList";
 import { getStudents } from "../../services/api/usersApi";
 import { useQuery } from "@tanstack/react-query";
 
-
 const Student = () => {
-  const {data, refetch} = useQuery({
-    queryKey: ['getStudents'],
-    queryFn: getStudents
-})
+  const { data } = useQuery({
+    queryKey: ["getStudents"],
+    queryFn: getStudents,
+  });
 
   return (
     <div className="adminman">
@@ -29,7 +28,7 @@ const Student = () => {
       </div>
 
       <div className="card_table student_table">
-       <StudentList data={data?.data}/>
+        <StudentList data={data?.data} />
       </div>
     </div>
   );

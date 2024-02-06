@@ -3,7 +3,6 @@ import React from "react";
 const ProfileAvatar = ({ url, fname, lname, size, font }) => {
   const firstLetter = fname?.charAt(0);
   const lastLetter = lname?.charAt(0);
-  console.log(lastLetter);
   if (url) {
     return (
       <img

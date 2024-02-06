@@ -11,8 +11,13 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from 'react-icons/bs'
+import { useNavigate } from "react-router-dom";
 
 const StudentList = ({ data }) => {
+    const navigate = useNavigate()
+    const gotoDetails = (id) => {
+        navigate(`/studentdetails/${id}`)
+    }
   const columnHelper = createColumnHelper();
   const columns = [
     columnHelper.accessor((row) => row.firstName, {
