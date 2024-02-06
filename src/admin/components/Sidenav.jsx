@@ -176,10 +176,10 @@ const Sidebar = ({
                     <NavLink onClick={closeSidebar} to="/admins">
                       Admin
                     </NavLink>
-                    <NavLink onClick={closeSidebar} to="activeuser">
+                    <NavLink onClick={closeSidebar} to="/instructors">
                       Instructors
                     </NavLink>
-                    <NavLink to="student" onClick={closeSidebar}>
+                    <NavLink to="/students" onClick={closeSidebar}>
                       Students
                     </NavLink>
                   </div>
@@ -237,7 +237,7 @@ const Sidebar = ({
               </span>
             </li>
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink className="nav-link" to="/pack">
                 <span className="nav-icon">
                   <span>
@@ -247,7 +247,7 @@ const Sidebar = ({
                   
                 </span>
               </NavLink>
-            </li>
+            </li> */}
 
             <li className="nav-item">
               <NavLink onClick={closeSidebar} to="/uni"  className="nav-link">
@@ -260,7 +260,7 @@ const Sidebar = ({
               </NavLink>
             </li>
 
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <NavLink onClick={closeSidebar} to="/uni" className="nav-link">
                 <span className="nav-icon">
                   <span>
@@ -269,7 +269,7 @@ const Sidebar = ({
                   </span>
                 </span>
               </NavLink>
-            </li>
+            </li> */}
             <li className="nav-item">
               <NavLink onClick={closeSidebar}  to="/uni"className="nav-link">
                 <span className="nav-icon">

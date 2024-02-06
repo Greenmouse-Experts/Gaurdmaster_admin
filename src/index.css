@@ -62,6 +62,9 @@ html{
  
   
 }
+.Toastify__toast-container {
+  z-index: 30000 !important;
+}
 @layer components {
   /* container settings */
   .box {

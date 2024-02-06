@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from 'react-icons/bs'
 
-const AdminsList = ({ data }) => {
+const StudentList = ({ data }) => {
   const columnHelper = createColumnHelper();
   const columns = [
     columnHelper.accessor((row) => row.firstName, {
@@ -94,12 +94,12 @@ const AdminsList = ({ data }) => {
   return (
     <>
       <div>
-        {data && !!data?.data.length && (
-          <DataTable data={data.data} columns={columns} />
+        {data && !!data?.length && (
+          <DataTable data={data} columns={columns} />
         )}
       </div>
     </>
   );
 };
 
-export default AdminsList;
+export default StudentList;

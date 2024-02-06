@@ -12,6 +12,9 @@ export const createSubadmin = async(payload) => {
  export const getAdmins = async(params) => {
     return  axios.get(`/user/subadmins`).then((response) => response.data)
  } 
-export const getClients = async(params) => {
-    return  axios.get(`/user/clients`).then((response) => response.data)
+ export const getStuctors = async(params) => {
+   return  axios.get(`/user/instructors`).then((response) => response.data)
+} 
+export const getStudents = async(params) => {
+    return  axios.get(`/user/students`).then((response) => response.data)
  } 
