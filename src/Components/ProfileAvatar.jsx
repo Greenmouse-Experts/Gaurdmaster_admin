@@ -15,17 +15,19 @@ const ProfileAvatar = ({ url, fname, lname, size, font }) => {
     );
   } else
     return (
-      <div
-        className="circle flex gap-x-[1px] justify-center items-center fw-600 bg-primary text-white"
+      <>
+        <div
+        className="circle flex gap-x-[1px] !justify-center items-center fw-600 bg-primary text-white"
         style={{ width: size, height: size }}
       >
-        <p style={{ fontSize: font }} className="uppercase">
+        <p style={{ fontSize: font }} className="uppercase !p-0 !w-auto">
           {firstLetter}
         </p>
-        <p style={{ fontSize: font }} className="uppercase">
+        <p style={{ fontSize: font }} className="uppercase !p-0 !w-auto">
           {lastLetter}
         </p>
       </div>
+      </>
     );
 };
 

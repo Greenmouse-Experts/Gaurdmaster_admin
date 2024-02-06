@@ -11,8 +11,13 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from 'react-icons/bs'
+import { useNavigate } from "react-router-dom";
 
-const AdminsList = ({ data }) => {
+const StudentList = ({ data }) => {
+    const navigate = useNavigate()
+    const gotoDetails = (id) => {
+        navigate(`/studentdetails/${id}`)
+    }
   const columnHelper = createColumnHelper();
   const columns = [
     columnHelper.accessor((row) => row.firstName, {
@@ -94,12 +99,12 @@ const AdminsList = ({ data }) => {
   return (
     <>
       <div>
-        {data && !!data?.data.length && (
-          <DataTable data={data.data} columns={columns} />
+        {data && !!data?.length && (
+          <DataTable data={data} columns={columns} />
         )}
       </div>
     </>
   );
 };
 
-export default AdminsList;
+export default StudentList;
