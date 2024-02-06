@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { createProgram } from "../../../services/api/programsApi";
-import { useMutation } from "@tanstack/react-query";
+import {
+  createProgram,
+  updateProgram,
+} from "../../../services/api/programsApi";
+import { toast } from "react-toastify";
 
-const EditProgram = ({data, close, refetch }) => {
-  console.log(data);
-  const create = useMutation({
-    mutationFn: createProgram,
-    mutationKey: ["EditProgram"],
-  });
+const EditProgram = ({ data, close, refetch }) => {
   const [isBusy, setIsBusy] = useState(false);
   const [userDetail, setUserDetail] = useState({
     title: data?.title || "",
@@ -17,23 +15,18 @@ const EditProgram = ({data, close, refetch }) => {
   };
   const submitAction = (e) => {
     e.preventDefault();
-    if (userDetail.password !== userDetail.confirmPassword) {
-      toast.error("Password does not match");
-      return;
-    }
     setIsBusy(true);
-    create.mutate(userDetail, {
-      onSuccess: (data) => {
+    updateProgram(data.id, userDetail)
+      .then((data) => {
         toast.success(data.message);
         setIsBusy(false);
         refetch();
         close();
-      },
-      onError: (error) => {
+      })
+      .catch((error) => {
         toast.error(error.response.data.message);
         setIsBusy(false);
-      },
-    });
+      });
   };
   return (
     <>
@@ -52,7 +45,9 @@ const EditProgram = ({data, close, refetch }) => {
             </div>
           </div>
           <div className="mt-12 flex justify-end">
-            <button className="btn-primary w-full py-3 fw-500 lg:text-lg">{isBusy? "Submiting..." : "Submit"}</button>
+            <button className="btn-primary w-full py-3 fw-500 lg:text-lg">
+              {isBusy ? "Submiting..." : "Submit"}
+            </button>
           </div>
         </form>
       </div>

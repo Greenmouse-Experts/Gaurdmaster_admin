@@ -6,6 +6,9 @@ axios.defaults.baseURL = BASE_URL;
 export const createProgram = async(payload) => {
     return  axios.post(`/programs/create`, payload).then((response) => response.data)
  } 
+ export const updateProgram = async(id, payload) => {
+   return  axios.patch(`/programs/${id}`, payload).then((response) => response.data)
+} 
  export const createCourse = async(payload) => {
     return  axios.post(`/courses/create`, payload).then((response) => response.data)
  } 
