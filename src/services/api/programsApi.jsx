@@ -18,3 +18,39 @@ export const createProgram = async(payload) => {
  export const getCourses = async(payload) => {
     return  axios.get(`/courses`, payload).then((response) => response.data)
  } 
+
+ export const getSingleCourse = async(id) => {
+   return  axios.get(`/courses/${id}`).then((response) => response.data)
+} 
+
+ export const updateCourse = async(id, payload) => {
+   return  axios.patch(`/courses/${id}`, payload).then((response) => response.data)
+} 
+
+export const getCourseContent = async(id) => {
+   return  axios.get(`/course-content/by-course/${id}`).then((response) => response.data)
+}
+
+export const createCourseContent = async(payload) => {
+   return  axios.post(`/course-content/create`, payload).then((response) => response.data)
+}
+
+export const updateCourseContent = async(id, payload) => {
+   return axios.patch(`/course-content-sub/${id}`, payload).then((response) => response.data)
+}
+
+export const createSubContent = async(payload) => {
+   return  axios.post(`/course-content-sub/create`, payload).then((response) => response.data)
+}
+
+export const viewSubContent = async(id) => {
+   return axios.get(`/course-content-sub/by-course-content/${id}`).then((response) => response.data)
+}
+
+export const updateSubContent = async(id, payload) => {
+   return axios.patch(`/course-content-sub/${id}`, payload).then((response) => response.data)
+}
+
+export const viewSingleSubContent = async(id) => {
+   return axios.get(`/course-content-sub/${id}`).then((response) => response.data)
+}

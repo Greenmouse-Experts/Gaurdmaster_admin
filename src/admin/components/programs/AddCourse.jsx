@@ -83,7 +83,7 @@ const AddCourse = ({ close, refetch }) => {
               </div>
             </div>
             <div className="input">
-              <label>Course Price</label>
+              <label>Course Price ($)</label>
               <div>
                 <input
                   type="number"
