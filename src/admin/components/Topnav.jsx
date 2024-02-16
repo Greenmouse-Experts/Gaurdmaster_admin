@@ -21,8 +21,8 @@ export const Topnav = ({ toggleSidebar }) => {
   const popup = () => {
     setActiveDropdown(!activeDropdown);
   };
-  const navigate = useNavigate()
-  const {user:admin} = useAuth()
+  const navigate = useNavigate();
+  const { user: admin } = useAuth();
 
   const bellIconRef = useRef(null);
   const handleClickOutside = (event) => {
@@ -46,96 +46,119 @@ export const Topnav = ({ toggleSidebar }) => {
 
   const datas = [];
   const [activeDropdown, setActiveDropdown] = useState(false);
-  const {signOut} = useAuth()
-  const logout =()=> {
-    signOut()
-  }
-  const {Modal, setShowModal} = useModal()
+  const { signOut } = useAuth();
+  const logout = () => {
+    signOut();
+  };
+  const { Modal, setShowModal } = useModal();
 
   return (
-    <div className="top_nav">
-      <div className="icon_menu">
-        <div className="menu-icon" onClick={toggleSidebar}>
-          <LuMenu />
-        </div>
-      </div>
-
-      <div className="icon_menu">
-        <div onClick={popup} ref={bellIconRef} className="bell">
-          <div className="bell_icon">
-            <GoBell />
-            <span> 6</span>
+    <>
+      <div className="top_nav">
+        <div className="icon_menu">
+          <div className="menu-icon" onClick={toggleSidebar}>
+            <LuMenu />
           </div>
+        </div>
 
-          {activeDropdown && (
-            <div className="bell_drop">
-              {datas.length > 0 ? (
-                datas.data.map((item) => (
-                  <div key={item.id}>
-                    <div className="add_head">
-                      <p>Notification</p>{" "}
-                    </div>
-                    <div className="bell_body">
-                      <GoBell />
-                      <div>
-                        <h3>
-                          {item.body} <span>{item.title}</span>
-                        </h3>
+        <div className="icon_menu">
+          <div onClick={popup} ref={bellIconRef} className="bell">
+            <div className="bell_icon">
+              <GoBell />
+              <span> 6</span>
+            </div>
+
+            {activeDropdown && (
+              <div className="bell_drop">
+                {datas.length > 0 ? (
+                  datas.data.map((item) => (
+                    <div key={item.id}>
+                      <div className="add_head">
+                        <p>Notification</p>{" "}
+                      </div>
+                      <div className="bell_body">
+                        <GoBell />
+                        <div>
+                          <h3>
+                            {item.body} <span>{item.title}</span>
+                          </h3>
+                        </div>
                       </div>
                     </div>
+                  ))
+                ) : (
+                  <div>
+                    {" "}
+                    <div className="add_head">
+                      <p>Notification</p>{" "}
+                    </div>{" "}
+                    <p className="no_body">No Notifications</p>
                   </div>
-                ))
-              ) : (
-                <div>
-                  {" "}
-                  <div className="add_head">
-                    <p>Notification</p>{" "}
-                  </div>{" "}
-                  <p className="no_body">No Notifications</p>
-                </div>
-              )}
-              <Link to="/notify">View All Notificaton</Link>
-            </div>
-          )}
-        </div>
-        <Menu placement="bottom-start">
-          <MenuHandler>
-            <Button className="p-0 m-0 bg-transparent hover:shadow-none outline-none !shadow-none">
-              <div className="flex items-center !gap-x-2">
-                <img src={admin.image? admin.image : user} alt="profile" className="lg:!w-12 lg:!h-12" />
-                <div className="flex gap-x-2 items-center">
-                  <p>{admin.firstName} {admin.lastName}</p>
-                  <RiArrowDropDownLine className="cursor-pointer text-[#FFC000] text-3xl" />
-                </div>
+                )}
+                <Link to="/notify">View All Notificaton</Link>
               </div>
-            </Button>
-          </MenuHandler>
-          <MenuList className="index-30 text-black w-44">
-            <MenuItem className="flex gap-x-2 items-center fw-500" onClick={() => navigate('/profile')}>
-              <BsGear className="text-2xl" />
-              Settings
-            </MenuItem>
-            <MenuItem
-              className="flex gap-x-2 items-center fw-500"
-              onClick={() => setShowModal(true)}
-            >
-              <IoLogOutOutline className="text-2xl" />
-              Logout
-            </MenuItem>
-          </MenuList>
-        </Menu>
-      </div>
-      <Modal title={''} size={'sm'} >
-          <div>
-          <div className="">
-              <h3 className="text-black fw-500 text-center">Are you Sure you want to Logout?</h3>
-            </div>
-            <div className="mt-12 flex justify-between px-3">
-            <button className="bg-red-600 text-white px-6 py-2 rounded-lg" onClick={() => setShowModal(false)}>No</button>
-              <button className="bg-primary text-white px-6 py-2 rounded-lg" onClick={logout}>Yes</button>
-            </div>
+            )}
           </div>
+          <Menu placement="bottom-start">
+            <MenuHandler>
+              <Button className="p-0 m-0 bg-transparent hover:shadow-none outline-none !shadow-none">
+                <div className="flex items-center !gap-x-2">
+                  <img
+                    src={admin.image ? admin.image : user}
+                    alt="profile"
+                    className="lg:!w-12 lg:!h-12"
+                  />
+                  <div className="flex gap-x-2 items-center">
+                    <p>
+                      {admin.firstName} {admin.lastName}
+                    </p>
+                    <RiArrowDropDownLine className="cursor-pointer text-[#FFC000] text-3xl" />
+                  </div>
+                </div>
+              </Button>
+            </MenuHandler>
+            <MenuList className="index-30 text-black w-44">
+              <MenuItem
+                className="flex gap-x-2 items-center fw-500"
+                onClick={() => navigate("/profile")}
+              >
+                <BsGear className="text-2xl" />
+                Settings
+              </MenuItem>
+              <MenuItem
+                className="flex gap-x-2 items-center fw-500"
+                onClick={() => setShowModal(true)}
+              >
+                <IoLogOutOutline className="text-2xl" />
+                Logout
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        </div>
+      </div>
+      <Modal title={""} size={"sm"}>
+        <div>
+          <div className="">
+            <h3 className="text-black fw-500 text-center">
+              Are you Sure you want to Logout?
+            </h3>
+          </div>
+          <div className="mt-12 flex justify-between px-3">
+            <button
+              className="bg-red-600 text-white px-6 py-2 rounded-lg"
+              onClick={() => setShowModal(false)}
+            >
+              No
+            </button>
+            <button
+              className="bg-primary text-white px-6 py-2 rounded-lg"
+              onClick={logout}
+            >
+              Yes
+            </button>
+          </div>
+        </div>
       </Modal>
-    </div>
+    </>
   );
 };

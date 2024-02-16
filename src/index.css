@@ -193,6 +193,9 @@ html{
   .bg-tertial-op {
     background: rgba(200, 100, 38, 0.1);
   }
+  .syne{
+    font-family: 'Syne', sans-serif;;
+  }
   .bg-hero {
     background: rgb(255, 255, 255);
     background: linear-gradient(

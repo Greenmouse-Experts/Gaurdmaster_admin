@@ -1,51 +1,38 @@
 import React, { useState } from "react";
-import { createCourse, getPrograms } from "../../../services/api/programsApi";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { getPrograms, updateCourse } from "../../../services/api/programsApi";
+import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-const AddCourse = ({ close, refetch }) => {
-  const create = useMutation({
-    mutationFn: createCourse,
-    mutationKey: ["addCourse"],
-  });
+const EditCourse = ({ item, close, refetch }) => {
   const { data } = useQuery({
     queryKey: ["getPrograms"],
     queryFn: getPrograms,
   });
   const [isBusy, setIsBusy] = useState(false);
   const [userDetail, setUserDetail] = useState({
-    title: "",
-    shortDesc: "",
-    fullDesc: "",
-    price: "",
-    program: "",
+    title: item?.title || "",
+    shortDesc: item?.shortDesc || "",
+    fullDesc: item.fullDesc || "",
+    price: item.price || "",
+    program: item.program.id || "",
   });
   const handleChange = (name, value) => {
     setUserDetail({ ...userDetail, [name]: value });
   };
   const submitAction = (e) => {
     e.preventDefault();
-    if (userDetail.password !== userDetail.confirmPassword) {
-      toast.error("Password does not match");
-      return;
-    }
     setIsBusy(true);
-    const payload = {
-      ...userDetail,
-      price: Number(userDetail.price)
-    }
-    create.mutate(payload, {
-      onSuccess: (data) => {
+    updateCourse(item.id, userDetail)
+      .then((data) => {
         toast.success(data.message);
         setIsBusy(false);
         refetch();
         close();
-      },
-      onError: (error) => {
+      })
+      .catch((error) => {
         toast.error(error.response.data.message);
         setIsBusy(false);
-      },
-    });
+      });
   };
   return (
     <>
@@ -70,6 +57,7 @@ const AddCourse = ({ close, refetch }) => {
                 <select
                   name="program"
                   className="p-[15px] w-full"
+                  value={userDetail.program}
                   onChange={(e) => handleChange("program", e.target.value)}
                 >
                   <option value=" ">select an option</option>
@@ -130,4 +118,4 @@ const AddCourse = ({ close, refetch }) => {
   );
 };
 
-export default AddCourse;
+export default EditCourse;

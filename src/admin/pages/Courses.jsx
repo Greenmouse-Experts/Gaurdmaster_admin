@@ -17,14 +17,14 @@ const Courses = () => {
     <>
       <div className="adminman">
         <div className="admin_head">
-          <h2>All Admin</h2>
-          <div to="/adduser" onClick={() => setShowModal(true)}>
+          <h2>All Courses</h2>
+          <div to="/adduser" className="cursor-pointer" onClick={() => setShowModal(true)}>
             <FaPlus />
             Add New Course
           </div>
         </div>
         <div className="card_table">
-          <CoursesList data={data?.data} />
+          <CoursesList data={data?.data} refetch={refetch}/>
         </div>
       </div>
       <Modal title={"Add New Admin"} size={"lg"} type={"withCancel"}>

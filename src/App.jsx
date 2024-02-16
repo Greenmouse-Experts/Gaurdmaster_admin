@@ -16,6 +16,8 @@ import ScrollToTop from "./Components/ScrollToTop";
 import InstructorManage from "./admin/pages/InstructorManage";
 import Programs from "./admin/pages/Programs";
 import Courses from "./admin/pages/Courses";
+import CourseDetails from "./admin/pages/CourseDetails";
+import Payments from "./admin/pages/Payments";
 
 function App() {
   return (
@@ -32,8 +34,10 @@ function App() {
           <Route path="/studentdetails/:id" element={<Studentdetails/>}/>
           <Route path="/programs" element={<Programs/>}/>
           <Route path="/courses" element={<Courses/>}/>
+          <Route path="/courses/:id" element={<CourseDetails/>}/>
           <Route path="/notify" element={<Notify/>}/>
           <Route path="/support" element={<Support/>}/>
+          <Route path="/payments" element={<Payments/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
       </Routes>

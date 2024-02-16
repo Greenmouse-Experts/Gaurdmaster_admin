@@ -19,7 +19,7 @@ const InstructorManage = () => {
           <div className="adminman">
             <div className="admin_head">
               <h2>All Instructors</h2>
-              <div to="/adduser" onClick={() => setShowModal(true)}>
+              <div to="/adduser" className="cursor-pointer" onClick={() => setShowModal(true)}>
                 <FaPlus />
                 Add New Instructor
               </div>

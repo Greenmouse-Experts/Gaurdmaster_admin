@@ -160,7 +160,7 @@ const Sidebar = ({
             <li className="nav-item">
               <span className="nav-link" onClick={toggleUsersMenu}>
                 <span className="nav-icon">
-                  <span>
+                  <span  className="cursor-pointer">
                     <FaUser />
                     {showSidebar && "User Management"}
                   </span>
@@ -213,7 +213,7 @@ const Sidebar = ({
             <li className="nav-item">
               <span onClick={toggleIdMenu} className="nav-link">
                 <span className="nav-icon">
-                  <span>
+                  <span  className="cursor-pointer">
                   <GiBookshelf />
                     {showSidebar && "Courses"}
                   </span>
@@ -250,7 +250,7 @@ const Sidebar = ({
             </li> */}
 
             <li className="nav-item">
-              <NavLink onClick={closeSidebar} to="/uni"  className="nav-link">
+              <NavLink onClick={closeSidebar} to="/payments"  className="nav-link">
                 <span className="nav-icon">
                   <span>
                   <FaWallet />
@@ -293,7 +293,7 @@ const Sidebar = ({
             <li className="nav-item">
               <span className="nav-link" onClick={togglePaymentMenu}>
                 <span className="nav-icon">
-                  <span>
+                  <span className="cursor-pointer">
                   <FiSettings />
                     
                     {showSidebar && "Settings"}

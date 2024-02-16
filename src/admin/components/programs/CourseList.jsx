@@ -18,8 +18,11 @@ import useModal from "../../../hooks/useModal";
 import EditProgram from "./EditProgram";
 import { FaRegEdit } from "react-icons/fa";
 import ReusableModal from "../../../Components/ReusableModal";
-import { updateProgram } from "../../../services/api/programsApi";
+import { updateCourse } from "../../../services/api/programsApi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { FaRegEye } from "react-icons/fa6";
+import EditCourse from "./EditCourse";
 
 const CoursesList = ({ data, refetch }) => {
   const { Modal: Edit, setShowModal: ShowEdit } = useModal();
@@ -27,6 +30,10 @@ const CoursesList = ({ data, refetch }) => {
   const { Modal: Publish, setShowModal: ShowPublish } = useModal();
   const [selected, setSelected] = useState();
   const [selectedId, setSelectedId] = useState();
+  const navigate = useNavigate();
+  const gotoDetails = (id) => {
+    navigate(`/courses/${id}`);
+  };
   const openEdit = (item) => {
     setSelected(item);
     ShowEdit(true);
@@ -40,12 +47,12 @@ const CoursesList = ({ data, refetch }) => {
     ShowRetract(true);
   };
   const [isBusy, setIsBusy] = useState(false);
-  const updateProgramStatus = (val) => {
+  const updateCourseStatus = (val) => {
     const payload = {
       isPublished: val === "active" ? true : false,
     };
     setIsBusy(true);
-    updateProgram(selectedId, payload)
+    updateCourse(selectedId, payload)
       .then((data) => {
         toast.success(data.message);
         setIsBusy(false);
@@ -123,7 +130,13 @@ const CoursesList = ({ data, refetch }) => {
               </Button>
             </MenuHandler>
             <MenuList className="">
-              {/* <MenuItem
+              <MenuItem
+                className="my-1 fw-500 flex items-center gap-x-2 pt-1"
+                onClick={() => gotoDetails(info.getValue())}
+              >
+                <FaRegEye /> View Details
+              </MenuItem>
+              <MenuItem
                 className="my-1 fw-500 flex items-center gap-x-2 pt-1"
                 onClick={() => openEdit(info.row.original)}
               >
@@ -143,7 +156,7 @@ const CoursesList = ({ data, refetch }) => {
                 >
                   <MdOutlinePublishedWithChanges /> Publish
                 </MenuItem>
-              )} */}
+              )}
             </MenuList>
           </Menu>
         </>
@@ -153,35 +166,37 @@ const CoursesList = ({ data, refetch }) => {
   return (
     <>
       <div>
+      <div>
         {data && !!data?.length && <DataTable data={data} columns={columns} />}
       </div>
-      <Edit title={"Edit Program"} size={"sm"} type={"withCancel"}>
-        <EditProgram
-          data={selected}
+      <Edit title={"Edit Course"} size={"sm"} type={"withCancel"}>
+        <EditCourse
+          item={selected}
           close={() => ShowEdit(false)}
           refetch={refetch}
         />
       </Edit>
       <Publish title={""} size={"sm"}>
         <ReusableModal
-          title={"Are you sure you want to publish this program"}
+          title={"Are you sure you want to publish this course"}
           actionTitle={"Publish"}
           cancelTitle={"Cancel"}
           closeModal={() => ShowPublish(false)}
-          action={() => updateProgramStatus("active")}
+          action={() => updateCourseStatus("active")}
           isBusy={isBusy}
         />
       </Publish>
       <Retract title={""} size={"sm"}>
         <ReusableModal
-          title={"Are you sure you want to retract this program"}
+          title={"Are you sure you want to retract this course"}
           actionTitle={"Retract"}
           cancelTitle={"Cancel"}
           closeModal={() => ShowRetract(false)}
-          action={() => updateProgramStatus("inactive")}
+          action={() => updateCourseStatus("inactive")}
           isBusy={isBusy}
         />
       </Retract>
+      </div>
     </>
   );
 };
