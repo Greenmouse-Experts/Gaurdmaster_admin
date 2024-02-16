@@ -250,7 +250,7 @@ const Sidebar = ({
             </li> */}
 
             <li className="nav-item">
-              <NavLink onClick={closeSidebar} to="/uni"  className="nav-link">
+              <NavLink onClick={closeSidebar} to="/payments"  className="nav-link">
                 <span className="nav-icon">
                   <span>
                   <FaWallet />

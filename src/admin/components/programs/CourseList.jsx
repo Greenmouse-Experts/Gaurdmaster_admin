@@ -22,6 +22,7 @@ import { updateCourse } from "../../../services/api/programsApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa6";
+import EditCourse from "./EditCourse";
 
 const CoursesList = ({ data, refetch }) => {
   const { Modal: Edit, setShowModal: ShowEdit } = useModal();
@@ -168,9 +169,9 @@ const CoursesList = ({ data, refetch }) => {
       <div>
         {data && !!data?.length && <DataTable data={data} columns={columns} />}
       </div>
-      <Edit title={"Edit Program"} size={"sm"} type={"withCancel"}>
-        <EditProgram
-          data={selected}
+      <Edit title={"Edit Course"} size={"sm"} type={"withCancel"}>
+        <EditCourse
+          item={selected}
           close={() => ShowEdit(false)}
           refetch={refetch}
         />

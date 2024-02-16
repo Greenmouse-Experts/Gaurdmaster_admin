@@ -38,7 +38,7 @@ const CourseContent = ({ id }) => {
             )}
             {!isLoading && data && (
               <div>
-                <ContentList data={data?.data} />
+                <ContentList data={data?.data} courseId={id} />
               </div>
             )}
           </div>

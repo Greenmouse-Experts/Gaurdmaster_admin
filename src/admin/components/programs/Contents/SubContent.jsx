@@ -5,7 +5,7 @@ import { viewSubContent } from "../../../../services/api/programsApi";
 import useModal from "../../../../hooks/useModal";
 import CreateSubContent from "./CreateSubContent";
 
-const SubContent = ({ id }) => {
+const SubContent = ({ id, courseId }) => {
   const { data, isLoading, refetch } = useQuery({
     queryFn: () => viewSubContent(id),
     queryKey: ["subContent"],
@@ -21,7 +21,7 @@ const SubContent = ({ id }) => {
       </div>
       <div></div>
         <Modal title={'Add Sub Content'} size={'lg'} type={'withCancel'}>
-            <CreateSubContent id={id} close={() => setShowModal(false)} refetch={refetch}/>
+            <CreateSubContent id={id} courseId={courseId} close={() => setShowModal(false)} refetch={refetch}/>
         </Modal>
     </div>
   );

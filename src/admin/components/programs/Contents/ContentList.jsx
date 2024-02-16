@@ -8,7 +8,7 @@ import {
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import SubContent from "./SubContent";
 
-const ContentList = ({ data }) => {
+const ContentList = ({ data, courseId }) => {
   const [open, setOpen] = React.useState(1);
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
   return (
@@ -40,7 +40,7 @@ const ContentList = ({ data }) => {
             </AccordionHeader>
             <AccordionBody className="px-4 bg-gray-50">
               <div>
-                <SubContent id={item.id}/>
+                <SubContent id={item.id} courseId={courseId}/>
               </div>
             </AccordionBody>
           </Accordion>
