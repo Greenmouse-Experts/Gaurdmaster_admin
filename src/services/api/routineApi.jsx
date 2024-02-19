@@ -19,8 +19,8 @@ axios.interceptors.response.use(
   }
 );
 
-export const uploadFile = async(payload) => {
-    return  axios.post(`/upload/image`, payload, {
+export const uploadVideo = async(payload) => {
+    return  axios.post(`/upload/video`, payload, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

@@ -1,13 +1,16 @@
 import React from 'react'
+import ReactPlayer from 'react-player/lazy'
 
-const RenderMedia = ({type, url}) => {
+const RenderMedia = ({ type, url }) => {
   return (
     <div className='w-full'>
-        {
-            type === "image"? <div className='w-full'>
-                <img src={url} alt="tutorial-image" className='w-full' />
-            </div> : type === "video"? <div></div> : ""
-        }
+      {
+        type === "image" ? <div className='w-full'>
+          <img src={url} alt="tutorial-image" className='w-full' />
+        </div> : type === "video" ? <div>
+          <ReactPlayer url={url} width={'100%'} controls />
+        </div> : ""
+      }
     </div>
   )
 }

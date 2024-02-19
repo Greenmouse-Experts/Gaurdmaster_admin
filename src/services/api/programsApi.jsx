@@ -9,6 +9,10 @@ export const createProgram = async(payload) => {
  export const updateProgram = async(id, payload) => {
    return  axios.patch(`/programs/${id}`, payload).then((response) => response.data)
 } 
+
+export const deleteProgram = async(id) => {
+   return  axios.delete(`/programs/${id}`).then((response) => response.data)
+} 
  export const createCourse = async(payload) => {
     return  axios.post(`/courses/create`, payload).then((response) => response.data)
  } 
@@ -25,6 +29,10 @@ export const createProgram = async(payload) => {
 
  export const updateCourse = async(id, payload) => {
    return  axios.patch(`/courses/${id}`, payload).then((response) => response.data)
+} 
+
+export const deleteCourse = async(id) => {
+   return  axios.delete(`/courses/${id}`).then((response) => response.data)
 } 
 
 export const getCourseContent = async(id) => {

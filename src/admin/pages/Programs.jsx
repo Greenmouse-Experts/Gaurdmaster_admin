@@ -7,7 +7,7 @@ import ProgramsList from "../components/programs/ProgramsList";
 import AddProgram from "../components/programs/AddProgram";
 
 const Programs = () => {
-  const { data, refetch } = useQuery({
+  const { data, refetch, isLoading } = useQuery({
     queryKey: ["getPrograms"],
     queryFn: getPrograms,
   });
@@ -24,7 +24,7 @@ const Programs = () => {
           </div>
         </div>
         <div className="card_table">
-          <ProgramsList data={data?.data} refetch={refetch} />
+          <ProgramsList data={data?.data} refetch={refetch} isLoading={isLoading} />
         </div>
       </div>
       <Modal title={"Add New Program"} size={"sm"} type={"withCancel"}>

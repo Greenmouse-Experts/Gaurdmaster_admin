@@ -18,17 +18,19 @@ import useModal from "../../../hooks/useModal";
 import EditProgram from "./EditProgram";
 import { FaRegEdit } from "react-icons/fa";
 import ReusableModal from "../../../Components/ReusableModal";
-import { updateCourse } from "../../../services/api/programsApi";
+import { deleteCourse, updateCourse } from "../../../services/api/programsApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa6";
 import EditCourse from "./EditCourse";
 import Picker from "../../../Components/Loaders/Picker";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 const CoursesList = ({ data, refetch, isLoading }) => {
   const { Modal: Edit, setShowModal: ShowEdit } = useModal();
   const { Modal: Retract, setShowModal: ShowRetract } = useModal();
   const { Modal: Publish, setShowModal: ShowPublish } = useModal();
+  const { Modal: Delete, setShowModal: ShowDelete } = useModal();
   const [selected, setSelected] = useState();
   const [selectedId, setSelectedId] = useState();
   const navigate = useNavigate();
@@ -47,6 +49,10 @@ const CoursesList = ({ data, refetch, isLoading }) => {
     setSelectedId(id);
     ShowRetract(true);
   };
+  const openDelete = (id) => {
+    setSelectedId(id);
+    ShowDelete(true);
+  };
   const [isBusy, setIsBusy] = useState(false);
   const updateCourseStatus = (val) => {
     const payload = {
@@ -60,6 +66,20 @@ const CoursesList = ({ data, refetch, isLoading }) => {
         refetch();
         ShowPublish(false);
         ShowRetract(false);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        setIsBusy(false);
+      });
+  };
+  const deleteThisCourse = (val) => {
+    setIsBusy(true);
+    deleteCourse(val)
+      .then((data) => {
+        toast.success(data.message);
+        setIsBusy(false);
+        refetch();
+        ShowDelete(false);
       })
       .catch((error) => {
         toast.error(error.response.data.message);
@@ -163,6 +183,12 @@ const CoursesList = ({ data, refetch, isLoading }) => {
                   <MdOutlinePublishedWithChanges /> Publish
                 </MenuItem>
               )}
+               <MenuItem
+                  className="my-1 pt-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
+                  onClick={() => openDelete(info.getValue())}
+                >
+                  <RiDeleteBinLine /> Delete
+                </MenuItem>
             </MenuList>
           </Menu>
         </>
@@ -187,7 +213,7 @@ const CoursesList = ({ data, refetch, isLoading }) => {
             refetch={refetch}
           />
         </Edit>
-        <Publish title={""} size={"sm"}>
+        <Publish title={""} size={"xs"}>
           <ReusableModal
             title={"Are you sure you want to publish this course"}
             actionTitle={"Publish"}
@@ -197,7 +223,7 @@ const CoursesList = ({ data, refetch, isLoading }) => {
             isBusy={isBusy}
           />
         </Publish>
-        <Retract title={""} size={"sm"}>
+        <Retract title={""} size={"xs"}>
           <ReusableModal
             title={"Are you sure you want to retract this course"}
             actionTitle={"Retract"}
@@ -207,6 +233,16 @@ const CoursesList = ({ data, refetch, isLoading }) => {
             isBusy={isBusy}
           />
         </Retract>
+        <Delete title={""} size={"xs"}>
+        <ReusableModal
+            title={"Are you sure you want to Delete this course"}
+            actionTitle={"Delete"}
+            cancelTitle={"Cancel"}
+            closeModal={() => ShowDelete(false)}
+            action={() => deleteThisCourse(selectedId)}
+            isBusy={isBusy}
+          />
+        </Delete>
       </div>
     </>
   );

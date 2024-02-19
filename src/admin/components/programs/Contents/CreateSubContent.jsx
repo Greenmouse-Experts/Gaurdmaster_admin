@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { createSubContent } from "../../../../services/api/programsApi";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { uploadImage } from "../../../../services/api/routineApi";
+import { uploadImage, uploadVideo } from "../../../../services/api/routineApi";
 
 const CreateSubContent = ({ id, courseId, close, refetch }) => {
   const create = useMutation({
@@ -54,14 +54,21 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
   const handleChange = (name, value) => {
     setUserDetail({ ...userDetail, [name]: value });
   };
+  const getUpload = () => {
+    if(userDetail.mediaType === "video"){
+      return uploadVideo
+    }else if(userDetail.mediaType === "image"){
+      return uploadImage
+    }else return;
+  }
   const mutation = useMutation({
-    mutationFn: uploadImage,
+    mutationFn: getUpload(),
     onSuccess: (data) => {
       const payload = {
         ...userDetail,
         duration: Number(userDetail.duration),
-        media: data.image,
-        // previewUrl: data.image
+        media: userDetail.media === "image"? data.image : data.video,
+        previewUrl: userDetail.media === "image"? data.image : data.video,
       };
       create.mutate(payload, {
         onSuccess: (data) => {
@@ -89,8 +96,8 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
         return ;
     }
     const fd = new FormData()
-    fd.append('image', userDetail.media)
-    userDetail.previewUrl !== "" && fd.append('image', userDetail.previewUrl)
+    fd.append(userDetail.mediaType, userDetail.media)
+    userDetail.previewUrl !== "" && fd.append(userDetail.mediaType, userDetail.previewUrl)
     mutation.mutate(fd)
   };
   return (

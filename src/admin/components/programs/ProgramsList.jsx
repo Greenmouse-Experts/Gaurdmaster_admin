@@ -18,14 +18,17 @@ import useModal from "../../../hooks/useModal";
 import EditProgram from "./EditProgram";
 import { FaRegEdit } from "react-icons/fa";
 import ReusableModal from "../../../Components/ReusableModal";
-import { updateProgram } from "../../../services/api/programsApi";
+import { deleteProgram, updateProgram } from "../../../services/api/programsApi";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { RiDeleteBinLine } from "react-icons/ri";
+import Picker from "../../../Components/Loaders/Picker";
 
-const ProgramsList = ({ data, refetch }) => {
+const ProgramsList = ({ data, refetch, isLoading }) => {
   const { Modal: Edit, setShowModal: ShowEdit } = useModal();
   const { Modal: Retract, setShowModal: ShowRetract } = useModal();
   const { Modal: Publish, setShowModal: ShowPublish } = useModal();
+  const { Modal: Delete, setShowModal: ShowDelete } = useModal();
   const [selected, setSelected] = useState();
   const [selectedId, setSelectedId] = useState();
   const openEdit = (item) => {
@@ -39,6 +42,10 @@ const ProgramsList = ({ data, refetch }) => {
   const openRetract = (id) => {
     setSelectedId(id);
     ShowRetract(true);
+  };
+  const openDelete = (id) => {
+    setSelectedId(id);
+    ShowDelete(true);
   };
   const [isBusy, setIsBusy] = useState(false);
   const updateProgramStatus = (val) => {
@@ -59,6 +66,20 @@ const ProgramsList = ({ data, refetch }) => {
       setIsBusy(false);
     });
   }
+  const deleteThisProgram = (val) => {
+    setIsBusy(true);
+    deleteProgram(val)
+      .then((data) => {
+        toast.success(data.message);
+        setIsBusy(false);
+        refetch();
+        ShowDelete(false);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        setIsBusy(false);
+      });
+  };
   const columnHelper = createColumnHelper();
   const columns = [
     columnHelper.accessor((row) => row.title, {
@@ -123,6 +144,12 @@ const ProgramsList = ({ data, refetch }) => {
                   <MdOutlinePublishedWithChanges /> Publish
                 </MenuItem>
               )}
+              <MenuItem
+                  className="my-1 pt-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
+                  onClick={() => openDelete(info.getValue())}
+                >
+                  <RiDeleteBinLine /> Delete
+                </MenuItem>
             </MenuList>
           </Menu>
         </>
@@ -132,6 +159,11 @@ const ProgramsList = ({ data, refetch }) => {
   return (
     <>
       <div>
+      {isLoading && (
+            <div className="place-center py-36">
+              <Picker size={1.7} />
+            </div>
+          )}
         {data && !!data?.length && <DataTable data={data} columns={columns} />}
       </div>
       <Edit title={"Edit Program"} size={"sm"} type={"withCancel"}>
@@ -141,7 +173,7 @@ const ProgramsList = ({ data, refetch }) => {
           refetch={refetch}
         />
       </Edit>
-      <Publish title={''} size={'sm'}>
+      <Publish title={''} size={'xs'}>
         <ReusableModal
           title={"Are you sure you want to publish this program"}
           actionTitle={"Publish"}
@@ -151,7 +183,7 @@ const ProgramsList = ({ data, refetch }) => {
           isBusy={isBusy}
         />
       </Publish>
-      <Retract title={''} size={'sm'}>
+      <Retract title={''} size={'xs'}>
       <ReusableModal
           title={"Are you sure you want to retract this program"}
           actionTitle={"Retract"}
@@ -161,6 +193,16 @@ const ProgramsList = ({ data, refetch }) => {
           isBusy={isBusy}
         />
       </Retract>
+      <Delete title={""} size={"xs"}>
+        <ReusableModal
+            title={"Are you sure you want to Delete this program"}
+            actionTitle={"Delete"}
+            cancelTitle={"Cancel"}
+            closeModal={() => ShowDelete(false)}
+            action={() => deleteThisProgram(selectedId)}
+            isBusy={isBusy}
+          />
+        </Delete>
     </>
   );
 };

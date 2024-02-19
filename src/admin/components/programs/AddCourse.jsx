@@ -31,8 +31,8 @@ const AddCourse = ({ close, refetch }) => {
       const payload = {
         ...userDetail,
         price: Number(userDetail.price),
-        coverImage: data.image
-        // previewUrl: data.image
+        coverImage: data.image,
+        previewUrl: null
       };
       create.mutate(payload, {
         onSuccess: (data) => {
