@@ -1,5 +1,5 @@
 import React from "react";
-import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+import { RiArrowDropDownLine, RiArrowDropUpLine, RiDeleteBin6Line } from "react-icons/ri";
 import {
   Accordion,
   AccordionBody,
@@ -36,6 +36,7 @@ const ContentList = ({ data, courseId }) => {
               <div className="flex gap-x-2 items-center">
                 <MdOutlineOndemandVideo className="text-"/>
                 <p className="text-lg">{item.title}</p>
+                <RiDeleteBin6Line className="cursor-pointer text-xl"/>
               </div>
             </AccordionHeader>
             <AccordionBody className="px-4 bg-gray-50">

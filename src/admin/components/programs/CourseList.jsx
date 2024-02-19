@@ -23,8 +23,9 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa6";
 import EditCourse from "./EditCourse";
+import Picker from "../../../Components/Loaders/Picker";
 
-const CoursesList = ({ data, refetch }) => {
+const CoursesList = ({ data, refetch, isLoading }) => {
   const { Modal: Edit, setShowModal: ShowEdit } = useModal();
   const { Modal: Retract, setShowModal: ShowRetract } = useModal();
   const { Modal: Publish, setShowModal: ShowPublish } = useModal();
@@ -85,6 +86,11 @@ const CoursesList = ({ data, refetch }) => {
     columnHelper.accessor((row) => row.program, {
       id: "Program",
       cell: (info) => <>{info.getValue()?.title}</>,
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.coverImage, {
+      id: "Cover Image",
+      cell: (info) => <>{info.getValue() ? <a href={info.getValue()} target="_blank" rel="noopener noreferrer"><img src={info.getValue()} alt="coverImage" className="w-36 h-24 object-cover" /></a> : <p>No Image</p>}</>,
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.instructor, {
@@ -166,36 +172,41 @@ const CoursesList = ({ data, refetch }) => {
   return (
     <>
       <div>
-      <div>
-        {data && !!data?.length && <DataTable data={data} columns={columns} />}
-      </div>
-      <Edit title={"Edit Course"} size={"sm"} type={"withCancel"}>
-        <EditCourse
-          item={selected}
-          close={() => ShowEdit(false)}
-          refetch={refetch}
-        />
-      </Edit>
-      <Publish title={""} size={"sm"}>
-        <ReusableModal
-          title={"Are you sure you want to publish this course"}
-          actionTitle={"Publish"}
-          cancelTitle={"Cancel"}
-          closeModal={() => ShowPublish(false)}
-          action={() => updateCourseStatus("active")}
-          isBusy={isBusy}
-        />
-      </Publish>
-      <Retract title={""} size={"sm"}>
-        <ReusableModal
-          title={"Are you sure you want to retract this course"}
-          actionTitle={"Retract"}
-          cancelTitle={"Cancel"}
-          closeModal={() => ShowRetract(false)}
-          action={() => updateCourseStatus("inactive")}
-          isBusy={isBusy}
-        />
-      </Retract>
+        <div>
+          {isLoading && (
+            <div className="place-center py-36">
+              <Picker size={1.7} />
+            </div>
+          )}
+          {data && !!data?.length && <DataTable data={data} columns={columns} />}
+        </div>
+        <Edit title={"Edit Course"} size={"sm"} type={"withCancel"}>
+          <EditCourse
+            item={selected}
+            close={() => ShowEdit(false)}
+            refetch={refetch}
+          />
+        </Edit>
+        <Publish title={""} size={"sm"}>
+          <ReusableModal
+            title={"Are you sure you want to publish this course"}
+            actionTitle={"Publish"}
+            cancelTitle={"Cancel"}
+            closeModal={() => ShowPublish(false)}
+            action={() => updateCourseStatus("active")}
+            isBusy={isBusy}
+          />
+        </Publish>
+        <Retract title={""} size={"sm"}>
+          <ReusableModal
+            title={"Are you sure you want to retract this course"}
+            actionTitle={"Retract"}
+            cancelTitle={"Cancel"}
+            closeModal={() => ShowRetract(false)}
+            action={() => updateCourseStatus("inactive")}
+            isBusy={isBusy}
+          />
+        </Retract>
       </div>
     </>
   );

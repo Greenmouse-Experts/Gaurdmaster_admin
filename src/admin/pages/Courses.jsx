@@ -7,7 +7,7 @@ import CoursesList from "../components/programs/CourseList";
 import { FaPlus } from "react-icons/fa";
 
 const Courses = () => {
-  const { data, refetch } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["getCourses"],
     queryFn: getCourses,
   });
@@ -24,7 +24,7 @@ const Courses = () => {
           </div>
         </div>
         <div className="card_table">
-          <CoursesList data={data?.data} refetch={refetch}/>
+          <CoursesList data={data?.data} isLoading={isLoading} refetch={refetch}/>
         </div>
       </div>
       <Modal title={"Add New Admin"} size={"lg"} type={"withCancel"}>

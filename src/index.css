@@ -6,9 +6,9 @@
 :root {
   --mont: 'Montserrat', sans-serif;
   --sky: 'Syne', sans-serif;
-  --blue:  linear-gradient(180deg, #003DA5 0%, #023B9D 100%);
+  --blue:  linear-gradient(180deg, #052b5e  0%, #052b5e  100%);
   --yell: #FFD347;
-  --blu: #003DA5;
+  --blu: #052b5e ;
   --back: #f2f3f7;
 
 }
@@ -221,7 +221,7 @@ html{
     color: #111827;
   }
   .bg-primary{
-    background-color: #003da5;
+    background-color: #052b5e ;
   }
   .bg-pri {
     background: #feb470;

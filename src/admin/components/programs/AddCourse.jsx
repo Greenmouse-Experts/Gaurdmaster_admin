@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { createCourse, getPrograms } from "../../../services/api/programsApi";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
+import { uploadImage } from "../../../services/api/routineApi";
 
 const AddCourse = ({ close, refetch }) => {
   const create = useMutation({
@@ -19,33 +20,48 @@ const AddCourse = ({ close, refetch }) => {
     fullDesc: "",
     price: "",
     program: "",
+    coverImg: ""
   });
   const handleChange = (name, value) => {
     setUserDetail({ ...userDetail, [name]: value });
   };
+  const mutation = useMutation({
+    mutationFn: uploadImage,
+    onSuccess: (data) => {
+      const payload = {
+        ...userDetail,
+        price: Number(userDetail.price),
+        coverImage: data.image
+        // previewUrl: data.image
+      };
+      create.mutate(payload, {
+        onSuccess: (data) => {
+          toast.success(data.message);
+          setIsBusy(false);
+          refetch();
+          close();
+        },
+        onError: (error) => {
+          toast.error(error.response.data.message);
+          setIsBusy(false);
+        },
+      });
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+      setIsBusy(false);
+    },
+  });
   const submitAction = (e) => {
     e.preventDefault();
-    if (userDetail.password !== userDetail.confirmPassword) {
-      toast.error("Password does not match");
-      return;
-    }
     setIsBusy(true);
-    const payload = {
-      ...userDetail,
-      price: Number(userDetail.price)
-    }
-    create.mutate(payload, {
-      onSuccess: (data) => {
-        toast.success(data.message);
-        setIsBusy(false);
-        refetch();
-        close();
-      },
-      onError: (error) => {
-        toast.error(error.response.data.message);
-        setIsBusy(false);
-      },
-    });
+    // const payload = {
+    //   ...userDetail,
+    //   price: Number(userDetail.price)
+    // }
+    const fd = new FormData()
+    fd.append('image', userDetail.coverImg)
+    mutation.mutate(fd)
   };
   return (
     <>
@@ -105,6 +121,17 @@ const AddCourse = ({ close, refetch }) => {
                   onChange={(e) => handleChange("shortDesc", e.target.value)}
                 />
               </div>
+            </div>
+          </div>
+          <div className="input mt-3">
+            <label>Cover Image</label>
+            <div>
+              <input
+                type="file"
+                accept="image/*"
+                required
+                onChange={(e) => handleChange("coverImg", e.target.files[0])}
+              />
             </div>
           </div>
           <div className="input mt-3">

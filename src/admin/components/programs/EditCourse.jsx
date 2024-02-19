@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getPrograms, updateCourse } from "../../../services/api/programsApi";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { uploadImage } from "../../../services/api/routineApi";
 import { toast } from "react-toastify";
 
 const EditCourse = ({ item, close, refetch }) => {
@@ -15,24 +16,56 @@ const EditCourse = ({ item, close, refetch }) => {
     fullDesc: item.fullDesc || "",
     price: item.price || "",
     program: item.program.id || "",
+    coverImg: ''
   });
   const handleChange = (name, value) => {
     setUserDetail({ ...userDetail, [name]: value });
   };
+  const mutation = useMutation({
+    mutationFn: uploadImage,
+    onSuccess: (data) => {
+      const payload = {
+        ...userDetail,
+        price: Number(userDetail.price),
+        coverImage: data.image
+      };
+      updateCourse(item.id, payload)
+        .then((data) => {
+          toast.success(data.message);
+          setIsBusy(false);
+          refetch();
+          close();
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+          setIsBusy(false);
+        });
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+      setIsBusy(false);
+    },
+  });
   const submitAction = (e) => {
     e.preventDefault();
     setIsBusy(true);
-    updateCourse(item.id, userDetail)
-      .then((data) => {
-        toast.success(data.message);
-        setIsBusy(false);
-        refetch();
-        close();
-      })
-      .catch((error) => {
-        toast.error(error.response.data.message);
-        setIsBusy(false);
-      });
+    if (userDetail.coverImg) {
+      const fd = new FormData()
+      fd.append('image', userDetail.coverImg)
+      mutation.mutate(fd)
+    } else {
+      updateCourse(item.id, userDetail)
+        .then((data) => {
+          toast.success(data.message);
+          setIsBusy(false);
+          refetch();
+          close();
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+          setIsBusy(false);
+        });
+    }
   };
   return (
     <>
@@ -93,6 +126,17 @@ const EditCourse = ({ item, close, refetch }) => {
                   onChange={(e) => handleChange("shortDesc", e.target.value)}
                 />
               </div>
+            </div>
+          </div>
+          <div className="input mt-3">
+            <label>Change Cover Image</label>
+            <div>
+              <input
+                type="file"
+                accept="image/*"
+                required
+                onChange={(e) => handleChange("coverImg", e.target.files[0])}
+              />
             </div>
           </div>
           <div className="input mt-3">

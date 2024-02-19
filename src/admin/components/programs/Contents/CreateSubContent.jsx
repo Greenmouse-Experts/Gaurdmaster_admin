@@ -59,8 +59,9 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
     onSuccess: (data) => {
       const payload = {
         ...userDetail,
+        duration: Number(userDetail.duration),
         media: data.image,
-        previewUrl: data.image
+        // previewUrl: data.image
       };
       create.mutate(payload, {
         onSuccess: (data) => {
