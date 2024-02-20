@@ -321,7 +321,7 @@ const Sidebar = ({
 
           
           <li className="nav-item">
-            <span onClick={() => setShowModal(true)} className="nav-link">
+            <span onClick={() => setShowModal(true)} className="nav-link cursor-pointer">
               <span className="nav-icon">
                 <span>
                   {" "}
