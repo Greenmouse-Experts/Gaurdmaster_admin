@@ -47,6 +47,10 @@ export const updateCourseContent = async(id, payload) => {
    return axios.patch(`/course-content-sub/${id}`, payload).then((response) => response.data)
 }
 
+export const deleteCourseContent = async(id) => {
+   return  axios.delete(`/course-content/${id}`).then((response) => response.data)
+} 
+
 export const createSubContent = async(payload) => {
    return  axios.post(`/course-content-sub/create`, payload).then((response) => response.data)
 }

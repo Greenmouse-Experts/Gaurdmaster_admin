@@ -10,7 +10,6 @@ const useModal = () => {
   const Modal = ({ title, children, size, type }) => {
     return (
       <>
-        <div>
           <Dialog
             open={showModal}
             size={size || "md"}
@@ -38,7 +37,6 @@ const useModal = () => {
               <DialogBody>{children}</DialogBody>
             </div>
           </Dialog>
-        </div>
       </>
     );
   };

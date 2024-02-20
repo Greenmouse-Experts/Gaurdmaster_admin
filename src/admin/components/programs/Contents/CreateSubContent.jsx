@@ -13,11 +13,11 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
   const [mediaType, setMediaType] = useState("");
   const medias = [
     {
-        name: "media",
-        value: "image",
-        naming: "Image",
-        accepts: "image/*",
-      },
+      name: "media",
+      value: "image",
+      naming: "Image",
+      accepts: "image/*",
+    },
     {
       name: "media",
       value: "video",
@@ -55,11 +55,11 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
     setUserDetail({ ...userDetail, [name]: value });
   };
   const getUpload = () => {
-    if(userDetail.mediaType === "video"){
+    if (userDetail.mediaType === "video") {
       return uploadVideo
-    }else if(userDetail.mediaType === "image"){
+    } else if (userDetail.mediaType === "image") {
       return uploadImage
-    }else return;
+    } else return;
   }
   const mutation = useMutation({
     mutationFn: getUpload(),
@@ -67,8 +67,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
       const payload = {
         ...userDetail,
         duration: Number(userDetail.duration),
-        media: userDetail.media === "image"? data.image : data.video,
-        previewUrl: userDetail.media === "image"? data.image : data.video,
+        media: userDetail.mediaType === "image" ? data.image : data.video,
       };
       create.mutate(payload, {
         onSuccess: (data) => {
@@ -88,16 +87,36 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
       setIsBusy(false);
     },
   });
-  const submitAction = (e) => {
+  const submitAction = async (e) => {
     e.preventDefault();
     setIsBusy(true);
-    if(userDetail.media === "" || userDetail.title === "" || userDetail.duration === 0){
-        toast.info('Please fill the required fields')
-        return ;
+    if (userDetail.media === "" || userDetail.title === "" || userDetail.duration === 0) {
+      toast.info('Please fill the required fields')
+      return;
+    }
+    if (userDetail.previewUrl) {
+      if (userDetail.mediaType === 'image') {
+        const fd = new FormData()
+        fd.append('image', userDetail.previewUrl)
+        await uploadImage(fd)
+          .then((data) => {
+            setUserDetail({ ...userDetail, previewUrl: data.image });
+          })
+          .catch(() => { })
+      }
+      else if (userDetail.mediaType === 'video') {
+        const fd = new FormData()
+        fd.append('video', userDetail.previewUrl)
+        await uploadVideo(fd)
+          .then((data) => {
+            setUserDetail({ ...userDetail, previewUrl: data.image });
+          })
+          .catch(() => { })
+      }
+      else{}
     }
     const fd = new FormData()
     fd.append(userDetail.mediaType, userDetail.media)
-    userDetail.previewUrl !== "" && fd.append(userDetail.mediaType, userDetail.previewUrl)
     mutation.mutate(fd)
   };
   return (
@@ -155,9 +174,8 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
               <div className="mt-3 border p-4 place-center relative">
                 {userDetail.media === "" ? (
                   <p
-                    className={`text-white relative z-0 !syne px-6 py-2 my-6 rounded-lg ${
-                      mediaType === "" ? "bg-gray-300" : "bg-gray-900"
-                    }`}
+                    className={`text-white relative z-0 !syne px-6 py-2 my-6 rounded-lg ${mediaType === "" ? "bg-gray-300" : "bg-gray-900"
+                      }`}
                   >
                     Click To Upload
                   </p>
@@ -181,9 +199,8 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
               <div className="mt-3 border p-4 place-center relative">
                 {userDetail.previewUrl === "" ? (
                   <p
-                    className={`text-white relative z-0 !syne px-6 py-2 my-6 rounded-lg ${
-                      mediaType === "" ? "bg-gray-300" : "bg-gray-900"
-                    }`}
+                    className={`text-white relative z-0 !syne px-6 py-2 my-6 rounded-lg ${mediaType === "" ? "bg-gray-300" : "bg-gray-900"
+                      }`}
                   >
                     Click To Upload
                   </p>
