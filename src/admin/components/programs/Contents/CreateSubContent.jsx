@@ -109,7 +109,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
         fd.append('video', userDetail.previewUrl)
         await uploadVideo(fd)
           .then((data) => {
-            setUserDetail({ ...userDetail, previewUrl: data.image });
+            setUserDetail({ ...userDetail, previewUrl: data.video });
           })
           .catch(() => { })
       }

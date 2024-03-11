@@ -90,7 +90,7 @@ const CoursesList = ({ data, refetch, isLoading }) => {
   const columns = [
     columnHelper.accessor((row) => row.title, {
       id: "Title",
-      cell: (info) => <p>{info.getValue()}</p>,
+      cell: (info) => <p className="!w-[350px] whitespace-normal">{info.getValue()}</p>,
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.shortDesc, {

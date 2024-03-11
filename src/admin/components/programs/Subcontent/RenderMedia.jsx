@@ -7,7 +7,7 @@ const RenderMedia = ({ type, url }) => {
       {
         type === "image" ? <div className='w-full'>
           <img src={url} alt="tutorial-image" className='w-full' />
-        </div> : type === "video" ? <div>
+        </div> : type === "video" ? <div className='relative -top-10'>
           <ReactPlayer url={url} width={'100%'} controls />
         </div> : ""
       }

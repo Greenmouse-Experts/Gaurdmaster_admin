@@ -205,7 +205,7 @@ font-size: 2rem;
 .card_table{
     width: 100% !important;
     overflow-x: auto;
-    border: black 1px solid;
+    /* border: black 1px solid; */
     border-bottom: 0;
      margin-top: 2rem;
      font-family: var(--mont) !important;

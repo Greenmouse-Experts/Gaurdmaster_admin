@@ -27,7 +27,7 @@ const Courses = () => {
           <CoursesList data={data?.data} isLoading={isLoading} refetch={refetch}/>
         </div>
       </div>
-      <Modal title={"Add New Admin"} size={"lg"} type={"withCancel"}>
+      <Modal title={"Add New Course"} size={"lg"} type={"withCancel"}>
         <AddCourse close={() => setShowModal(false)} refetch={refetch} />
       </Modal>
     </>

@@ -5,13 +5,47 @@ import {
   getPaginationRowModel,
   flexRender,
 } from "@tanstack/react-table";
+import React from "react";
 import { TbArrowBackUp, TbArrowBackUpDouble, TbArrowForwardUp, TbArrowForwardUpDouble } from "react-icons/tb";
+import { IoSearch } from "react-icons/io5";
 
+function DebouncedInput({
+  value: initialValue,
+  onChange,
+  debounce = 500,
+  ...props
+}) {
+  const [value, setValue] = React.useState(initialValue)
+
+  React.useEffect(() => {
+    setValue(initialValue)
+  }, [initialValue])
+
+  React.useEffect(() => {
+    const timeout = setTimeout(() => {
+      onChange(value)
+    }, debounce)
+
+    return () => clearTimeout(timeout)
+  }, [value])
+
+  return (
+    <div className="w-[300px] border border-gray-400 flex items-center px-2 mb-3">
+      <IoSearch className="text-lg shring-0"/>
+      <input {...props} value={value} className="w-full p-2" onChange={e => setValue(e.target.value)} />
+    </div>
+  )
+}
 export const DataTable = ({ data, columns }) => {
+  const [globalFilter, setGlobalFilter] = React.useState('')
   const table = useReactTable({
     data,
     columns,
+    state: {
+      globalFilter,
+    },
     // Pipeline
+    onGlobalFilterChange: setGlobalFilter,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -20,6 +54,14 @@ export const DataTable = ({ data, columns }) => {
   });
   return (
     <div>
+       <div>
+        <DebouncedInput
+          value={globalFilter ?? ''}
+          onChange={value => setGlobalFilter(String(value))}
+          className="p-2 font-lg shadow border border-block"
+          placeholder="Search all columns..."
+        />
+      </div>
       <div className="flex flex-col border-t-2 border-l border-b border-gray-400">
         <div className=" overflow-x-auto">
           <div className="align-middle inline-block min-w-full ">
