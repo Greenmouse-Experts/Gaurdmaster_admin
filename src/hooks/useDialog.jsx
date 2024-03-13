@@ -20,7 +20,7 @@ const useDialog = () => {
         <>
           <Modal blockScrollOnMount={false} isCentered motionPreset='slideInBottom' isOpen={showModal} onClose={closeModal}>
             <ModalOverlay />
-            <ModalContent className="py-4">
+            <ModalContent className="pb-4">
               <ModalHeader>{title}</ModalHeader>
               <ModalCloseButton />
               <ModalBody>

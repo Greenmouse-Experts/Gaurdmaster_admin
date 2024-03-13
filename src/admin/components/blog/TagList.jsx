@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { createColumnHelper } from "@tanstack/react-table";
 import { DataTable } from "../../../Components/table";
-import dayjs from "dayjs";
+import { createColumnHelper } from "@tanstack/react-table";
 import {
   Button,
   Menu,
@@ -10,25 +9,25 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
+import dayjs from "dayjs";
+import Picker from "../../../Components/Loaders/Picker";
+import useDialog from "../../../hooks/useDialog";
+import EditTag from "./EditTag";
+import { deleteBlogTag, updateBlogTag } from "../../../services/api/blogApi";
+import ReusableModal from "../../../Components/ReusableModal";
 import {
   MdOutlinePublishedWithChanges,
   MdOutlineUnpublished,
 } from "react-icons/md";
-import useModal from "../../../hooks/useModal";
-import EditProgram from "./EditProgram";
 import { FaRegEdit } from "react-icons/fa";
-import ReusableModal from "../../../Components/ReusableModal";
-import { deleteProgram, updateProgram } from "../../../services/api/programsApi";
-import { useMutation } from "@tanstack/react-query";
-import { toast } from "react-toastify";
 import { RiDeleteBinLine } from "react-icons/ri";
-import Picker from "../../../Components/Loaders/Picker";
+import { toast } from "react-toastify";
 
-const ProgramsList = ({ data, refetch, isLoading }) => {
-  const { Modal: Edit, setShowModal: ShowEdit } = useModal();
-  const { Modal: Retract, setShowModal: ShowRetract } = useModal();
-  const { Modal: Publish, setShowModal: ShowPublish } = useModal();
-  const { Modal: Delete, setShowModal: ShowDelete } = useModal();
+const TagList = ({ data, isLoading, refetch }) => {
+  const { Dialog: Edit, setShowModal: ShowEdit } = useDialog();
+  const { Dialog: Retract, setShowModal: ShowRetract } = useDialog();
+  const { Dialog: Publish, setShowModal: ShowPublish } = useDialog();
+  const { Dialog: Delete, setShowModal: ShowDelete } = useDialog();
   const [selected, setSelected] = useState();
   const [selectedId, setSelectedId] = useState();
   const openEdit = (item) => {
@@ -48,27 +47,27 @@ const ProgramsList = ({ data, refetch, isLoading }) => {
     ShowDelete(true);
   };
   const [isBusy, setIsBusy] = useState(false);
-  const updateProgramStatus = (val) => {
+  const updateTagStatus = (val) => {
     const payload = {
-      isPublished: val === "active"? true : false
-    }
-    setIsBusy(true)
-    updateProgram(selectedId, payload)
-    .then((data) => {
-      toast.success(data.message);
-      setIsBusy(false);
-      refetch();
-      ShowPublish(false)
-      ShowRetract(false)
-    })
-    .catch((error) => {
-      toast.error(error.response.data.message);
-      setIsBusy(false);
-    });
-  }
-  const deleteThisProgram = (val) => {
+      isPublished: val === "active" ? true : false,
+    };
     setIsBusy(true);
-    deleteProgram(val)
+    updateBlogTag(selectedId, payload)
+      .then((data) => {
+        toast.success(data.message);
+        setIsBusy(false);
+        refetch();
+        ShowPublish(false);
+        ShowRetract(false);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        setIsBusy(false);
+      });
+  };
+  const deleteThisTag = (val) => {
+    setIsBusy(true);
+    deleteBlogTag(val)
       .then((data) => {
         toast.success(data.message);
         setIsBusy(false);
@@ -82,13 +81,13 @@ const ProgramsList = ({ data, refetch, isLoading }) => {
   };
   const columnHelper = createColumnHelper();
   const columns = [
-    columnHelper.accessor((row) => row.title, {
-      id: "Title",
+    columnHelper.accessor((row) => row.tag, {
+      id: "Tag Name",
       cell: (info) => <>{info.getValue()}</>,
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.createdDate, {
-      id: "Created At",
+      id: "Date Created",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
       header: (info) => info.column.id,
     }),
@@ -99,12 +98,12 @@ const ProgramsList = ({ data, refetch, isLoading }) => {
           {info.getValue() ? (
             <div className="flex items-center gap-x-2">
               <span className="bg-green-600 w-4 h-4 circle"></span>{" "}
-              <span className="fw-500 text-green-600">Published</span>
+              <span className="fw-500 text-green-600">Active</span>
             </div>
           ) : (
             <div className="flex items-center gap-x-2">
               <span className="bg-orange-600 w-4 h-4 circle"></span>{" "}
-              <span className="fw-500 text-orange-600">Restricted</span>
+              <span className="fw-500 text-orange-600">Inactive</span>
             </div>
           )}
         </>
@@ -145,11 +144,11 @@ const ProgramsList = ({ data, refetch, isLoading }) => {
                 </MenuItem>
               )}
               <MenuItem
-                  className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
-                  onClick={() => openDelete(info.getValue())}
-                >
-                  <RiDeleteBinLine /> Delete
-                </MenuItem>
+                className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
+                onClick={() => openDelete(info.getValue())}
+              >
+                <RiDeleteBinLine /> Delete
+              </MenuItem>
             </MenuList>
           </Menu>
         </>
@@ -159,52 +158,54 @@ const ProgramsList = ({ data, refetch, isLoading }) => {
   return (
     <>
       <div>
-      {isLoading && (
-            <div className="place-center py-36">
-              <Picker size={1.7} />
-            </div>
-          )}
-        {data && !!data?.length && <DataTable data={data} columns={columns} />}
+        {isLoading && (
+          <div className="place-center py-36">
+            <Picker size={1.7} />
+          </div>
+        )}
+        {data && !!data?.data.length && (
+          <DataTable data={data.data} columns={columns} />
+        )}
       </div>
-      <Edit title={"Edit Program"} size={"sm"} type={"withCancel"}>
-        <EditProgram
+      <Edit title={"Edit Tag"} size={"sm"} type={"withCancel"}>
+        <EditTag
           data={selected}
           close={() => ShowEdit(false)}
           refetch={refetch}
         />
       </Edit>
-      <Publish title={''} size={'xs'}>
+      <Publish title={""} size={"xs"}>
         <ReusableModal
-          title={"Are you sure you want to publish this program"}
+          title={"Are you sure you want to publish this Tag"}
           actionTitle={"Publish"}
           cancelTitle={"Cancel"}
           closeModal={() => ShowPublish(false)}
-          action={() => updateProgramStatus('active')}
+          action={() => updateTagStatus("active")}
           isBusy={isBusy}
         />
       </Publish>
-      <Retract title={''} size={'xs'}>
-      <ReusableModal
-          title={"Are you sure you want to retract this program"}
+      <Retract title={""} size={"xs"}>
+        <ReusableModal
+          title={"Are you sure you want to retract this Tag"}
           actionTitle={"Retract"}
           cancelTitle={"Cancel"}
           closeModal={() => ShowRetract(false)}
-          action={() => updateProgramStatus('inactive')}
+          action={() => updateTagStatus("inactive")}
           isBusy={isBusy}
         />
       </Retract>
       <Delete title={""} size={"xs"}>
         <ReusableModal
-            title={"Are you sure you want to Delete this program"}
-            actionTitle={"Delete"}
-            cancelTitle={"Cancel"}
-            closeModal={() => ShowDelete(false)}
-            action={() => deleteThisProgram(selectedId)}
-            isBusy={isBusy}
-          />
-        </Delete>
+          title={"Are you sure you want to Delete this Tag"}
+          actionTitle={"Delete"}
+          cancelTitle={"Cancel"}
+          closeModal={() => ShowDelete(false)}
+          action={() => deleteThisTag(selectedId)}
+          isBusy={isBusy}
+        />
+      </Delete>
     </>
   );
 };
 
-export default ProgramsList;
+export default TagList;

@@ -25,8 +25,9 @@ import { FaRegEye } from "react-icons/fa6";
 import EditCourse from "./EditCourse";
 import Picker from "../../../Components/Loaders/Picker";
 import { RiDeleteBinLine } from "react-icons/ri";
+import { DynamicTable } from "../../../Components/DynamicTable";
 
-const CoursesList = ({ data, refetch, isLoading }) => {
+const CoursesList = ({ data, refetch, isLoading, next, prev , page, count}) => {
   const { Modal: Edit, setShowModal: ShowEdit } = useModal();
   const { Modal: Retract, setShowModal: ShowRetract } = useModal();
   const { Modal: Publish, setShowModal: ShowPublish } = useModal();
@@ -170,21 +171,21 @@ const CoursesList = ({ data, refetch, isLoading }) => {
               </MenuItem>
               {info.row.original.isPublished ? (
                 <MenuItem
-                  className="my-1 pt-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
+                  className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
                   onClick={() => openRetract(info.getValue())}
                 >
                   <MdOutlineUnpublished /> Retract
                 </MenuItem>
               ) : (
                 <MenuItem
-                  className="my-1 pt-1 fw-500 bg-green-500 text-white flex items-center gap-x-2 pt-1"
+                  className="my-1 fw-500 bg-green-500 text-white flex items-center gap-x-2 pt-1"
                   onClick={() => openPublish(info.getValue())}
                 >
                   <MdOutlinePublishedWithChanges /> Publish
                 </MenuItem>
               )}
                <MenuItem
-                  className="my-1 pt-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
+                  className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
                   onClick={() => openDelete(info.getValue())}
                 >
                   <RiDeleteBinLine /> Delete
@@ -204,7 +205,7 @@ const CoursesList = ({ data, refetch, isLoading }) => {
               <Picker size={1.7} />
             </div>
           )}
-          {data && !!data?.length && <DataTable data={data} columns={columns} />}
+          {data && !!data?.length && <DynamicTable data={data} columns={columns} next={next} prev={prev} page={page} count={count}/>}
         </div>
         <Edit title={"Edit Course"} size={"sm"} type={"withCancel"}>
           <EditCourse

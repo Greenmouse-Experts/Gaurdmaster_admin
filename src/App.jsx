@@ -18,6 +18,10 @@ import Programs from "./admin/pages/Programs";
 import Courses from "./admin/pages/Courses";
 import CourseDetails from "./admin/pages/CourseDetails";
 import Payments from "./admin/pages/Payments";
+import BlogTags from "./admin/pages/BlogTags";
+import { BlogPost } from "./admin/pages/BlogPost";
+import CreateBlog from "./admin/pages/CreateBlog";
+import EditBlogPost from "./admin/pages/EditBlogPost";
 
 function App() {
   return (
@@ -38,6 +42,10 @@ function App() {
           <Route path="/notify" element={<Notify/>}/>
           <Route path="/support" element={<Support/>}/>
           <Route path="/payments" element={<Payments/>}/>
+          <Route path="/blog" element={<BlogPost/>}/>
+          <Route path="/blog/add" element={<CreateBlog/>}/>
+          <Route path="/blog-tags" element={<BlogTags/>}/>
+          <Route path="/blog/edit/:id" element={<EditBlogPost/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
       </Routes>

@@ -38,10 +38,10 @@
   //   return filtered;
   // };
 
-  // export const getPageCount = (count: number, limit: number) => {
-  //   const pageCount = Math.ceil(count / limit);
-  //   return pageCount;
-  // };
+  export const getPageCount = (count, limit) => {
+    const pageCount = Math.ceil(count / limit);
+    return pageCount;
+  };
   
   // export const generatePaginationNumbers = (
   //   currentPage: number,

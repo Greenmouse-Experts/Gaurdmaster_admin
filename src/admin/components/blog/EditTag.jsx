@@ -1,21 +1,19 @@
 import React, { useState } from "react";
-import {
-  updateProgram,
-} from "../../../services/api/programsApi";
 import { toast } from "react-toastify";
+import { updateBlogTag } from "../../../services/api/blogApi";
 
-const EditProgram = ({ data, close, refetch }) => {
+const EditTag = ({ data, close, refetch }) => {
   const [isBusy, setIsBusy] = useState(false);
-  const [userDetail, setUserDetail] = useState({
-    title: data?.title || "",
+  const [uTag, setUTag] = useState({
+    tag: data?.tag || "",
   });
   const handleChange = (name, value) => {
-    setUserDetail({ ...userDetail, [name]: value });
+    setUTag({ ...uTag, [name]: value });
   };
   const submitAction = (e) => {
     e.preventDefault();
     setIsBusy(true);
-    updateProgram(data.id, userDetail)
+    updateBlogTag(data.id, uTag)
       .then((data) => {
         toast.success(data.message);
         setIsBusy(false);
@@ -32,14 +30,14 @@ const EditProgram = ({ data, close, refetch }) => {
       <div className="px-4">
         <form action="" onSubmit={submitAction}>
           <div className="input">
-            <label>Program Title</label>
+            <label>Tag Name</label>
             <div>
               <input
                 type="text"
                 placeholder="Enter Program Title"
-                value={userDetail.title}
+                value={uTag.tag}
                 required
-                onChange={(e) => handleChange("title", e.target.value)}
+                onChange={(e) => handleChange("tag", e.target.value)}
               />
             </div>
           </div>
@@ -54,4 +52,4 @@ const EditProgram = ({ data, close, refetch }) => {
   );
 };
 
-export default EditProgram;
+export default EditTag;

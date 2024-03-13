@@ -1,15 +1,12 @@
 import React, { useEffect, useRef,useState } from "react";
 import { NavLink } from "react-router-dom";
-import logo from "../../assets/wlogo.png";
 import { FiSettings, FiLogOut } from "react-icons/fi";
-import { BsCalendar4Event,  BsCashCoin } from "react-icons/bs";
 import { LuLayoutDashboard } from "react-icons/lu";
 import "../stylesheet/component.css";
-import {  FaUsers, FaUser, FaWallet } from "react-icons/fa";
+import {  FaUsers, FaUser, FaWallet, FaBloggerB } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowUp, IoIosArrowDown,IoIosChatbubbles } from "react-icons/io";
 import { GiBookshelf } from "react-icons/gi";
-import { IoSyncSharp } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 import useModal from "../../hooks/useModal";
 
@@ -186,29 +183,6 @@ const Sidebar = ({
                 )}
               </span>
             </li>
-            {/* <li className="nav-item">
-              <span onClick={toggleMembershipMenu} className="nav-link">
-                <span className="nav-icon">
-                  <span>
-                    <FaUsers />
-                    {showSidebar && "Media Manager"}
-                  </span>
-                  {showSidebar &&
-                    (showMembershipMenu ? (
-                      <IoIosArrowUp className="nav-arrow" />
-                    ) : (
-                      <IoIosArrowDown className="nav-arrow" />
-                    ))}
-                </span>
-                {showMembershipMenu && (
-                  <div className="nav">
-                    <NavLink onClick={closeSidebar} to="allmember">
-                      Add Media
-                    </NavLink>
-                  </div>
-                )}
-              </span>
-            </li> */}
 
             <li className="nav-item">
               <span onClick={toggleIdMenu} className="nav-link">
@@ -236,7 +210,33 @@ const Sidebar = ({
                 )}
               </span>
             </li>
-
+            
+            <li className="nav-item">
+              <span onClick={toggleMembershipMenu} className="nav-link">
+                <span className="nav-icon">
+                  <span>
+                    <FaBloggerB />
+                    {showSidebar && "Blog"}
+                  </span>
+                  {showSidebar &&
+                    (showMembershipMenu ? (
+                      <IoIosArrowUp className="nav-arrow" />
+                    ) : (
+                      <IoIosArrowDown className="nav-arrow" />
+                    ))}
+                </span>
+                {showMembershipMenu && (
+                  <div className="nav">
+                    <NavLink onClick={closeSidebar} to="/blog-tags">
+                      Tags
+                    </NavLink>
+                    <NavLink onClick={closeSidebar} to="/blog">
+                      Posts
+                    </NavLink>
+                  </div>
+                )}
+              </span>
+            </li>
             {/* <li className="nav-item">
               <NavLink className="nav-link" to="/pack">
                 <span className="nav-icon">

@@ -20,7 +20,7 @@ export const deleteProgram = async(id) => {
     return  axios.get(`/programs`).then((response) => response.data)
  } 
  export const getCourses = async(payload) => {
-    return  axios.get(`/courses`, payload).then((response) => response.data)
+    return  axios.get(`/courses?page=${payload}`).then((response) => response.data)
  } 
 
  export const getSingleCourse = async(id) => {
