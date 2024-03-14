@@ -50,3 +50,14 @@ export const deleteBlogPost = async (id) => {
     .delete(`/blog/remove-post/${id}`)
     .then((response) => response.data);
 };
+
+export const addBlogPostTag = async (id) => {
+  return axios
+  .patch(`/blog/remove-post-tag/${id}`)
+  .then((response) => response.data);
+}
+export const removeBlogPostTag = async (id, payload) => {
+  return axios
+  .patch(`/blog/remove-post-tag/${id}`, payload)
+  .then((response) => response.data);
+}

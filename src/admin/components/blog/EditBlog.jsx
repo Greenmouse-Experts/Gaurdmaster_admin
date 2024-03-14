@@ -56,7 +56,7 @@ const EditBlog = ({ item, refetch, close }) => {
     onSuccess: (data) => {
       const payload = {
         ...postDetail,
-        tags: addedTags.map(({ id }) => ({ id: id })),
+        // tags: addedTags.map(({ id }) => ({ id: id })),
         coverImage: data.image,
       };
       updateBlogPost(item?.id, payload)

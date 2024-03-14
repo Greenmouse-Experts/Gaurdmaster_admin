@@ -73,7 +73,7 @@ import { getPageCount } from "./utils";
                 <div>Page</div>
                 <strong>
                   {page} of{" "}
-                  {getPageCount(count, 20)}
+                  {getPageCount(count, 10)}
                 </strong>
               </span>
             </div>

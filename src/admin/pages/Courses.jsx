@@ -16,17 +16,17 @@ const Courses = () => {
   });
   const { Modal, setShowModal } = useModal();
   const handleNext = () => {
-    if(page){
-      setPage((old) => old + 1)
+    if(page * 10 > data?.count){
+      toast.info('This is the last page')
     }else{
-      toast.info('This is the first page')
+      setPage((old) => old + 1)
     }
   }
   const handlePrev = () => {
     if(page > 1){
       setPage((old) => old - 1)
     }else{
-      toast.info('This is the last page')
+      toast.info('This is the first page')
     }
   }
 

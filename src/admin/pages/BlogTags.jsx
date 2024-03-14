@@ -27,7 +27,7 @@ const BlogTags = () => {
           <TagList data={data} isLoading={isLoading} refetch={refetch} />
         </div>
       </div>
-      <Dialog title={"Add New Admin"} size={"lg"} type={"withCancel"}>
+      <Dialog title={"Add New Tag"} size={"lg"} type={"withCancel"}>
         <AddTag close={() => setShowModal(false)} refetch={refetch} />
       </Dialog>
     </>
