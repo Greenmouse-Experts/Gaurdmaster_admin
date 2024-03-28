@@ -13,7 +13,6 @@ import dayjs from 'dayjs';
 import Picker from '../../../Components/Loaders/Picker';
 import { RiDeleteBinLine } from 'react-icons/ri';
 import { MdOutlinePublishedWithChanges, MdOutlineUnpublished } from 'react-icons/md';
-import { FaRegEdit } from 'react-icons/fa';
 import ReusableModal from '../../../Components/ReusableModal';
 import useDialog from '../../../hooks/useDialog';
 import { deleteBlogPost, updateBlogPost } from '../../../services/api/blogApi';

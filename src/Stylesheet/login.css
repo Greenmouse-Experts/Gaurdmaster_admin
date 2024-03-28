@@ -1,24 +1,26 @@
-.main_login{
+.main_login {
     width: 100%;
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 100vh;
 }
+
 .order1 {
     order: 1
-    
 }
+
 .order2 {
     order: 2;
 }
-.side1{
+
+.side1 {
     width: 40%;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 5rem 5%;
-    font-family: var(--mont)!important;
+    font-family: var(--mont) !important;
     background: var(--blu);
     background-image: url(../assets/login.png);
     background-position: center;
@@ -26,31 +28,30 @@ min-height: 100vh;
     background-size: cover;
     min-height: 100vh;
     background-clip: border-box;
-   
-    
+
+
 }
 
-.reg{
+.reg {
     background-image: url(../assets/register.png);
     align-items: flex-start;
     padding-top: 10rem;
 }
 
 
-.side1> div{
+.side1>div {
     display: flex;
     flex-direction: column;
     width: 100%;
     align-items: center;
-    gap: 3rem
-    ;
-}
-.side1 img{
-    width: 70%
-   
+    gap: 3rem;
 }
 
-.side1 div div{
+.side1 img {
+    width: 70%
+}
+
+.side1 div div {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -58,31 +59,32 @@ min-height: 100vh;
     gap: 2rem;
 }
 
-.side1 h3{
+.side1 h3 {
     color: #FFF;
 
-font-size: 2rem;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.side1 p{
+.side1 p {
     color: #FFF;
-text-align: center;
-font-size: 19px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+    text-align: center;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 }
-.side1 a{
+
+.side1 a {
     color: #FFF;
     text-align: center;
     font-size: 19px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    font-family: var(--mont)!important;
+    font-family: var(--mont) !important;
     padding: 1.6rem 5rem;
     width: fit-content;
     border: 1px solid white;
@@ -90,7 +92,7 @@ line-height: normal;
     border-radius: 40px;
 }
 
-.side1 a:hover{
+.side1 a:hover {
     color: var(--blu);
     border: 1px solid white;
     background: white;
@@ -98,81 +100,83 @@ line-height: normal;
 }
 
 
-.side2{
+.side2 {
     width: 60%;
     display: flex;
     flex-direction: column;
     padding: 3rem 2rem;
-    font-family: var(--mont)!important;
+    font-family: var(--mont) !important;
 }
 
-.don{
-  
+.don {
+
     align-self: flex-end;
     display: flex;
     align-items: center;
     gap: 1rem;
     color: #797979;
-font-size: 19px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.don a{
+.don a {
     border-radius: 7px;
-background: #FFC000;
-color: #797979;
-font-size: 19px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-padding: 1rem 1.8rem;
-display: flex;
-align-items: center;
-justify-content: center;
+    background: #FFC000;
+    color: #797979;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 1rem 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.login{
+.login {
     display: flex;
     flex-direction: column;
-    height: 100% ;
+    height: 100%;
     justify-content: center;
     width: 100%;
     padding: 3rem 6rem;
 
 
 }
-.login h2{
+
+.login h2 {
     color: #0D0D0D;
-font-size: 2rem;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 
 }
 
-.go{
+.go {
     width: 100%;
     display: flex;
     margin-top: 1.5rem;
     border-radius: 10px;
-background: #346EF1;
-padding: 9px;
+    background: #346EF1;
+    padding: 9px;
 
 }
-.go span{
+
+.go span {
     align-self: flex-start;
     padding: 7px 10px;
     background: white;
     border-radius: 6px;
 }
 
-.go span img{
+.go span img {
     width: 2.5rem;
 }
 
-.go p{
+.go p {
     display: flex;
     justify-self: center !important;
     justify-content: center !important;
@@ -180,13 +184,13 @@ padding: 9px;
     align-items: center;
     width: 100%;
     color: #FFF;
-font-size: 24px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.or{
+.or {
     align-self: center;
     position: absolute;
     top: -14px;
@@ -194,13 +198,13 @@ line-height: normal;
     background: white;
     z-index: 100;
     padding: 0 10px;
-font-size: 19px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.login form{
+.login form {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -210,131 +214,135 @@ line-height: normal;
     padding: 2.5rem 0;
 }
 
-.login_form> div{
+.login_form>div {
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
 }
 
-.login_form label{
+.login_form label {
     color: #000;
-font-size: 19px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.input div{
+.input div {
     display: flex;
     width: 100%;
     align-items: center;
     padding: 5px 1rem;
     justify-content: space-between;
     border-radius: 9px;
-border: 1px solid #192F59;
-    
+    border: 1px solid #192F59;
+
 }
 
-.input input{
+.input input {
     width: 80%;
     padding: 1rem;
     border: none;
     color: rgba(0, 0, 0, 0.589);
-font-family: var(--mont)!important;
-font-size: 17px;
-font-style: normal;
-font-weight: 500;
-line-height: normal;
+    font-family: var(--mont) !important;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
 
 }
 
-.input input::placeholder{
+.input input::placeholder {
     color: rgba(25, 47, 89, 0.345);
 }
 
-.eye-icon svg{
+.eye-icon svg {
     color: rgba(25, 47, 89, 0.222);
     font-size: 1.5rem;
 }
 
-.login_form > a{
+.login_form>a {
     align-self: flex-end;
     width: fit-content;
     color: #192F59;
-font-size: 19px;
-font-style: normal;
-font-family: var(--mont)!important;
-font-weight: 600;
-line-height: normal;
+    font-size: 19px;
+    font-style: normal;
+    font-family: var(--mont) !important;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.login_form button{
+.login_form button {
     border: none;
     background: var(--blu);
     padding: 1.1rem;
     color: #FFF;
-text-align: center;
-font-family: var(--mont)!important;
-font-size: 19px;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-border-radius: 9px;
-margin-top: 10px;
+    text-align: center;
+    font-family: var(--mont) !important;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    border-radius: 9px;
+    margin-top: 10px;
 }
 
 
-.login_logo{
+.login_logo {
     display: none;
 }
 
 
-.double{
+.double {
     display: flex;
     gap: 2rem;
     flex-direction: row !important;
     justify-content: space-between;
 }
 
-.double .input{
+.double .input {
     width: 100%;
     display: flex;
     flex-direction: column;
     gap: 0.8rem;
 }
 
-.log_p{
+.log_p {
     color: #646464;
-font-size: 19px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    font-size: 19px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 }
 
-.log_p span{
+.log_p span {
     color: var(--blu);
 }
+
 @media screen and (max-width: 1100px) {
-    .login{
+    .login {
         padding: 3rem 4rem;
     }
 }
 
 @media screen and (max-width: 1024px) {
-    .side1{
+    .side1 {
         display: none;
     }
-    .side2{
+
+    .side2 {
         width: 100%;
         background: white;
-      
+
     }
-    .don{
+
+    .don {
         margin-top: 1rem;
     }
-    .main_login{
+
+    .main_login {
         padding: 6rem 5%;
-        font-family: var(--mont)!important;
+        font-family: var(--mont) !important;
         background: #192F59;
         background-image: url(../assets/login.png);
         background-position: center;
@@ -343,7 +351,8 @@ line-height: normal;
         min-height: 100vh;
         background-clip: border-box;
     }
-    .login_logo{
+
+    .login_logo {
         display: block;
         padding: 2rem 0;
         display: flex;
@@ -352,50 +361,55 @@ line-height: normal;
         gap: 2rem;
     }
 
-    .login_logo img{
+    .login_logo img {
         width: 80%;
     }
 
-    .login_logo h3{
-color: #192F59;
-font-size: 2rem;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+    .login_logo h3 {
+        color: #192F59;
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
     }
 
 
-    
+
 }
 
 @media screen and (max-width: 745px) {
-    .login{
+    .login {
         padding: 2rem 0;
     }
-    .double{
+
+    .double {
         gap: 0;
         flex-direction: column !important;
     }
 }
 
 @media screen and (max-width: 550px) {
-    
-    .login_logo h3{
+
+    .login_logo h3 {
         font-size: 1.4rem;
     }
-    .don{
+
+    .don {
         gap: 0.5rem;
 
     }
-    .don a{
+
+    .don a {
         padding: 0.5rem 1rem;
         text-align: center;
     }
-    .go{
+
+    .go {
         gap: 10px;
         text-align: center;
     }
-    .login_logo img{
+
+    .login_logo img {
         width: 95%;
     }
 }

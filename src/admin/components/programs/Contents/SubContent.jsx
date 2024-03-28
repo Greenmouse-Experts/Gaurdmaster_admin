@@ -5,11 +5,12 @@ import { viewSubContent } from "../../../../services/api/programsApi";
 import useModal from "../../../../hooks/useModal";
 import CreateSubContent from "./CreateSubContent";
 import ViewSubcontent from "../Subcontent/ViewSubcontent";
+import CreateAssesment from "../Assesment/createAssesment";
 
 const SubContent = ({ id, courseId }) => {
   const [data, setData] = useState([])
-  const getData = async(id) => {
-      await viewSubContent(id)
+  const getData = async (id) => {
+    await viewSubContent(id)
       .then((res) => {
         setData(res.data)
       })
@@ -18,8 +19,9 @@ const SubContent = ({ id, courseId }) => {
   useEffect(() => {
     getData(id)
   }, [id])
-  const {Modal, setShowModal} = useModal()
-  const {Modal:View, setShowModal:ShowView} = useModal()
+  const { Modal, setShowModal } = useModal()
+  const { Modal: View, setShowModal: ShowView } = useModal()
+  const { Modal: CreateAssess, setShowModal: ShowCreateAssess } = useModal()
   const [selected, setSelected] = useState('')
   const openDetails = (item) => {
     setSelected(item)
@@ -27,19 +29,27 @@ const SubContent = ({ id, courseId }) => {
   }
   return (
     <div className="!syne">
-      <div
-        className="flex items-center gap-x-2 cursor-pointer fw-600 text-primary !syne"
-        onClick={() => setShowModal(true)}
-      >
-        <IoAddCircle className="text-xl" /> Add SubContent
+      <div className="flex items-center gap-x-3">
+        <div
+          className="flex items-center gap-x-2 cursor-pointer fw-600 text-primary !syne"
+          onClick={() => setShowModal(true)}
+        >
+          <IoAddCircle className="text-xl" /> Add SubContent
+        </div>
+        <div
+          className="flex items-center gap-x-2 cursor-pointer fw-600 text-primary !syne"
+          onClick={() => ShowCreateAssess(true)}
+        >
+          <IoAddCircle className="text-xl" /> Add Assessment
+        </div>
       </div>
       <div className="mt-4 grid gap-3">
         {
           !!data?.length && data.map((item) => (
-            <div className="flex justify-between items-center shadow p-2 rounded" onClick={() => openDetails(item.id)}>
+            <div className="flex justify-between items-center shadow p-2 rounded" onClick={() => openDetails(item.id)} key={item.id}>
               <div className="flex gap-x-2">
-              <span className="w-3 h-3 circle mt-2 bg-primary"></span>
-              <p className="fs-600">{item.title}</p>
+                <span className="w-3 h-3 circle mt-2 bg-primary"></span>
+                <p className="fs-600">{item.title}</p>
               </div>
               <div>
                 <p>{item.duration} Min(s)</p>
@@ -48,12 +58,15 @@ const SubContent = ({ id, courseId }) => {
           ))
         }
       </div>
-        <Modal title={'Add Sub Content'} size={'lg'} type={'withCancel'}>
-            <CreateSubContent id={id} courseId={courseId} close={() => setShowModal(false)} refetch={() => getData(id)}/>
-        </Modal>
-        <View title={'Course Sub Content'} size={'lg'} type={'withCancel'}>
-          <ViewSubcontent id={selected}/>
-        </View>
+      <Modal title={'Add Sub Content'} size={'lg'} type={'withCancel'}>
+        <CreateSubContent id={id} courseId={courseId} close={() => setShowModal(false)} refetch={() => getData(id)} />
+      </Modal>
+      <View title={'Course Sub Content'} size={'lg'} type={'withCancel'}>
+        <ViewSubcontent id={selected} />
+      </View>
+      <CreateAssess title={'Add Assessment'} size={'lg'} type={'withCancel'}>
+        <CreateAssesment id={id} courseId={courseId} close={() => ShowCreateAssess(false)} refetch={() => getData(id)}/>
+      </CreateAssess>
     </div>
   );
 };

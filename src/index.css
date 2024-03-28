@@ -25,6 +25,9 @@ a{
   font-weight: 500;
   line-height: normal;
 }
+.PhoneInputInput {
+  outline: none !important;
+}
 
 .padding{
   padding: 3rem 7%;

@@ -9,7 +9,6 @@ import { MdOutlineOndemandVideo } from "react-icons/md";
 import SubContent from "./SubContent";
 import { deleteCourseContent } from "../../../../services/api/programsApi";
 import { toast } from "react-toastify";
-import useModal from "../../../../hooks/useModal";
 import ReusableModal from "../../../../Components/ReusableModal";
 import useDialog from "../../../../hooks/useDialog";
 
@@ -63,7 +62,7 @@ const ContentList = ({ data, courseId }) => {
                 <MdOutlineOndemandVideo className="text-" />
                 <p className="text-lg">{item.title}</p>
                 <div onClick={(e) => e.stopPropagation()}>
-                <RiDeleteBin6Line className="cursor-pointer text-xl" onClick={() => openDelete(item.id)}/>
+                  <RiDeleteBin6Line className="cursor-pointer text-xl" onClick={() => openDelete(item.id)} />
                 </div>
               </div>
             </AccordionHeader>

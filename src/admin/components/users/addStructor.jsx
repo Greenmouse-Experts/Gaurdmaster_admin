@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { AiFillEye } from "react-icons/ai";
 import { createInstructor } from "../../../services/api/usersApi";
 import { toast } from "react-toastify";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 const AddInstructor = ({close, refetch}) => {
   const create = useMutation({
@@ -86,16 +88,14 @@ const AddInstructor = ({close, refetch}) => {
                 />
               </div>
             </div>
-            <div className="input">
+            <div className="">
               <label>Phone Number</label>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Enter Phone Number"
-                  value={userDetail.phone}
-                  required
-                  onChange={(e) => handleChange("phone", e.target.value)}
-                />
+              <div className="border border-[#192f59] p-1 lg:p-2 rounded-[9px]">
+              <PhoneInput
+                    defaultCountry="US"
+                    onChange={(value) => handleChange("phone", String(value))}
+                    className="p-2 bg-transparent"
+                  />
               </div>
             </div>
             <div className="input">

@@ -20,11 +20,13 @@ const Courses = () => {
       toast.info('This is the last page')
     }else{
       setPage((old) => old + 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }
   const handlePrev = () => {
     if(page > 1){
       setPage((old) => old - 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }else{
       toast.info('This is the first page')
     }

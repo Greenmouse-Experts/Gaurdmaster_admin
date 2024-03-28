@@ -18,7 +18,7 @@ const useDialog = () => {
   const Dialog = ({ title, children, size, type }) => {
     return (
         <>
-          <Modal blockScrollOnMount={false} isCentered motionPreset='slideInBottom' isOpen={showModal} onClose={closeModal}>
+          <Modal blockScrollOnMount={false} size={size} isCentered motionPreset='slideInBottom' isOpen={showModal} onClose={closeModal}>
             <ModalOverlay />
             <ModalContent className="pb-4">
               <ModalHeader>{title}</ModalHeader>

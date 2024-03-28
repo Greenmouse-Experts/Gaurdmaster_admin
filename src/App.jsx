@@ -22,6 +22,7 @@ import BlogTags from "./admin/pages/BlogTags";
 import { BlogPost } from "./admin/pages/BlogPost";
 import CreateBlog from "./admin/pages/CreateBlog";
 import EditBlogPost from "./admin/pages/EditBlogPost";
+import ViewAssessment from "./admin/components/programs/Assesment/viewAssessment";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/programs" element={<Programs/>}/>
           <Route path="/courses" element={<Courses/>}/>
           <Route path="/courses/:id" element={<CourseDetails/>}/>
+          <Route path="/assessment/:id" element={<ViewAssessment/>}/>
           <Route path="/notify" element={<Notify/>}/>
           <Route path="/support" element={<Support/>}/>
           <Route path="/payments" element={<Payments/>}/>
