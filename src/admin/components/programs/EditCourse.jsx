@@ -128,17 +128,21 @@ const EditCourse = ({ item, close, refetch }) => {
               </div>
             </div>
           </div>
-          <div className="input mt-3">
+         <div className="flex gap-x-2 items-center">
+         <div className="input mt-3">
             <label>Change Cover Image</label>
             <div>
               <input
                 type="file"
                 accept="image/*"
-                required
                 onChange={(e) => handleChange("coverImg", e.target.files[0])}
               />
             </div>
           </div>
+          <div className="w-24 h-24 shrink-0 border-2 mt-3">
+            <img src={item.coverImage} alt="cover-image" className="w-full h-full object-cover" />
+          </div>
+         </div>
           <div className="input mt-3">
             <label>Course Description</label>
             <div>

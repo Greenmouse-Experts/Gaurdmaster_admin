@@ -46,10 +46,11 @@ const SubContent = ({ id, courseId }) => {
       <div className="mt-4 grid gap-3">
         {
           !!data?.length && data.map((item) => (
-            <div className="flex justify-between items-center shadow p-2 rounded" onClick={() => openDetails(item.id)} key={item.id}>
+            <div className="flex justify-between items-center cursor-pointer shadow p-2 rounded" onClick={() => openDetails(item.id)} key={item.id}>
               <div className="flex gap-x-2">
                 <span className="w-3 h-3 circle mt-2 bg-primary"></span>
                 <p className="fs-600">{item.title}</p>
+                {item?.mediaType === "assessment" && <p className="px-3 fs-300 bg-primary text-white rounded-lg">Assessment</p>}
               </div>
               <div>
                 <p>{item.duration} Min(s)</p>

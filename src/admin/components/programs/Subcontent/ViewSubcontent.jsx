@@ -37,7 +37,7 @@ const ViewSubcontent = ({ id }) => {
                 <p>Content: {data.courseContent.title}</p>
                 {data.mediaType === "assessment" ? (
                   <div>
-                    <p className="flex items-center gap-x-2" onClick={() => navigate(`/assessment/${id}`)}>
+                    <p className="flex items-center gap-x-2 cursor-pointer" onClick={() => navigate(`/assessment/${id}`)}>
                       {" "}
                       <IoAddCircle className="text-xl" /> View/Add Assessment
                       Questions

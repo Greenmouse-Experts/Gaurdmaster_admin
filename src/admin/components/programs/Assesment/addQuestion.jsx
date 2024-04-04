@@ -138,7 +138,7 @@ const AddQuestion = ({ courseId, id, subId, close, refetch }) => {
                       >
                         {item}
                         <div onClick={(e) => e.stopPropagation()}>
-                            <MdOutlineRemoveCircle className="text-red-600" onClick={() => removeObjective(item, i)} />
+                            <MdOutlineRemoveCircle className="text-red-600 cursor-pointer" onClick={() => removeObjective(item, i)} />
                         </div>
                       </div>
                     ))}
@@ -150,7 +150,7 @@ const AddQuestion = ({ courseId, id, subId, close, refetch }) => {
                     onChange={(e) => setOptionInput(e.target.value)}
                     className="w-full p-2"
                   />
-                  <IoSend className="text-2xl shrink-0" onClick={handleAddQuestion} />
+                  <IoSend className="text-2xl shrink-0 cursor-pointer" onClick={handleAddQuestion} />
                 </div>
               </div>
             </div>
