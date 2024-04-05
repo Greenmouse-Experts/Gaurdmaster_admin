@@ -36,14 +36,14 @@ const AddQuestion = ({ courseId, id, subId, close, refetch }) => {
   };
   const removeObjective = (item, i) => {
     const filtered = objective.filter(where => where !== item)
-    if(answer === i + 1){
+    if(answer === i){
         toast.info('Please unselect as answer before removing')
     }else{
         setObjective(filtered)
     }
   }
   const makeAnswer = (item) => {
-    setAnswer(Number(item) + 1);
+    setAnswer(Number(item));
   };
   const [isBusy, setIsBusy] = useState(false);
   const create = useMutation({
@@ -132,7 +132,7 @@ const AddQuestion = ({ courseId, id, subId, close, refetch }) => {
                   {!!objective.length &&
                     objective.map((item, i) => (
                       <div
-                        className={`flex border border-gray-500 py-1 px-2 items-center gap-x-5 rounded cursor-pointer ${answer === i + 1 && 'bg-green-300'}`}
+                        className={`flex border border-gray-500 py-1 px-2 items-center gap-x-5 rounded cursor-pointer ${answer === i  && 'bg-green-300'}`}
                         key={i}
                         onClick={() => makeAnswer(i)}
                       >

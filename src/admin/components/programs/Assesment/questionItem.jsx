@@ -55,7 +55,7 @@ const QuestionItem = ({ data, i, refetch }) => {
             <div className="flex gap-x-2 items-center" key={i}>
               <input type="radio" disabled className="w-4 h-4" />
               <label>{item}</label>
-              {i + 1 === data.correctOption && (
+              {i === data.correctOption && (
                 <span className="fw-500 text-green-600 fs-300 pl-3">
                   Correct Answer
                 </span>
