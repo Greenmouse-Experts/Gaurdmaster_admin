@@ -16,7 +16,7 @@ const Payments = () => {
     {
       label: 'Cancelled Payments',
       content:
-        <PaymentList status={'pending'}/>,
+        <PaymentList status={'cancelled'}/>,
     },
   ]
   return (

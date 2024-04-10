@@ -5,7 +5,7 @@ axios.defaults.baseURL = BASE_URL;
 
 export const getPayments = async (type, page) => {
   return axios
-    .get(`/orders/access-ordered-items?status=${type}&page=${page}`)
+    .get(`/orders/fetch-student-trx?status=${type}&page=${page}`)
     .then((response) => response.data);
 };
 

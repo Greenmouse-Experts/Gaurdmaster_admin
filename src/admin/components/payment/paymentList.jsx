@@ -11,7 +11,6 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { createColumnHelper } from "@tanstack/react-table";
-import { FaRegEye } from "react-icons/fa";
 import useDialog from "../../../hooks/useDialog";
 import PaymentDetails from "./paymentDetails";
 import dayjs from "dayjs";
@@ -49,22 +48,27 @@ const PaymentList = ({ status }) => {
   };
   const columnHelper = createColumnHelper();
   const columns = [
-    columnHelper.accessor((row) => row.id, {
-      id: "Order Id",
+    columnHelper.accessor((row) => row.trx.id, {
+      id: "Reference Id",
       cell: (info) => <>{info.getValue()}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.price, {
+    columnHelper.accessor((row) => row.trx.subAmount, {
+      id: "Course Amount (Sub Total)",
+      cell: (info) => <>{`$${info.getValue()}`}</>,
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.trx.amount, {
       id: "Amount Paid",
       cell: (info) => <>{`$${info.getValue()}`}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.order.createdDate, {
+    columnHelper.accessor((row) => row.trx.createdDate, {
       id: "Created At",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.order.status, {
+    columnHelper.accessor((row) => row.trx.status, {
       id: "Status",
       cell: (info) => (
         <>
@@ -78,6 +82,11 @@ const PaymentList = ({ status }) => {
               <span className="bg-orange-600 w-4 h-4 circle"></span>{" "}
               <span className="fw-500 text-orange-600">Pending</span>
             </div>
+          ) : info.getValue() === "cancelled" ? (
+            <div className="flex items-center gap-x-2">
+              <span className="bg-red-600 w-4 h-4 circle"></span>{" "}
+              <span className="fw-500 text-red-600">Cancelled</span>
+            </div>
           ) : (
             ""
           )}
@@ -85,7 +94,7 @@ const PaymentList = ({ status }) => {
       ),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.order.buyer, {
+    columnHelper.accessor((row) => row.buyer, {
       id: "Student",
       cell: (info) => <>{`${info.getValue().firstName} ${info.getValue().lastName}`}</>,
       header: (info) => info.column.id,
@@ -104,7 +113,7 @@ const PaymentList = ({ status }) => {
             <MenuList className="">
               <MenuItem
                 className="my-1 fw-500 flex items-center gap-x-2 pt-1"
-                onClick={() => openView(info.row.original)}
+                onClick={() => openView(info.row.original.orderItems)}
               >
                 View Details
               </MenuItem>
@@ -133,7 +142,7 @@ const PaymentList = ({ status }) => {
           />
         )}
       </div>
-      <Dialog>
+      <Dialog title={'Purchased Items'}>
         <PaymentDetails data={selected} />
       </Dialog>
     </>
