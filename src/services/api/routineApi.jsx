@@ -12,24 +12,38 @@ axios.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401) {
-    //     localStorage.clear()
-    //   return (window.location.href = "/login");
+      //     localStorage.clear()
+      //   return (window.location.href = "/login");
     }
     return Promise.reject(error);
   }
 );
 
-export const uploadVideo = async(payload) => {
-    return  axios.post(`/upload/video`, payload, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    }).then((response) => response.data)
- } 
- export const uploadImage = async(payload) => {
-    return  axios.post(`/upload/image`, payload, {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    }).then((response) => response.data)
- } 
+export const uploadVideo = async (payload) => {
+  return axios
+    .post(`/upload/video`, payload, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
+};
+export const uploadImage = async (payload) => {
+  return axios
+    .post(`/upload/image`, payload, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then((response) => response.data);
+};
+
+export const getNotify = async () => {
+  return axios.get(`/notifications/admin`).then((response) => response.data);
+};
+
+export const markUserNotify = async (id) => {
+  return axios
+    .patch(`/notifications/mark-as-read/${id}`)
+    .then((response) => response.data);
+};

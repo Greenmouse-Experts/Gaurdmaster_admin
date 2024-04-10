@@ -16,6 +16,8 @@ import { BsGear } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 import useModal from "../../hooks/useModal";
+import { useQuery } from "@tanstack/react-query";
+import { getNotify } from "../../services/api/routineApi";
 
 export const Topnav = ({ toggleSidebar }) => {
   const popup = () => {
@@ -51,7 +53,10 @@ export const Topnav = ({ toggleSidebar }) => {
     signOut();
   };
   const { Modal, setShowModal } = useModal();
-
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["notify"],
+    queryFn: getNotify,
+  });
   return (
     <>
       <div className="top_nav">
@@ -63,29 +68,29 @@ export const Topnav = ({ toggleSidebar }) => {
 
         <div className="icon_menu">
           <div onClick={popup} ref={bellIconRef} className="bell">
-            <div className="bell_icon">
+            <div className="bell_icon cursor-pointer">
               <GoBell />
-              <span> 6</span>
+              <span>{data?.data?.length}</span>
             </div>
 
             {activeDropdown && (
               <div className="bell_drop">
-                {datas.length > 0 ? (
-                  datas.data.map((item) => (
-                    <div key={item.id}>
-                      <div className="add_head">
-                        <p>Notification</p>{" "}
-                      </div>
-                      <div className="bell_body">
-                        <GoBell />
-                        <div>
-                          <h3>
-                            {item.body} <span>{item.title}</span>
-                          </h3>
+                {data?.data?.length > 0 ? (
+                  <div>
+                    <div className="add_head">
+                      <p>Notification</p>{" "}
+                    </div>
+                    {data?.data?.slice(0,5).map((item) => (
+                      <div key={item.id}>
+                        <div className="bell_body">
+                          <GoBell className="shrink-0"/>
+                          <div>
+                            <h3 className="!fs-500">{item.body}</h3>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))
+                    ))}
+                  </div>
                 ) : (
                   <div>
                     {" "}

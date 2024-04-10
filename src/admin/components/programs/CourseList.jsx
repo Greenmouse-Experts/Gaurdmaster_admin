@@ -27,7 +27,7 @@ import Picker from "../../../Components/Loaders/Picker";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { DynamicTable } from "../../../Components/DynamicTable";
 
-const CoursesList = ({ data, refetch, isLoading, next, prev , page, count}) => {
+const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
   const { Modal: Edit, setShowModal: ShowEdit } = useModal();
   const { Modal: Retract, setShowModal: ShowRetract } = useModal();
   const { Modal: Publish, setShowModal: ShowPublish } = useModal();
@@ -91,12 +91,16 @@ const CoursesList = ({ data, refetch, isLoading, next, prev , page, count}) => {
   const columns = [
     columnHelper.accessor((row) => row.title, {
       id: "Title",
-      cell: (info) => <p className="!w-[350px] whitespace-normal">{info.getValue()}</p>,
+      cell: (info) => (
+        <p className="!w-[350px] whitespace-normal">{info.getValue()}</p>
+      ),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.shortDesc, {
       id: "Description",
-      cell: (info) => <p className="!w-[350px] whitespace-normal">{info.getValue()}</p>,
+      cell: (info) => (
+        <p className="!w-[350px] whitespace-normal">{info.getValue()}</p>
+      ),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.price, {
@@ -111,7 +115,21 @@ const CoursesList = ({ data, refetch, isLoading, next, prev , page, count}) => {
     }),
     columnHelper.accessor((row) => row.coverImage, {
       id: "Cover Image",
-      cell: (info) => <>{info.getValue() ? <a href={info.getValue()} target="_blank" rel="noopener noreferrer"><img src={info.getValue()} alt="coverImage" className="w-36 h-24 object-cover" /></a> : <p>No Image</p>}</>,
+      cell: (info) => (
+        <>
+          {info.getValue() ? (
+            <a href={info.getValue()} target="_blank" rel="noopener noreferrer">
+              <img
+                src={info.getValue()}
+                alt="coverImage"
+                className="w-36 h-24 object-cover"
+              />
+            </a>
+          ) : (
+            <p>No Image</p>
+          )}
+        </>
+      ),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.instructor, {
@@ -184,12 +202,12 @@ const CoursesList = ({ data, refetch, isLoading, next, prev , page, count}) => {
                   <MdOutlinePublishedWithChanges /> Publish
                 </MenuItem>
               )}
-               <MenuItem
-                  className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
-                  onClick={() => openDelete(info.getValue())}
-                >
-                  <RiDeleteBinLine /> Delete
-                </MenuItem>
+              <MenuItem
+                className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
+                onClick={() => openDelete(info.getValue())}
+              >
+                <RiDeleteBinLine /> Delete
+              </MenuItem>
             </MenuList>
           </Menu>
         </>
@@ -205,7 +223,16 @@ const CoursesList = ({ data, refetch, isLoading, next, prev , page, count}) => {
               <Picker size={1.7} />
             </div>
           )}
-          {data && !!data?.length && <DynamicTable data={data} columns={columns} next={next} prev={prev} page={page} count={count}/>}
+          {data && !!data?.length && (
+            <DynamicTable
+              data={data}
+              columns={columns}
+              next={next}
+              prev={prev}
+              page={page}
+              count={count}
+            />
+          )}
         </div>
         <Edit title={"Edit Course"} size={"sm"} type={"withCancel"}>
           <EditCourse
@@ -235,7 +262,7 @@ const CoursesList = ({ data, refetch, isLoading, next, prev , page, count}) => {
           />
         </Retract>
         <Delete title={""} size={"xs"}>
-        <ReusableModal
+          <ReusableModal
             title={"Are you sure you want to Delete this course"}
             actionTitle={"Delete"}
             cancelTitle={"Cancel"}

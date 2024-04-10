@@ -9,6 +9,7 @@ import { IoIosArrowUp, IoIosArrowDown,IoIosChatbubbles } from "react-icons/io";
 import { GiBookshelf } from "react-icons/gi";
 import useAuth from "../../hooks/useAuth";
 import useModal from "../../hooks/useModal";
+import { IoNotifications } from "react-icons/io5";
 
 const Sidebar = ({
   showSidebar,
@@ -270,16 +271,6 @@ const Sidebar = ({
                 </span>
               </NavLink>
             </li> */}
-            {/* <li className="nav-item">
-              <NavLink onClick={closeSidebar}  to="/uni"className="nav-link">
-                <span className="nav-icon">
-                  <span>
-                  <BsCashCoin />
-                    {showSidebar && "Admin Earning"}
-                  </span>
-                </span>
-              </NavLink>
-            </li> */}
             <li className="nav-item">
             <NavLink onClick={closeSidebar} to="support" className="nav-link">
               <span className="nav-icon">
@@ -316,7 +307,16 @@ const Sidebar = ({
                 )}
               </span>
             </li>
-            
+            <li className="nav-item">
+              <NavLink onClick={closeSidebar}  to="/notify"className="nav-link">
+                <span className="nav-icon">
+                  <span>
+                  <IoNotifications />
+                    {showSidebar && "Notification"}
+                  </span>
+                </span>
+              </NavLink>
+            </li>
           </div>
 
           
