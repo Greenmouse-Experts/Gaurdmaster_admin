@@ -100,12 +100,28 @@ export const getAssessmentQuestions = async (id) => {
 };
 
 export const createQuestion = async (payload) => {
-   return axios.post(`/assessments/add-question`, payload).then((response) => response.data)
+  return axios.post(`/assessments/add-question`, payload).then((response) => response.data)
 }
 export const editQuestion = async (id, payload) => {
-   return axios.patch(`/assessments/question/${id}`, payload).then((response) => response.data)
+  return axios.patch(`/assessments/question/${id}`, payload).then((response) => response.data)
 }
 
 export const deleteQuestion = async (id) => {
-   return axios.delete(`/assessments/question/${id}`).then((response) => response.data)
+  return axios.delete(`/assessments/question/${id}`).then((response) => response.data)
 }
+
+export const getCourseReviews = async (id) => {
+  return axios
+    .get(`/reviews/view-course-reviews/${id}`)
+    .then((response) => response.data);
+};
+
+export const muteCourseReview = async (id) => {
+  return axios.post(`/reviews/mute-course-review/${id}`).then((response) => response.data)
+}
+
+export const unmuteCourseReview = async (id) => {
+  return axios.post(`/reviews/unmute-course-review/${id}`).then((response) => response.data)
+}
+
+

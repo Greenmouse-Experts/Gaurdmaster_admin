@@ -10,7 +10,7 @@ const ProfileAvatar = ({ url, fname, lname, size, font }) => {
         alt="profile"
         width={size}
         height={size}
-        className="circle"
+        className="circle aspect-square"
       />
     );
   } else
