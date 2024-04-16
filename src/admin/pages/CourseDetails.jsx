@@ -5,7 +5,7 @@ import { getCourseReviews, getSingleCourse } from "../../services/api/programsAp
 import Picker from "../../Components/Loaders/Picker";
 import CourseContent from "../components/programs/CourseContent";
 import dayjs from "dayjs";
-import { FaExpand, FaExpandAlt, FaRegClock, FaUser } from "react-icons/fa";
+import { FaExpand, FaRegClock, FaUser } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import useDialog from "../../hooks/useDialog";
 import ReviewModal from "../components/programs/Review/ReviewModal";
@@ -52,8 +52,8 @@ const CourseDetails = () => {
                   </div>
                   <div className="flex">
                   <div className="flex items-center gap-x-2 text-primary">
-                    <p className="text-lg fw-600">4.0</p>
-                    <p className="fs-500">course rating - {reviews?.data?.length} review(s) </p>
+                    <p className="text-lg fw-600">{reviews?.data?.avgRating}</p>
+                    <p className="fs-500">course rating - {reviews?.data?.results?.length} review(s) </p>
                   </div>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ const CourseDetails = () => {
         )}
       </div>
       <Dialog title={'Course Reviews'} size={'2xl'}>
-        <ReviewModal data={reviews?.data} refetch={refetch}/>
+        <ReviewModal data={reviews?.data?.results} refetch={refetch}/>
       </Dialog>
     </>
   );
