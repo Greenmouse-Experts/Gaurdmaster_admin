@@ -15,11 +15,13 @@ dayjs.extend(relativeTime);
 import { BsThreeDotsVertical } from "react-icons/bs";
 import Picker from "../../Components/Loaders/Picker";
 import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 
 const Notify = ({ datas }) => {
+  const { user } = useAuth()
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["notify"],
-    queryFn: getNotify,
+    queryFn: () => getNotify(user.role),
   });
 
   const [activeButton, setActiveButton] = useState("all");

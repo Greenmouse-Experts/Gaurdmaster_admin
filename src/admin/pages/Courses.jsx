@@ -6,12 +6,15 @@ import AddCourse from "../components/programs/AddCourse";
 import CoursesList from "../components/programs/CourseList";
 import { FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
+import useAuth from "../../hooks/useAuth";
 
 const Courses = () => {
+  const {role} = useAuth()
   const [page, setPage] = useState(1)
+  const route = role === "admin"? "courses" : "courses/instructor"
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["getCourses", page],
-    queryFn: () => getCourses(page),
+    queryFn: () => getCourses(page, route),
     placeholderData: keepPreviousData,
   });
   const { Modal, setShowModal } = useModal();

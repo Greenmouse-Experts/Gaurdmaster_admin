@@ -38,8 +38,8 @@ export const uploadImage = async (payload) => {
     .then((response) => response.data);
 };
 
-export const getNotify = async () => {
-  return axios.get(`/notifications/admin`).then((response) => response.data);
+export const getNotify = async (path) => {
+  return axios.get(`/notifications/${path}`).then((response) => response.data);
 };
 
 export const markUserNotify = async (id) => {

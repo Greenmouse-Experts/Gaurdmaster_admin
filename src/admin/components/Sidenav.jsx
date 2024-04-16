@@ -1,11 +1,11 @@
-import React, { useEffect, useRef,useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FiSettings, FiLogOut } from "react-icons/fi";
 import { LuLayoutDashboard } from "react-icons/lu";
 import "../stylesheet/component.css";
-import {  FaUsers, FaUser, FaWallet, FaBloggerB } from "react-icons/fa";
+import { FaUsers, FaUser, FaWallet, FaBloggerB } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
-import { IoIosArrowUp, IoIosArrowDown,IoIosChatbubbles } from "react-icons/io";
+import { IoIosArrowUp, IoIosArrowDown, IoIosChatbubbles } from "react-icons/io";
 import { GiBookshelf } from "react-icons/gi";
 import useAuth from "../../hooks/useAuth";
 import useModal from "../../hooks/useModal";
@@ -121,15 +121,15 @@ const Sidebar = ({
   const handleClick = () => {
     setPopup(true);
   };
-  
-  const {signOut} = useAuth()
+
+  const { signOut, user } = useAuth()
   const handlePopup = () => {
     setPopup(false);
   };
-  const logout =()=> {
+  const logout = () => {
     signOut()
   }
-  const {Modal, setShowModal} = useModal()
+  const { Modal, setShowModal } = useModal()
 
   return (
     <div
@@ -149,16 +149,16 @@ const Sidebar = ({
               <NavLink
                 onClick={closeSidebar}
                 to="/"
-                className="nav-lin"
+                className={`nav-lin ${showSidebar? 'w-[300px]' : ''}`}
               >
                 <LuLayoutDashboard /> {showSidebar && "Dashboard"}
               </NavLink>
             </li>
 
-            <li className="nav-item">
+           {user.role === "admin" && <li className="nav-item">
               <span className="nav-link" onClick={toggleUsersMenu}>
                 <span className="nav-icon">
-                  <span  className="cursor-pointer">
+                  <span className="cursor-pointer">
                     <FaUser />
                     {showSidebar && "User Management"}
                   </span>
@@ -183,13 +183,13 @@ const Sidebar = ({
                   </div>
                 )}
               </span>
-            </li>
+            </li>}
 
             <li className="nav-item">
               <span onClick={toggleIdMenu} className="nav-link">
                 <span className="nav-icon">
-                  <span  className="cursor-pointer">
-                  <GiBookshelf />
+                  <span className="cursor-pointer">
+                    <GiBookshelf />
                     {showSidebar && "Courses"}
                   </span>
                   {showSidebar &&
@@ -201,9 +201,9 @@ const Sidebar = ({
                 </span>
                 {showIdMenu && (
                   <div className="nav">
-                    <NavLink onClick={closeSidebar} to="programs">
+                    {user.role === "admin" && <NavLink onClick={closeSidebar} to="programs">
                       Programs
-                    </NavLink>
+                    </NavLink>}
                     <NavLink onClick={closeSidebar} to="courses">
                       All Courses
                     </NavLink>
@@ -211,8 +211,8 @@ const Sidebar = ({
                 )}
               </span>
             </li>
-            
-            <li className="nav-item">
+
+           {user.role === "admin" && <li className="nav-item">
               <span onClick={toggleMembershipMenu} className="nav-link">
                 <span className="nav-icon">
                   <span>
@@ -237,7 +237,7 @@ const Sidebar = ({
                   </div>
                 )}
               </span>
-            </li>
+            </li>}
             {/* <li className="nav-item">
               <NavLink className="nav-link" to="/pack">
                 <span className="nav-icon">
@@ -250,16 +250,16 @@ const Sidebar = ({
               </NavLink>
             </li> */}
 
-            <li className="nav-item">
-              <NavLink onClick={closeSidebar} to="/payments"  className="nav-link">
+           {user.role === 'admin' && <li className="nav-item">
+              <NavLink onClick={closeSidebar} to="/payments" className="nav-link">
                 <span className="nav-icon">
                   <span>
-                  <FaWallet />
+                    <FaWallet />
                     {showSidebar && "Payments"}
                   </span>
                 </span>
               </NavLink>
-            </li>
+            </li>}
 
             {/* <li className="nav-item">
               <NavLink onClick={closeSidebar} to="/uni" className="nav-link">
@@ -272,21 +272,21 @@ const Sidebar = ({
               </NavLink>
             </li> */}
             <li className="nav-item">
-            <NavLink onClick={closeSidebar} to="support" className="nav-link">
-              <span className="nav-icon">
-                <span>
-                <IoIosChatbubbles />
-                  {showSidebar && "Support"}
+              <NavLink onClick={closeSidebar} to="support" className="nav-link">
+                <span className="nav-icon">
+                  <span>
+                    <IoIosChatbubbles />
+                    {showSidebar && "Support"}
+                  </span>
                 </span>
-              </span>
-            </NavLink>
-          </li>
+              </NavLink>
+            </li>
             <li className="nav-item">
               <span className="nav-link" onClick={togglePaymentMenu}>
                 <span className="nav-icon">
                   <span className="cursor-pointer">
-                  <FiSettings />
-                    
+                    <FiSettings />
+
                     {showSidebar && "Settings"}
                   </span>
                   {showSidebar &&
@@ -302,16 +302,16 @@ const Sidebar = ({
                     <NavLink onClick={closeSidebar} to="profile">
                       My Profile
                     </NavLink>
-                    
+
                   </div>
                 )}
               </span>
             </li>
             <li className="nav-item">
-              <NavLink onClick={closeSidebar}  to="/notify"className="nav-link">
+              <NavLink onClick={closeSidebar} to="/notify" className="nav-link">
                 <span className="nav-icon">
                   <span>
-                  <IoNotifications />
+                    <IoNotifications />
                     {showSidebar && "Notification"}
                   </span>
                 </span>
@@ -319,7 +319,7 @@ const Sidebar = ({
             </li>
           </div>
 
-          
+
           <li className="nav-item">
             <span onClick={() => setShowModal(true)} className="nav-link cursor-pointer">
               <span className="nav-icon">
@@ -332,30 +332,16 @@ const Sidebar = ({
           </li>
         </ul>
       </nav>
-      {/* {popup && (
-        <div className="popup z-[2000]">
-          <div className="modal" onClick={handlePopup}></div>
-          <div className="pop_up">
-            <div className="pop_head">
-              <h3>Are you Sure you want to Logout?</h3>
-            </div>
-            <div className="pop_btn">
-              <button onClick={logout}>Yes</button>
-              <button onClick={handlePopup}>No</button>
-            </div>
+      <Modal title={''} size={'sm'} >
+        <div>
+          <div className="">
+            <h3 className="text-black fw-500 text-center">Are you Sure you want to Logout?</h3>
+          </div>
+          <div className="mt-12 flex justify-between px-3">
+            <button className="bg-red-600 text-white px-6 py-2 rounded-lg" onClick={() => setShowModal(false)}>No</button>
+            <button className="bg-primary text-white px-6 py-2 rounded-lg" onClick={logout}>Yes</button>
           </div>
         </div>
-      )} */}
-      <Modal title={''} size={'sm'} >
-          <div>
-          <div className="">
-              <h3 className="text-black fw-500 text-center">Are you Sure you want to Logout?</h3>
-            </div>
-            <div className="mt-12 flex justify-between px-3">
-            <button className="bg-red-600 text-white px-6 py-2 rounded-lg" onClick={() => setShowModal(false)}>No</button>
-              <button className="bg-primary text-white px-6 py-2 rounded-lg" onClick={logout}>Yes</button>
-            </div>
-          </div>
       </Modal>
     </div>
   );

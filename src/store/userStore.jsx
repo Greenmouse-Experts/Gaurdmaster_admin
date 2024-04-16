@@ -9,7 +9,8 @@ const userInitState = {
     image: '',
     phone: '',
     id: '',
-    joined: ''
+    joined: '',
+    role: ''
 }
 const useAuthStore = create()(
   persist(

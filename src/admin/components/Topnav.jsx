@@ -55,7 +55,7 @@ export const Topnav = ({ toggleSidebar }) => {
   const { Modal, setShowModal } = useModal();
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["notify"],
-    queryFn: getNotify,
+    queryFn: () => getNotify(admin.role),
   });
   return (
     <>

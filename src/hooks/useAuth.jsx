@@ -6,6 +6,7 @@ const useAuth = () => {
   const clearUser = useAuthStore((state) => state.clearUser);
   const userId = user.id;
   const token = user.token;
+  const role = user.role
   const signOut = () => {
     localStorage.clear();
     clearUser();
@@ -13,6 +14,7 @@ const useAuth = () => {
   };
   return {
     user,
+    role,
     userId,
     token,
     saveUser,

@@ -45,9 +45,10 @@ const Login = () => {
           phone: data.data.phone,
           id: data.data.id,
           image: data.data.picture,
+          role: data.data.role
         });
         localStorage.setItem('guardadmin_token', data.accessToken)
-        if(data.data.role === "admin"){
+        if(data.data.role === "admin" || data?.data?.role === "instructor"){
           navigate('/')
         }
       })

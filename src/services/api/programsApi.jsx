@@ -1,8 +1,8 @@
 import axios from "axios";
 import { BASE_URL } from "../constant.Jsx";
+import useAuthStore from "../../store/userStore";
 
 axios.defaults.baseURL = BASE_URL;
-
 export const createProgram = async (payload) => {
   return axios
     .post(`/programs/create`, payload)
@@ -25,9 +25,9 @@ export const createCourse = async (payload) => {
 export const getPrograms = async () => {
   return axios.get(`/programs`).then((response) => response.data);
 };
-export const getCourses = async (payload) => {
+export const getCourses = async (payload, route) => {
   return axios
-    .get(`/courses?page=${payload}`)
+    .get(`/${route}?page=${payload}`)
     .then((response) => response.data);
 };
 
