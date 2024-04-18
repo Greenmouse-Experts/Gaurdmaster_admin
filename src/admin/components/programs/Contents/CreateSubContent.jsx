@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import { createSubContent } from "../../../../services/api/programsApi";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
-import { uploadImage, uploadVideo } from "../../../../services/api/routineApi";
+import {
+  uploadAudio,
+  uploadFile,
+  uploadImage,
+  uploadVideo,
+} from "../../../../services/api/routineApi";
 
 const CreateSubContent = ({ id, courseId, close, refetch }) => {
   const create = useMutation({
@@ -29,7 +34,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
       value: "document",
       naming: "File/Document",
       accepts:
-        ".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        ".doc,.docx,.ppt,.pptx,.pdf",
     },
     {
       name: "media",
@@ -38,6 +43,12 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
       accepts: "audio/mp3,audio/*;capture=microphone",
     },
   ];
+  const formatSize = {
+    image: "Image size must not be above 1mb",
+    video: "Video size should not be above 100mb",
+    audio: "Audio file size should not be above 8mb",
+    document: "Document size should not be above 10mb"
+  }
   const [userDetail, setUserDetail] = useState({
     title: "",
     course: courseId,
@@ -56,19 +67,30 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
   };
   const getUpload = () => {
     if (userDetail.mediaType === "video") {
-      return uploadVideo
+      return uploadVideo;
     } else if (userDetail.mediaType === "image") {
-      return uploadImage
+      return uploadImage;
+    } else if (userDetail.mediaType === "document") {
+      return uploadFile;
+    } else if (userDetail.mediaType === "audio") {
+      return uploadAudio;
     } else return;
-  }
+  };
   const mutation = useMutation({
     mutationFn: getUpload(),
     onSuccess: (data) => {
       const payload = {
         ...userDetail,
         duration: Number(userDetail.duration),
-        media: userDetail.mediaType === "image" ? data.image : data.video,
-        previewUrl: userDetail.previewUrl === ""? null : userDetail.previewUrl,
+        media:
+          userDetail.mediaType === "image"
+            ? data.image
+            : userDetail.mediaType === "video"
+              ? data.video
+              : userDetail.mediaType === "audio"
+                ? data.audio
+                : data.doc,
+        previewUrl: userDetail.previewUrl === "" ? null : userDetail.previewUrl,
       };
       create.mutate(payload, {
         onSuccess: (data) => {
@@ -83,42 +105,85 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
         },
       });
     },
-    onError: () => {
-      toast.error("Something went wrong");
+    onError: (error) => {
+      toast.error(error.response.data.message);
       setIsBusy(false);
     },
   });
   const submitAction = async (e) => {
     e.preventDefault();
     setIsBusy(true);
-    if (userDetail.media === "" || userDetail.title === "" || userDetail.duration === 0) {
-      toast.info('Please fill the required fields')
+    if (
+      userDetail.media === "" ||
+      userDetail.title === ""
+    ) {
+      toast.info("Please fill the required fields");
       return;
     }
+    // validate sizes
+    if(userDetail.mediaType === "image"){
+      if (userDetail.media.size > 1 * 1000 * 1024) {
+        toast.info("Only images with maximum size of 1MB is allowed");
+        return;
+      }
+    }
+    if(userDetail.mediaType === "video"){
+      if (userDetail.media.size > 50 * 1000 * 1024) {
+        toast.info("Only video with maximum size of 50MB is allowed");
+        return;
+      }
+    }
+    if(userDetail.mediaType === "document"){
+      if (userDetail.media.size > 10 * 1000 * 1024) {
+        toast.info("Only documents with maximum size of 10MB is allowed");
+        return;
+      }
+    }
+    if(userDetail.mediaType === "audio"){
+      if (userDetail.media.size > 8 * 1000 * 1024) {
+        toast.info("Only audios with maximum size of 8MB is allowed");
+        return;
+      }
+    }
     if (userDetail.previewUrl) {
-      if (userDetail.mediaType === 'image') {
-        const fd = new FormData()
-        fd.append('image', userDetail.previewUrl)
+      if (userDetail.mediaType === "image") {
+        const fd = new FormData();
+        fd.append("image", userDetail.previewUrl);
         await uploadImage(fd)
           .then((data) => {
             setUserDetail({ ...userDetail, previewUrl: data.image });
           })
-          .catch(() => { })
-      }
-      else if (userDetail.mediaType === 'video') {
-        const fd = new FormData()
-        fd.append('video', userDetail.previewUrl)
+          .catch(() => { });
+      } else if (userDetail.mediaType === "video") {
+        const fd = new FormData();
+        fd.append("video", userDetail.previewUrl);
         await uploadVideo(fd)
           .then((data) => {
             setUserDetail({ ...userDetail, previewUrl: data.video });
           })
-          .catch(() => { })
+          .catch(() => { });
+      } else if (userDetail.mediaType === "document") {
+        const fd = new FormData();
+        fd.append("doc", userDetail.previewUrl);
+        await uploadFile(fd)
+          .then((data) => {
+            setUserDetail({ ...userDetail, previewUrl: data.doc });
+          })
+          .catch(() => { });
+      } else if (userDetail.mediaType === "audio") {
+        const fd = new FormData();
+        fd.append("audio", userDetail.previewUrl);
+        await uploadVideo(fd)
+          .then((data) => {
+            setUserDetail({ ...userDetail, previewUrl: data.audio });
+          })
+          .catch(() => { });
+      } else {
       }
-      else{}
     }
-    const fd = new FormData()
-    fd.append(userDetail.mediaType, userDetail.media)
-    mutation.mutate(fd)
+    const fd = new FormData();
+    fd.append(userDetail.mediaType === "document" ? "doc" : userDetail.mediaType, userDetail.media);
+    mutation.mutate(fd);
   };
   return (
     <div className="px-4">
@@ -172,6 +237,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
             </div>
             <div className="mt-6">
               <p>Course Media</p>
+              <p className="fs-400 italic">{formatSize[userDetail.mediaType]}</p>
               <div className="mt-3 border p-4 place-center relative">
                 {userDetail.media === "" ? (
                   <p

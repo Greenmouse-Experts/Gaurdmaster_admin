@@ -10,6 +10,8 @@ import { GiBookshelf } from "react-icons/gi";
 import useAuth from "../../hooks/useAuth";
 import useModal from "../../hooks/useModal";
 import { IoNotifications } from "react-icons/io5";
+import { BsCalendar4Event } from "react-icons/bs";
+import { MdOutlineReviews } from "react-icons/md";
 
 const Sidebar = ({
   showSidebar,
@@ -238,7 +240,18 @@ const Sidebar = ({
                 )}
               </span>
             </li>}
-            {/* <li className="nav-item">
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/testimonials">
+                <span className="nav-icon">
+                  <span>
+                    <MdOutlineReviews />
+                    {showSidebar && "Testimonials"}
+                  </span>
+                  
+                </span>
+              </NavLink>
+            </li>
+            {user.role === 'instructor' && <li className="nav-item">
               <NavLink className="nav-link" to="/pack">
                 <span className="nav-icon">
                   <span>
@@ -248,8 +261,7 @@ const Sidebar = ({
                   
                 </span>
               </NavLink>
-            </li> */}
-
+            </li>}
            {user.role === 'admin' && <li className="nav-item">
               <NavLink onClick={closeSidebar} to="/payments" className="nav-link">
                 <span className="nav-icon">

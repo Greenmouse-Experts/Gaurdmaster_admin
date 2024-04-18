@@ -35,6 +35,16 @@ const ViewSubcontent = ({ id }) => {
                 <p>Date Added: 23 Febuary 2024</p>
                 <p>Order: Lesson {data.order}</p>
                 <p>Content: {data.courseContent.title}</p>
+                {data.media && <p>
+                    Media URL:{" "}
+                    <a
+                      href={data.media}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Click to view
+                    </a>
+                  </p>}
                 {data.mediaType === "assessment" ? (
                   <div>
                     <p className="flex items-center gap-x-2 cursor-pointer" onClick={() => navigate(`/assessment/${id}`)}>
@@ -43,7 +53,7 @@ const ViewSubcontent = ({ id }) => {
                       Questions
                     </p>
                   </div>
-                ) : (
+                ) : data?.previewUrl? (
                   <p>
                     Preview URL:{" "}
                     <a
@@ -54,7 +64,7 @@ const ViewSubcontent = ({ id }) => {
                       Click to view
                     </a>
                   </p>
-                )}
+                ) : ''}
               </div>
             </div>
           </div>
