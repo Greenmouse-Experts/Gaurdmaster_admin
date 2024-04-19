@@ -10,7 +10,7 @@ import useAuth from "../../../hooks/useAuth";
 
 const CourseContent = ({ id }) => {
   const {role} = useAuth()
-  const route = role !== "admin"? `course-content/${id}` : `course-content/by-course/${id}`
+  const route = role === "admin"? `course-content/by-course/${id}` : `course-content/by-course/${id}`
   const { data, isLoading, refetch } = useQuery({
     queryFn: () => getCourseContent(route),
     queryKey: ["courseContent"],
