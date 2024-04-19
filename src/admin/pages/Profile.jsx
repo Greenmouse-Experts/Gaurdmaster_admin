@@ -138,7 +138,7 @@ const Profile = () => {
             </span>{" "}
             <div className="prof_card">
               <label htmlFor="email">Email</label>
-              <h3>admin@gmail.com</h3>
+              <h3>{user.email}</h3>
             </div>
           </div>
           <div>
@@ -147,7 +147,7 @@ const Profile = () => {
             </span>
             <div className="prof_card">
               <label htmlFor="phone">Type</label>
-              <h3>Administrator</h3>
+              <h3>{user.type === 'admin'? "Administrator" : "Instructor"}</h3>
             </div>
           </div>
         </div>

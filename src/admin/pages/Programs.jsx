@@ -5,11 +5,14 @@ import useModal from "../../hooks/useModal";
 import { FaPlus } from "react-icons/fa6";
 import ProgramsList from "../components/programs/ProgramsList";
 import AddProgram from "../components/programs/AddProgram";
+import useAuth from "../../hooks/useAuth";
 
 const Programs = () => {
+  const {role} = useAuth()
+  const route = role === "admin"? "programs" : "programs/fetch-programs"
   const { data, refetch, isLoading } = useQuery({
     queryKey: ["getPrograms"],
-    queryFn: getPrograms,
+    queryFn: () => getPrograms(route),
   });
   const { Modal, setShowModal } = useModal();
 

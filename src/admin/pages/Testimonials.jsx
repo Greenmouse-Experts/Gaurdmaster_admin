@@ -2,11 +2,14 @@ import { useQuery } from '@tanstack/react-query'
 import React, { useState } from 'react'
 import { getTestimonials } from '../../services/api/routineApi'
 import TestimonialList from '../components/testimonials/testimonialList'
+import useAuth from '../../hooks/useAuth'
 
 const TestimonialsPage = () => {
     const [page, setPage] = useState(1)
+    const {role} = useAuth()
+    const route = role === "admin"? `/testimonials` : `/testimonials/published`
     const {data, isLoading, refetch} = useQuery({
-        queryFn: () => getTestimonials(page),
+        queryFn: () => getTestimonials(route, page),
         queryKey: ['fetch-testimonials', page]
     })
     const handleNext = () => {

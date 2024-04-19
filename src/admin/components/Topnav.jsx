@@ -80,7 +80,7 @@ export const Topnav = ({ toggleSidebar }) => {
                     <div className="add_head">
                       <p>Notification</p>{" "}
                     </div>
-                    {data?.data?.slice(0,5).map((item) => (
+                    {data?.data?.slice(0,4).map((item) => (
                       <div key={item.id}>
                         <div className="bell_body">
                           <GoBell className="shrink-0"/>

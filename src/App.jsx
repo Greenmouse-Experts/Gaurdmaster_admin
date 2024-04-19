@@ -24,6 +24,7 @@ import CreateBlog from "./admin/pages/CreateBlog";
 import EditBlogPost from "./admin/pages/EditBlogPost";
 import ViewAssessment from "./admin/components/programs/Assesment/viewAssessment";
 import TestimonialsPage from "./admin/pages/Testimonials";
+import InstructorPackage from "./admin/pages/Package";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/blog-tags" element={<BlogTags/>}/>
           <Route path="/blog/edit/:id" element={<EditBlogPost/>}/>
           <Route path="/testimonials" element={<TestimonialsPage/>}/>
+          <Route path="/pack" element={<InstructorPackage/>}/>
         </Route>
         <Route path="/login" element={<Login/>}/>
       </Routes>

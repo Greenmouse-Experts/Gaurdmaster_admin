@@ -9,11 +9,14 @@ import { FaExpand, FaRegClock, FaUser } from "react-icons/fa";
 import { RiMoneyDollarCircleLine } from "react-icons/ri";
 import useDialog from "../../hooks/useDialog";
 import ReviewModal from "../components/programs/Review/ReviewModal";
+import useAuth from "../../hooks/useAuth";
 
 const CourseDetails = () => {
   const { id } = useParams();
+  const {role} = useAuth()
+  const courseRoute = role === "admin"? `/courses/${id}` : `/courses/instructor/${id}`
   const { data, isLoading } = useQuery({
-    queryFn: () => getSingleCourse(id),
+    queryFn: () => getSingleCourse(courseRoute),
     queryKey: ["singleCourse"],
   });
   const { data:reviews, isLoading:loading, refetch } = useQuery({

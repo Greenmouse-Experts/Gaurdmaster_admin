@@ -3,15 +3,18 @@ import { createCourse, getPrograms } from "../../../services/api/programsApi";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { uploadImage } from "../../../services/api/routineApi";
+import useAuth from "../../../hooks/useAuth";
 
 const AddCourse = ({ close, refetch }) => {
+  const {role} = useAuth()
   const create = useMutation({
     mutationFn: createCourse,
     mutationKey: ["addCourse"],
   });
+  const route = role === "admin"? "programs" : "programs/fetch-programs"
   const { data } = useQuery({
     queryKey: ["getPrograms"],
-    queryFn: getPrograms,
+    queryFn: () => getPrograms(route),
   });
   const [isBusy, setIsBusy] = useState(false);
   const [userDetail, setUserDetail] = useState({

@@ -6,8 +6,10 @@ import useDialog from "../../../hooks/useDialog";
 import ReusableModal from "../../../Components/ReusableModal";
 import { deleteTestimonial, updateTestimonial } from "../../../services/api/routineApi";
 import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
 
 const TestimonialList = ({ data, isLoading, refetch }) => {
+  const {role} = useAuth()
   const { Dialog: Update, setShowModal: ShowUpdate } = useDialog();
   const { Dialog: Delete, setShowModal: ShowDelete } = useDialog();
   const [selected, setSelected] = useState({ id: "", type: "" });
@@ -82,7 +84,7 @@ const TestimonialList = ({ data, isLoading, refetch }) => {
                   <p className="!p-0">{item.testimony}</p>
                 </div>
               </div>
-              <div className="lg:w-3/12">
+              {role === "admin" && <div className="lg:w-3/12">
                 <div className="lg:flex justify-end">
                   {item.isPublished ? (
                     <div className="flex items-center gap-x-2">
@@ -110,7 +112,7 @@ const TestimonialList = ({ data, isLoading, refetch }) => {
                     <RiDeleteBinLine className="text-xl text-red-600 cursor-pointer" onClick={() => openDelete(item.id)}/>
                   </div>
                 </div>
-              </div>
+              </div>}
             </div>
           ))}
       </div>

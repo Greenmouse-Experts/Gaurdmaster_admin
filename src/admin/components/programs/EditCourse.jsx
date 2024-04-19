@@ -3,18 +3,21 @@ import { getPrograms, updateCourse } from "../../../services/api/programsApi";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { uploadImage } from "../../../services/api/routineApi";
 import { toast } from "react-toastify";
+import useAuth from "../../../hooks/useAuth";
 
 const EditCourse = ({ item, close, refetch }) => {
+  const {role} = useAuth()
+  const progRoute = role === "admin"? "programs" : "programs/fetch-programs"
   const { data } = useQuery({
     queryKey: ["getPrograms"],
-    queryFn: getPrograms,
+    queryFn: () => getPrograms(progRoute),
   });
   const [isBusy, setIsBusy] = useState(false);
   const [userDetail, setUserDetail] = useState({
     title: item?.title || "",
     shortDesc: item?.shortDesc || "",
     fullDesc: item.fullDesc || "",
-    price: item.price || "",
+    price: Number(item.price) || "",
     program: item.program.id || "",
     coverImg: ''
   });
@@ -29,7 +32,8 @@ const EditCourse = ({ item, close, refetch }) => {
         price: Number(userDetail.price),
         coverImage: data.image
       };
-      updateCourse(item.id, payload)
+      const route = role === "admin"? `/courses/${item.id}` : `/courses/instructor/${item.id}`
+      updateCourse(route, payload)
         .then((data) => {
           toast.success(data.message);
           setIsBusy(false);
@@ -54,7 +58,12 @@ const EditCourse = ({ item, close, refetch }) => {
       fd.append('image', userDetail.coverImg)
       mutation.mutate(fd)
     } else {
-      updateCourse(item.id, userDetail)
+      const payload = {
+        ...userDetail,
+        price: Number(item.price)
+      }
+      const route = role === "admin"? `/courses/${item.id}` : `/courses/instructor/${item.id}`
+      updateCourse(route, payload)
         .then((data) => {
           toast.success(data.message);
           setIsBusy(false);

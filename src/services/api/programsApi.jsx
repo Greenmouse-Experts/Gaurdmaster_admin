@@ -22,8 +22,8 @@ export const createCourse = async (payload) => {
     .post(`/courses/create`, payload)
     .then((response) => response.data);
 };
-export const getPrograms = async () => {
-  return axios.get(`/programs`).then((response) => response.data);
+export const getPrograms = async (route) => {
+  return axios.get(`/${route}`).then((response) => response.data);
 };
 export const getCourses = async (payload, route) => {
   return axios
@@ -31,13 +31,13 @@ export const getCourses = async (payload, route) => {
     .then((response) => response.data);
 };
 
-export const getSingleCourse = async (id) => {
-  return axios.get(`/courses/${id}`).then((response) => response.data);
+export const getSingleCourse = async (route) => {
+  return axios.get(`${route}`).then((response) => response.data);
 };
 
-export const updateCourse = async (id, payload) => {
+export const updateCourse = async (route, payload) => {
   return axios
-    .patch(`/courses/${id}`, payload)
+    .patch(`${route}`, payload)
     .then((response) => response.data);
 };
 
@@ -45,9 +45,9 @@ export const deleteCourse = async (id) => {
   return axios.delete(`/courses/${id}`).then((response) => response.data);
 };
 
-export const getCourseContent = async (id) => {
+export const getCourseContent = async (route) => {
   return axios
-    .get(`/course-content/by-course/${id}`)
+    .get(`${route}`)
     .then((response) => response.data);
 };
 

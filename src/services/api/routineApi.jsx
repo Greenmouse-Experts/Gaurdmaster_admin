@@ -68,9 +68,9 @@ export const markUserNotify = async (id) => {
     .then((response) => response.data);
 };
 
-export const getTestimonials = async (page) => {
+export const getTestimonials = async (route, page) => {
   return axios
-    .get(`/testimonials?page=${page}`)
+    .get(`${route}?page=${page}`)
     .then((response) => response.data);
 };
 

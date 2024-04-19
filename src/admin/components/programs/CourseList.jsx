@@ -26,8 +26,10 @@ import EditCourse from "./EditCourse";
 import Picker from "../../../Components/Loaders/Picker";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { DynamicTable } from "../../../Components/DynamicTable";
+import useAuth from "../../../hooks/useAuth";
 
 const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
+  const {role} = useAuth()
   const { Modal: Edit, setShowModal: ShowEdit } = useModal();
   const { Modal: Retract, setShowModal: ShowRetract } = useModal();
   const { Modal: Publish, setShowModal: ShowPublish } = useModal();
@@ -60,7 +62,8 @@ const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
       isPublished: val === "active" ? true : false,
     };
     setIsBusy(true);
-    updateCourse(selectedId, payload)
+    const route = role === "admin"? `/courses/${selectedId}` : `/courses/instructor/${selectedId}`
+    updateCourse(route, payload)
       .then((data) => {
         toast.success(data.message);
         setIsBusy(false);
@@ -132,13 +135,13 @@ const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
       ),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.instructor, {
+    ...(role === 'admin'? [columnHelper.accessor((row) => row.instructor, {
       id: "Instructor",
       cell: (info) => (
         <>{`${info.getValue()?.firstName} ${info.getValue()?.lastName}`}</>
       ),
       header: (info) => info.column.id,
-    }),
+    })] : []),
     columnHelper.accessor((row) => row.createdDate, {
       id: "Created At",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
@@ -187,7 +190,7 @@ const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
               >
                 <FaRegEdit /> Edit
               </MenuItem>
-              {info.row.original.isPublished ? (
+             {role === "admin"? info.row.original.isPublished ? (
                 <MenuItem
                   className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
                   onClick={() => openRetract(info.getValue())}
@@ -201,7 +204,7 @@ const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
                 >
                   <MdOutlinePublishedWithChanges /> Publish
                 </MenuItem>
-              )}
+              ) : ''}
               <MenuItem
                 className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
                 onClick={() => openDelete(info.getValue())}

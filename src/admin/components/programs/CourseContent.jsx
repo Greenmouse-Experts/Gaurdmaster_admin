@@ -6,10 +6,13 @@ import { IoAddCircle } from "react-icons/io5";
 import useModal from "../../../hooks/useModal";
 import AddContent from "./Contents/AddContent";
 import ContentList from "./Contents/ContentList";
+import useAuth from "../../../hooks/useAuth";
 
 const CourseContent = ({ id }) => {
+  const {role} = useAuth()
+  const route = role !== "admin"? `course-content/${id}` : `course-content/by-course/${id}`
   const { data, isLoading, refetch } = useQuery({
-    queryFn: () => getCourseContent(id),
+    queryFn: () => getCourseContent(route),
     queryKey: ["courseContent"],
   });
   const { Modal, setShowModal } = useModal();
