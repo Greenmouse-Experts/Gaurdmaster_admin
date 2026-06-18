@@ -28,19 +28,14 @@ const Home = () => {
       {
         label: "Data",
         data: [2, 11, 20, 15, 25, 30, 18, 22, 16, 28, 12, 24], // Replace these values with your data
-        backgroundColor: [
-          "#192F59"
-        ], 
-        borderColor: [
-          "#192F59"
-        ],// Bar colors
+        backgroundColor: ["#192F59"],
+        borderColor: ["#192F59"], // Bar colors
         fill: {
-        target: 'origin',
-        above: '#192f5942',   // Area will be red above the origin
-        below: '#192f5942'    // And blue below the origin
-      }
+          target: "origin",
+          above: "#192f5942", // Area will be red above the origin
+          below: "#192f5942", // And blue below the origin
+        },
       },
-      
     ],
   };
 
@@ -74,7 +69,9 @@ const Home = () => {
                 <h3>Enrollment</h3>
                 <p>100</p>
               </div>
-              <span><PiStudentBold /></span>
+              <span>
+                <PiStudentBold />
+              </span>
             </div>
             <div>
               <div>
@@ -82,7 +79,9 @@ const Home = () => {
                 <p>20</p>
               </div>
 
-              <span><FaUserCheck /></span>
+              <span>
+                <FaUserCheck />
+              </span>
             </div>
             <div>
               <div>
@@ -96,7 +95,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="inst">
+        {/* <div className="inst">
           <h2>Top Instructor</h2>
 
           <div>
@@ -120,7 +119,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div>*/}
       </div>
 
       <div className="home_bottoms">
@@ -136,7 +135,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-  )                       
+  );
 };
 
 export default Home;

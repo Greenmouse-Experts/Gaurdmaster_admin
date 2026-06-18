@@ -177,9 +177,9 @@ const Sidebar = ({
                       <NavLink onClick={closeSidebar} to="/admins">
                         Admin
                       </NavLink>
-                      <NavLink onClick={closeSidebar} to="/instructors">
+                      {/* <NavLink onClick={closeSidebar} to="/instructors">
                         Instructors
-                      </NavLink>
+                      </NavLink>*/}
                       <NavLink to="/students" onClick={closeSidebar}>
                         Students
                       </NavLink>
