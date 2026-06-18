@@ -11,7 +11,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePassword = () => {
-    setShowPassword(!showPassword); 
+    setShowPassword(!showPassword);
   };
   const [isBusy, setIsBusy] = useState(false);
   const [userDetail, setUserDetail] = useState({
@@ -45,11 +45,11 @@ const Login = () => {
           phone: data.data.phone,
           id: data.data.id,
           image: data.data.picture,
-          role: data.data.role
+          role: data.data.role,
         });
-        localStorage.setItem('guardadmin_token', data.accessToken)
-        if(data.data.role === "admin" || data?.data?.role === "instructor"){
-          navigate('/')
+        localStorage.setItem("guardadmin_token", data.accessToken);
+        if (data.data.role === "admin" || data?.data?.role === "instructor") {
+          navigate("/");
         }
       })
       .catch((error) => {
@@ -62,12 +62,7 @@ const Login = () => {
     <div className="main_login">
       <div className="side1">
         <div>
-          <img
-            src={
-              "https://res.cloudinary.com/greenmouse-tech/image/upload/v1706278834/rsh/logo2-removebg-preview_fcvxwc.png"
-            }
-            alt=""
-          />
+          <img src={"/logo.png"} alt="" />
           <div>
             <h3>Welcome Admin!</h3>
             <p>

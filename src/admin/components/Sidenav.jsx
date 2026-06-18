@@ -124,14 +124,14 @@ const Sidebar = ({
     setPopup(true);
   };
 
-  const { signOut, user } = useAuth()
+  const { signOut, user } = useAuth();
   const handlePopup = () => {
     setPopup(false);
   };
   const logout = () => {
-    signOut()
-  }
-  const { Modal, setShowModal } = useModal()
+    signOut();
+  };
+  const { Modal, setShowModal } = useModal();
 
   return (
     <div
@@ -139,7 +139,7 @@ const Sidebar = ({
       className={showSidebar ? "sidebar" : "sidebar closed"}
     >
       <div className={showSidebar ? "side_img" : "img-side"}>
-        <img className="img-logo" src={'https://res.cloudinary.com/greenmouse-tech/image/upload/v1706278834/rsh/logo2-removebg-preview_fcvxwc.png'} alt="Logo" />{" "}
+        <img className="img-logo" src={"/logo.png"} alt="Logo" />{" "}
         <div className="men" onClick={toggleSidebar}>
           <AiOutlineClose />
         </div>
@@ -151,41 +151,43 @@ const Sidebar = ({
               <NavLink
                 onClick={closeSidebar}
                 to="/"
-                className={`nav-lin ${showSidebar? 'w-[300px]' : ''}`}
+                className={`nav-lin ${showSidebar ? "w-[300px]" : ""}`}
               >
                 <LuLayoutDashboard /> {showSidebar && "Dashboard"}
               </NavLink>
             </li>
 
-           {user.role === "admin" && <li className="nav-item">
-              <span className="nav-link" onClick={toggleUsersMenu}>
-                <span className="nav-icon">
-                  <span className="cursor-pointer">
-                    <FaUser />
-                    {showSidebar && "User Management"}
+            {user.role === "admin" && (
+              <li className="nav-item">
+                <span className="nav-link" onClick={toggleUsersMenu}>
+                  <span className="nav-icon">
+                    <span className="cursor-pointer">
+                      <FaUser />
+                      {showSidebar && "User Management"}
+                    </span>
+                    {showSidebar &&
+                      (showUsersMenu ? (
+                        <IoIosArrowUp className="nav-arrow" />
+                      ) : (
+                        <IoIosArrowDown className="nav-arrow" />
+                      ))}
                   </span>
-                  {showSidebar &&
-                    (showUsersMenu ? (
-                      <IoIosArrowUp className="nav-arrow" />
-                    ) : (
-                      <IoIosArrowDown className="nav-arrow" />
-                    ))}
+                  {showUsersMenu && (
+                    <div className="nav">
+                      <NavLink onClick={closeSidebar} to="/admins">
+                        Admin
+                      </NavLink>
+                      <NavLink onClick={closeSidebar} to="/instructors">
+                        Instructors
+                      </NavLink>
+                      <NavLink to="/students" onClick={closeSidebar}>
+                        Students
+                      </NavLink>
+                    </div>
+                  )}
                 </span>
-                {showUsersMenu && (
-                  <div className="nav">
-                    <NavLink onClick={closeSidebar} to="/admins">
-                      Admin
-                    </NavLink>
-                    <NavLink onClick={closeSidebar} to="/instructors">
-                      Instructors
-                    </NavLink>
-                    <NavLink to="/students" onClick={closeSidebar}>
-                      Students
-                    </NavLink>
-                  </div>
-                )}
-              </span>
-            </li>}
+              </li>
+            )}
 
             <li className="nav-item">
               <span onClick={toggleIdMenu} className="nav-link">
@@ -203,9 +205,11 @@ const Sidebar = ({
                 </span>
                 {showIdMenu && (
                   <div className="nav">
-                    {user.role === "admin" && <NavLink onClick={closeSidebar} to="programs">
-                      Programs
-                    </NavLink>}
+                    {user.role === "admin" && (
+                      <NavLink onClick={closeSidebar} to="programs">
+                        Programs
+                      </NavLink>
+                    )}
                     <NavLink onClick={closeSidebar} to="courses">
                       All Courses
                     </NavLink>
@@ -214,32 +218,34 @@ const Sidebar = ({
               </span>
             </li>
 
-           {user.role === "admin" && <li className="nav-item">
-              <span onClick={toggleMembershipMenu} className="nav-link">
-                <span className="nav-icon">
-                  <span>
-                    <FaBloggerB />
-                    {showSidebar && "Blog"}
+            {user.role === "admin" && (
+              <li className="nav-item">
+                <span onClick={toggleMembershipMenu} className="nav-link">
+                  <span className="nav-icon">
+                    <span>
+                      <FaBloggerB />
+                      {showSidebar && "Blog"}
+                    </span>
+                    {showSidebar &&
+                      (showMembershipMenu ? (
+                        <IoIosArrowUp className="nav-arrow" />
+                      ) : (
+                        <IoIosArrowDown className="nav-arrow" />
+                      ))}
                   </span>
-                  {showSidebar &&
-                    (showMembershipMenu ? (
-                      <IoIosArrowUp className="nav-arrow" />
-                    ) : (
-                      <IoIosArrowDown className="nav-arrow" />
-                    ))}
+                  {showMembershipMenu && (
+                    <div className="nav">
+                      <NavLink onClick={closeSidebar} to="/blog-tags">
+                        Tags
+                      </NavLink>
+                      <NavLink onClick={closeSidebar} to="/blog">
+                        Posts
+                      </NavLink>
+                    </div>
+                  )}
                 </span>
-                {showMembershipMenu && (
-                  <div className="nav">
-                    <NavLink onClick={closeSidebar} to="/blog-tags">
-                      Tags
-                    </NavLink>
-                    <NavLink onClick={closeSidebar} to="/blog">
-                      Posts
-                    </NavLink>
-                  </div>
-                )}
-              </span>
-            </li>}
+              </li>
+            )}
             <li className="nav-item">
               <NavLink className="nav-link" to="/testimonials">
                 <span className="nav-icon">
@@ -247,31 +253,37 @@ const Sidebar = ({
                     <MdOutlineReviews />
                     {showSidebar && "Testimonials"}
                   </span>
-                  
                 </span>
               </NavLink>
             </li>
-            {user.role === 'instructor' && <li className="nav-item">
-              <NavLink className="nav-link" to="/pack">
-                <span className="nav-icon">
-                  <span>
-                    <BsCalendar4Event />
-                    {showSidebar && "Instructor Package"}
+            {user.role === "instructor" && (
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/pack">
+                  <span className="nav-icon">
+                    <span>
+                      <BsCalendar4Event />
+                      {showSidebar && "Instructor Package"}
+                    </span>
                   </span>
-                  
-                </span>
-              </NavLink>
-            </li>}
-           {user.role === 'admin' && <li className="nav-item">
-              <NavLink onClick={closeSidebar} to="/payments" className="nav-link">
-                <span className="nav-icon">
-                  <span>
-                    <FaWallet />
-                    {showSidebar && "Payments"}
+                </NavLink>
+              </li>
+            )}
+            {user.role === "admin" && (
+              <li className="nav-item">
+                <NavLink
+                  onClick={closeSidebar}
+                  to="/payments"
+                  className="nav-link"
+                >
+                  <span className="nav-icon">
+                    <span>
+                      <FaWallet />
+                      {showSidebar && "Payments"}
+                    </span>
                   </span>
-                </span>
-              </NavLink>
-            </li>}
+                </NavLink>
+              </li>
+            )}
 
             {/* <li className="nav-item">
               <NavLink onClick={closeSidebar} to="/uni" className="nav-link">
@@ -314,7 +326,6 @@ const Sidebar = ({
                     <NavLink onClick={closeSidebar} to="profile">
                       My Profile
                     </NavLink>
-
                   </div>
                 )}
               </span>
@@ -331,9 +342,11 @@ const Sidebar = ({
             </li>
           </div>
 
-
           <li className="nav-item">
-            <span onClick={() => setShowModal(true)} className="nav-link cursor-pointer">
+            <span
+              onClick={() => setShowModal(true)}
+              className="nav-link cursor-pointer"
+            >
               <span className="nav-icon">
                 <span>
                   {" "}
@@ -344,14 +357,26 @@ const Sidebar = ({
           </li>
         </ul>
       </nav>
-      <Modal title={''} size={'sm'} >
+      <Modal title={""} size={"sm"}>
         <div>
           <div className="">
-            <h3 className="text-black fw-500 text-center">Are you Sure you want to Logout?</h3>
+            <h3 className="text-black fw-500 text-center">
+              Are you Sure you want to Logout?
+            </h3>
           </div>
           <div className="mt-12 flex justify-between px-3">
-            <button className="bg-red-600 text-white px-6 py-2 rounded-lg" onClick={() => setShowModal(false)}>No</button>
-            <button className="bg-primary text-white px-6 py-2 rounded-lg" onClick={logout}>Yes</button>
+            <button
+              className="bg-red-600 text-white px-6 py-2 rounded-lg"
+              onClick={() => setShowModal(false)}
+            >
+              No
+            </button>
+            <button
+              className="bg-primary text-white px-6 py-2 rounded-lg"
+              onClick={logout}
+            >
+              Yes
+            </button>
           </div>
         </div>
       </Modal>
