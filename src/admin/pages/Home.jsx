@@ -50,45 +50,43 @@ const Home = () => {
 
   return (
     <div className="homes">
-      <div className="top_home">
-        <div className="homes_head">
+      <div className="">
+        <div className="w-full">
           <h2>Revenue</h2>
-          <div className="rev">
-            <div>
-              <div>
-                <h3>Courses</h3>
-                <p>30</p>
+          <div className="rev grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+            <div className="flex items-center justify-between bg-white rounded-xl p-5 shadow-sm border border-gray-100 ">
+              <div className="p-4">
+                <p className="text-sm text-gray-500 mb-1">Courses</p>
+                <h3 className="text-3xl font-bold text-gray-800">30</h3>
               </div>
-
-              <span>
+              <span className="bg-[#1a2744] text-white text-3xl p-4 rounded-xl flex items-center justify-center">
                 <GiBookshelf />
               </span>
             </div>
-            <div>
+            <div className="flex items-center justify-between bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div>
-                <h3>Enrollment</h3>
-                <p>100</p>
+                <p className="text-sm text-gray-500 mb-1">Enrollment</p>
+                <h3 className="text-3xl font-bold text-gray-800">100</h3>
               </div>
-              <span>
+              <span className="bg-[#1a2744] text-white text-3xl p-4 rounded-xl flex items-center justify-center">
                 <PiStudentBold />
               </span>
             </div>
-            <div>
+            <div className="flex items-center justify-between bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div>
-                <h3>Instructors</h3>
-                <p>20</p>
+                <p className="text-sm text-gray-500 mb-1">Instructors</p>
+                <h3 className="text-3xl font-bold text-gray-800">20</h3>
               </div>
-
-              <span>
+              <span className="bg-[#1a2744] text-white text-3xl p-4 rounded-xl flex items-center justify-center">
                 <FaUserCheck />
               </span>
             </div>
-            <div>
+            <div className="flex items-center justify-between bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div>
-                <h3>Students</h3>
-                <p>120</p>
+                <p className="text-sm text-gray-500 mb-1">Students</p>
+                <h3 className="text-3xl font-bold text-gray-800">120</h3>
               </div>
-              <span>
+              <span className="bg-[#1a2744] text-white text-3xl p-4 rounded-xl flex items-center justify-center">
                 <FaUsers />
               </span>
             </div>
