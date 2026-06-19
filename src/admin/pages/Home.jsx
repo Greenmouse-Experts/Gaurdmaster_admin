@@ -1,15 +1,12 @@
 import React from "react";
 import "../stylesheet/layout.css";
-import { Line } from "react-chartjs-2";
-// eslint-disable-next-line
-import { Chart as chartjs } from "chart.js/auto";
 import { FaUsers, FaUserCheck } from "react-icons/fa";
 import { GiBookshelf } from "react-icons/gi";
 import logo from "../../assets/profile.png";
 import { PiStudentBold } from "react-icons/pi";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import { apiClient } from "../../services/api/authApi";
+import RevenueChart from "../components/dashboard/RevenueChart";
 
 const Home = () => {
   const query = useQuery({
@@ -21,45 +18,6 @@ const Home = () => {
   });
 
   const analytics = query.data || {};
-
-  const data = {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ],
-    datasets: [
-      {
-        label: "Data",
-        data: [2, 11, 20, 15, 25, 30, 18, 22, 16, 28, 12, 24], // Replace these values with your data
-        backgroundColor: ["#192F59"],
-        borderColor: ["#192F59"], // Bar colors
-        fill: {
-          target: "origin",
-          above: "#192f5942", // Area will be red above the origin
-          below: "#192f5942", // And blue below the origin
-        },
-      },
-    ],
-  };
-
-  const options = {
-    maintainAspectRatio: false,
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
 
   return (
     <div className="homes">
@@ -142,16 +100,7 @@ const Home = () => {
       </div>
 
       <div className="home_bottoms">
-        <div className="bar_admin">
-          <h2>This Year Revenue</h2>
-          <div className="bar_div">
-            <Line
-              data={data}
-              options={options}
-              style={{ width: "inherit", height: "100%" }}
-            />
-          </div>
-        </div>
+        <RevenueChart />
       </div>
     </div>
   );
