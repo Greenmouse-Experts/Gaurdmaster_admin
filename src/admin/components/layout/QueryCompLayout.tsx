@@ -1,0 +1,94 @@
+import type { QueryObserverResult } from "@tanstack/react-query";
+import type { AxiosError } from "axios";
+
+import { Loader2, ShieldOff } from "lucide-react";
+import { extract_message } from "../../../helpers/apihelpers";
+import { ApiResponse } from "../../../types/api";
+
+interface QueryPageLayoutProps<TData> {
+  query: QueryObserverResult<TData>;
+  children?: React.ReactNode | ((data: TData) => React.ReactNode);
+  loadingText?: string;
+  customLoading?: React.ReactNode;
+}
+
+export default function QueryCompLayout<TData>(
+  props: QueryPageLayoutProps<TData>,
+) {
+  const { children, customLoading, query, loadingText = "Loading..." } = props;
+  const loading = query.isLoading;
+  if (loading) {
+    if (customLoading) {
+      return customLoading;
+    }
+    return (
+      <div className="flex-1 w-full min-h-52  bg-white fade ring rounded-box grid place-items-center  flex-col items-center justify-center p-8 animate-in fade-in duration-700">
+        <div className="space-y-8">
+          <div className="relative flex items-center justify-center">
+            {/* Animated Rings */}
+            <div className="absolute h-24 w-24 rounded-full border-4 border-primary/10 border-t-primary animate-spin duration-[2000ms]" />
+            <div className="absolute h-20 w-20 rounded-full border-4 border-primary/5 border-b-primary/40 animate-spin-reverse duration-[3000ms]" />
+
+            {/* Center Icon */}
+            <div className="relative flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary shadow-inner">
+              <Loader2 className="h-6 w-6 animate-spin" />
+            </div>
+          </div>
+
+          {/* Text Content */}
+          <div className="flex flex-col items-center gap-2 text-center">
+            <h3 className="text-lg font-semibold tracking-tight text-base-content/80">
+              {loadingText}
+            </h3>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  if (props.query.error) {
+    const axiosError = props.query.error as AxiosError<ApiResponse>;
+    const is403 = axiosError?.response?.status === 403;
+    const error = extract_message(axiosError);
+
+    if (is403) {
+      return (
+        <div className="p-4 h-[520px] grid place-items-center bg-base-100 rounded-md border border-base-200">
+          <div className="flex flex-col items-center gap-4 text-center max-w-xs">
+            <div className="p-4 rounded-full bg-error/10 text-error">
+              <ShieldOff className="w-8 h-8" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="text-lg font-bold text-base-content">
+                Access Denied
+              </h3>
+              <p className="text-sm text-base-content/60">
+                You don't have permission to view this resource. Contact support
+                or a Super Admin to request access.
+              </p>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className="p-4 h-[520px] grid place-items-center bg-base-300 rounded-md">
+        <div className="p-4 space-y-4">
+          <div className="text-xl font-bold floating-label">{error}</div>
+          <button
+            className="btn btn-error btn-block"
+            onClick={() => props.query.refetch()}
+          >
+            Reload
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (query.data === undefined) return null;
+
+  return typeof children === "function"
+    ? children(query.data as TData)
+    : children;
+}
