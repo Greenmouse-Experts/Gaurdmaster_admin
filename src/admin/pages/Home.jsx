@@ -7,8 +7,21 @@ import { FaUsers, FaUserCheck } from "react-icons/fa";
 import { GiBookshelf } from "react-icons/gi";
 import logo from "../../assets/profile.png";
 import { PiStudentBold } from "react-icons/pi";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { apiClient } from "../../services/api/authApi";
 
 const Home = () => {
+  const query = useQuery({
+    queryKey: ["revenue"],
+    queryFn: async () => {
+      let resp = await apiClient.get("/orders/admin-analytics");
+      return resp.data;
+    },
+  });
+
+  const analytics = query.data || {};
+
   const data = {
     labels: [
       "January",
@@ -57,7 +70,9 @@ const Home = () => {
             <div className="flex items-center justify-between bg-white rounded-xl p-5 shadow-sm border border-gray-100 ">
               <div className="p-4">
                 <p className="text-sm text-gray-500 mb-1">Courses</p>
-                <h3 className="text-3xl font-bold text-gray-800">30</h3>
+                <h3 className="text-3xl font-bold text-gray-800">
+                  {analytics.courses ?? 0}
+                </h3>
               </div>
               <span className="bg-[#1a2744] text-white text-3xl p-4 rounded-xl flex items-center justify-center">
                 <GiBookshelf />
@@ -66,7 +81,9 @@ const Home = () => {
             <div className="flex items-center justify-between bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div>
                 <p className="text-sm text-gray-500 mb-1">Enrollment</p>
-                <h3 className="text-3xl font-bold text-gray-800">100</h3>
+                <h3 className="text-3xl font-bold text-gray-800">
+                  {analytics.enrollment ?? 0}
+                </h3>
               </div>
               <span className="bg-[#1a2744] text-white text-3xl p-4 rounded-xl flex items-center justify-center">
                 <PiStudentBold />
@@ -75,7 +92,9 @@ const Home = () => {
             <div className="flex items-center justify-between bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div>
                 <p className="text-sm text-gray-500 mb-1">Instructors</p>
-                <h3 className="text-3xl font-bold text-gray-800">20</h3>
+                <h3 className="text-3xl font-bold text-gray-800">
+                  {analytics.instructors ?? 0}
+                </h3>
               </div>
               <span className="bg-[#1a2744] text-white text-3xl p-4 rounded-xl flex items-center justify-center">
                 <FaUserCheck />
@@ -84,7 +103,9 @@ const Home = () => {
             <div className="flex items-center justify-between bg-white rounded-xl p-5 shadow-sm border border-gray-100">
               <div>
                 <p className="text-sm text-gray-500 mb-1">Students</p>
-                <h3 className="text-3xl font-bold text-gray-800">120</h3>
+                <h3 className="text-3xl font-bold text-gray-800">
+                  {analytics.students ?? 0}
+                </h3>
               </div>
               <span className="bg-[#1a2744] text-white text-3xl p-4 rounded-xl flex items-center justify-center">
                 <FaUsers />
