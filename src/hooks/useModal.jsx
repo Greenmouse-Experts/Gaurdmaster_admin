@@ -1,43 +1,70 @@
-import React, { useState } from "react";
-import { Dialog, DialogBody, DialogHeader } from "@material-tailwind/react";
+import { useState, useEffect, useCallback } from "react";
+import { Portal } from "react-portal";
 import { FaTimes } from "react-icons/fa";
+
+// Map the old @material-tailwind dialog sizes onto tailwind max-widths.
+const sizeMap = {
+  xs: "max-w-sm",
+  sm: "max-w-md",
+  md: "max-w-lg",
+  lg: "max-w-2xl",
+  xl: "max-w-3xl",
+  "2xl": "max-w-4xl",
+};
 
 const useModal = () => {
   const [showModal, setModal] = useState(false);
 
-  const setShowModal = (state) => setModal(state);
+  const setShowModal = useCallback((state) => setModal(state), []);
 
   const Modal = ({ title, children, size, type }) => {
+    // Close on ESC while open.
+    useEffect(() => {
+      if (!showModal) return;
+      const onKeyDown = (e) => {
+        if (e.key === "Escape") setShowModal(false);
+      };
+      window.addEventListener("keydown", onKeyDown);
+      return () => window.removeEventListener("keydown", onKeyDown);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [showModal]);
+
+    if (!showModal) return null;
+
     return (
-      <>
-          <Dialog
-            open={showModal}
-            size={size || "md"}
-            handler={() => setShowModal(false)}
-            animate={{
-              mount: { scale: 1, y: 0 },
-              unmount: { scale: 0.9, y: -100 },
-            }}
-            className="py-5 border-0 outline-none"
+      <Portal>
+        {/* Full-viewport overlay (Portal -> body, so `fixed` = viewport,
+            unaffected by any transformed ancestor). Flex centres the box. */}
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4"
+          onClick={() => setShowModal(false)}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className={`w-full ${
+              sizeMap[size] || sizeMap.md
+            } max-h-[90vh] overflow-y-auto rounded-lg bg-white py-5 shadow-2xl outline-none`}
           >
-            <div>
-              <DialogHeader>
-                {type === "withCancel" ? (
-                  <div className="flex items-center border-b justify-between w-full px-2">
-                    <p className="text-xl">{title}</p>{" "}
-                    <FaTimes
-                      className="text-gray-500"
-                      onClick={() => setShowModal(false)}
-                    />
-                  </div>
-                ) : (
-                  <p className="text-center w-full">{title}</p>
-                )}
-              </DialogHeader>
-              <DialogBody>{children}</DialogBody>
+            <div className="px-4 pb-2">
+              {type === "withCancel" ? (
+                <div className="flex items-center justify-between w-full border-b px-2 pb-2">
+                  <p className="text-xl">{title}</p>
+                  <button
+                    type="button"
+                    aria-label="Close"
+                    onClick={() => setShowModal(false)}
+                  >
+                    <FaTimes className="text-gray-500" />
+                  </button>
+                </div>
+              ) : (
+                <p className="text-center w-full">{title}</p>
+              )}
             </div>
-          </Dialog>
-      </>
+            <div className="px-4">{children}</div>
+          </div>
+        </div>
+      </Portal>
     );
   };
 
