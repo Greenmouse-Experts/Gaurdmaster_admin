@@ -1,5 +1,5 @@
-import { BeatLoader } from 'react-spinners';
-import Button from './Button';
+import { BeatLoader } from "react-spinners";
+import Button from "./Button";
 
 const ReusableModal = ({
   title,

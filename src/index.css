@@ -3,17 +3,19 @@
 @tailwind components;
 @tailwind utilities;
 @import "tailwindcss";
-
 :root {
     --mont: "Montserrat", sans-serif;
     --sky: "Syne", sans-serif;
-    --blue: linear-gradient(180deg, #052b5e 0%, #052b5e 100%);
+    --blue: #052b5e;
     --yell: #ffd347;
     --blu: #052b5e;
     --back: #f2f3f7;
 }
 @theme {
     --font-sans: var(--mont);
+}
+@utility bg-primary {
+    @apply bg-[var(--blue)];
 }
 a {
     text-decoration: none;
