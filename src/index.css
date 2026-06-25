@@ -17,6 +17,14 @@
 @utility bg-primary {
     @apply bg-[var(--blue)];
 }
+
+@utility btn-primary {
+    @apply bg-[var(--blue)] text-white;
+}
+
+@utility add_btn {
+    @apply bg-[var(--blue)] p-4 text-white;
+}
 a {
     text-decoration: none;
 }

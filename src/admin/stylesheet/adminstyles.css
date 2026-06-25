@@ -1,20 +1,20 @@
-.profile{
+.profile {
     display: flex;
     flex-direction: row;
     margin-top: 2rem;
     color: black;
     gap: 1.6rem;
-    
+
     margin-right: 1rem;
-   
 }
 
-.profile img{
+.profile img {
     width: 10rem;
-    height: 10rem;border-radius: 50%;
+    height: 10rem;
+    border-radius: 50%;
 }
 
-.profile_left{
+.profile_left {
     background: white;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding: 1.5rem;
@@ -22,24 +22,24 @@
     width: 48%;
     height: fit-content;
 }
-.profile_head{
+.profile_head {
     display: flex;
     align-items: center;
     gap: 2rem;
     margin: 2rem 0;
 }
 
-.profile_head> div{
+.profile_head > div {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-.profile_head h3{
+.profile_head h3 {
     font-weight: 500;
     font-size: 1.3rem;
 }
 
-.profile_head button{
+.profile_head button {
     border: 0;
     background: var(--blu);
     width: fit-content;
@@ -49,7 +49,7 @@
     font-size: 1rem;
     position: relative;
 }
-.profile_head button input{
+.profile_head button input {
     position: absolute;
     top: 0;
     left: 0;
@@ -57,68 +57,62 @@
     height: 100%;
     opacity: 0;
 }
-.profile_body{
+.profile_body {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-.profile_body svg{
+.profile_body svg {
     font-size: 2rem;
 }
 
-
-.profile_body> div{
-    color:black !important;
+.profile_body > div {
+    color: black !important;
     padding: 1.2rem 2rem;
     background: var(--yell);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
     flex-direction: row;
     gap: 1.2rem;
-    padding: 1.5rem 2rem ;
+    padding: 1.5rem 2rem;
     align-items: center;
-
 }
 
-.profile_body label{
+.profile_body label {
     font-size: 1.2rem;
     font-weight: 600;
-    
 }
 
-.prof_card h3{
+.prof_card h3 {
     padding-top: 0.5rem;
     font-size: 1.1rem;
-    
 }
 
-.profile h2{
+.profile h2 {
     font-family: var(--sky) !important;
     display: flex;
     justify-content: space-between;
-font-size: 2rem;
+    font-size: 2rem;
 }
 
-.profile_left> h2 span{
+.profile_left > h2 span {
     font-size: 1rem;
     color: var(--color);
 }
 
-.profile_right{
-   
+.profile_right {
     width: 50%;
     display: flex;
     flex-direction: column;
     gap: 2rem;
-   
 }
 
-.profile_right h2{
+.profile_right h2 {
     border-bottom: 1px solid var(--blu);
     padding-bottom: 1rem;
 }
 
-.profile_right form{
+.profile_right form {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     background: white;
     padding: 2rem 3rem;
@@ -128,22 +122,20 @@ font-size: 2rem;
     border-radius: 10px !important;
 }
 
-
-.profile_right .input div{
+.profile_right .input div {
     margin-top: 1rem;
     padding: 0.3rem !important;
 }
 
-.profile_right .input input::placeholder{
-  
+.profile_right .input input::placeholder {
     font-size: 1rem;
 }
-.profile_right .input input{
+.profile_right .input input {
     padding: 1rem !important;
     font-size: 1rem;
 }
 
-.profile_right button{
+.profile_right button {
     padding: 1rem 3rem;
     border-radius: 10px;
     font-size: 1rem;
@@ -153,28 +145,27 @@ font-size: 2rem;
     font-weight: 600;
 }
 
-.adminman{
+.adminman {
     margin-top: 1rem;
     padding: 2rem;
     background: white;
     border-radius: 10px;
     margin-right: 1rem;
 }
-.admin_head{
+.admin_head {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding-bottom: 2rem;
     border-bottom: #1b1f22 1px solid;
-
 }
-.admin_head h2{
+.admin_head h2 {
     font-size: 2rem;
     font-weight: 600;
     font-family: var(--sky) !important;
 }
-.admin_head div{
+.admin_head div {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -183,10 +174,9 @@ font-size: 2rem;
     border-radius: 40px;
     font-size: 1.1rem;
     color: white;
-
 }
 
-.admin_head p{
+.admin_head p {
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -195,23 +185,22 @@ font-size: 2rem;
     border-radius: 40px;
     font-size: 1.1rem;
     color: white;
-
 }
 
-.p_line{
+.p_line {
     width: 100%;
     border-bottom: 1px solid black;
 }
-.card_table{
+.card_table {
     width: 100% !important;
     overflow-x: auto;
     /* border: black 1px solid; */
     border-bottom: 0;
-     margin-top: 2rem;
-     font-family: var(--mont) !important;
+    margin-top: 2rem;
+    font-family: var(--mont) !important;
 }
-.card_table table{
-   margin-top: 0;
+.card_table table {
+    margin-top: 0;
     overflow-x: auto;
     color: white;
     /* margin-top: 2rem; */
@@ -222,74 +211,72 @@ font-size: 2rem;
     overflow-y: hidden;
 }
 
-.card_table th:not(:last-child){
-    border-right:  black 1px solid ;
+.card_table th:not(:last-child) {
+    border-right: black 1px solid;
     text-align: left;
     padding: 1rem;
-
 }
 
-.card_table td:not(:last-child){
-    border-right:  black 1px solid ;
-    
+.card_table td:not(:last-child) {
+    border-right: black 1px solid;
 }
 
-
-.card_table td{
+.card_table td {
     width: fit-content;
     margin-top: 5rem;
-    text-align:left;
-    border-bottom:black 1px solid;
+    text-align: left;
+    border-bottom: black 1px solid;
     padding: 0.5rem 1rem;
     color: black;
 }
 
-.card_table th{
+.card_table th {
     background: var(--blu);
 
-    border-bottom:black 1px solid;
+    border-bottom: black 1px solid;
     text-align: left;
     padding: 1rem;
     white-space: nowrap;
-    padding-right: 2rem  !important;
+    padding-right: 2rem !important;
 }
 
-.card_table tr{
-    border-bottom:black 1px solid;
-    display: table-row; 
+.card_table tr {
+    border-bottom: black 1px solid;
+    display: table-row;
 }
 
-.card_table p{
+.card_table p {
     width: inherit;
     padding: 1.3rem;
 
     border-top: none;
 }
 
-.adminman form{
+.adminman form {
     padding-top: 2rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.create_input{
+.create_input {
     font-size: 1.1rem;
     display: grid;
     align-items: center;
     grid-template-columns: 0.5fr 1fr;
 }
 
-.create_input input{
+.create_input input {
     padding: 0.8rem;
     border-radius: 8px;
     border: 1px solid #1b1f22;
 }
 
-.adminman form button{
+.adminman form button {
     background: var(--blu);
-    padding:  0.8rem 5rem;
-    width: fit-content;border-radius: 10px;
+    padding: 0.8rem 5rem;
+    width: fit-content;
+    border-radius: 10px;
     border: none;
     color: white;
     font-size: 1.1rem;
@@ -297,31 +284,32 @@ font-size: 2rem;
     align-self: center;
 }
 
-.admin_head div{
+.admin_head div {
     display: flex;
     align-items: center;
-    gap: 1.5rem
+    gap: 1.5rem;
 }
 
-.search_input{
+.search_input {
     border: 1px solid black;
-    padding: 0.2rem ;
+    padding: 0.2rem;
     padding-left: 1rem;
 }
 
-.search_input span{
-    background: var(--blu);padding: 0.6rem;
+.search_input span {
+    background: var(--blu);
+    padding: 0.6rem;
     color: white;
     font-size: 1.3rem;
 }
 
-.student_table img{
+.student_table img {
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
 }
 
-.dot_pop{
+.dot_pop {
     position: absolute;
     background: white;
     display: flex;
@@ -330,7 +318,7 @@ font-size: 2rem;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.dot_pop span{
+.dot_pop span {
     padding: 0.6rem 2rem;
     font-size: 1.1rem;
     font-weight: 500;
@@ -339,12 +327,11 @@ font-size: 2rem;
     gap: 1rem;
 }
 
-.dot_pop span:hover{
+.dot_pop span:hover {
     background: #f2f3f7;
 }
 
-
-.popup{
+.popup {
     position: fixed;
     top: 0;
     left: 0;
@@ -355,14 +342,14 @@ font-size: 2rem;
     justify-content: center;
     align-items: center;
     z-index: 2000;
-  }
-  
-.add_member{
+}
+
+.add_member {
     z-index: 5000;
     width: fit-content;
 }
 
-.add_head{
+.add_head {
     font-weight: 600;
     background: var(--blu);
     padding: 1.3rem 2rem;
@@ -373,10 +360,10 @@ font-size: 2rem;
     font-size: 1.5rem;
     justify-content: space-between;
 }
-.add_head svg{
+.add_head svg {
     font-size: 1.2rem;
 }
-.add_mem{
+.add_mem {
     background: white;
     padding: 1.5rem 5rem 3rem 5rem;
 
@@ -386,163 +373,155 @@ font-size: 2rem;
     width: 100%;
 }
 
-.add_mem div{
+.add_mem div {
     display: flex;
     gap: 1rem;
     font-size: 1.1rem;
     font-weight: 500;
     align-items: center;
-
-
 }
 
-
-
-.add_btn{
+.add_btn {
     width: 100%;
     padding: 1rem 1.5rem;
     border-radius: 15px;
-    background: var(--blu);
+    background: var(--blue);
     border: none;
     color: white;
     font-style: normal;
-font-weight: 600;
-line-height: normal;
-font-size: 1rem;
-margin-top: 1rem;
+    font-weight: 600;
+    line-height: normal;
+    font-size: 1rem;
+    margin-top: 1rem;
 }
 
-.modal{
+.modal {
     position: absolute;
     width: 100% !important;
     height: 100vh !important;
-   background: transparent;
+    background: transparent;
 }
 
-
-.stu_det{
+.stu_det {
     background: white;
-    margin-top: 1rem ;
+    margin-top: 1rem;
     width: 100%;
     font-family: var(--mont) !important;
 }
 
-.stu_det > h2{
+.stu_det > h2 {
     font-size: 2rem;
     font-family: var(--sky) !important;
 }
 
-.stu_det img{
+.stu_det img {
     width: 8rem;
     height: 8rem;
     border-radius: 50%;
 }
 
-.stu_det .profile_head h3{
+.stu_det .profile_head h3 {
     font-size: 1.3rem;
     font-weight: 500;
 }
 
-.stu_det .profile_body> div{
-    color:black !important;
+.stu_det .profile_body > div {
+    color: black !important;
     padding: 1.2rem 2rem;
     background: var(--yell);
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.stu_det .profile_body div label{
+.stu_det .profile_body div label {
     font-size: 1.2rem;
     font-family: var(--sky) !important;
     font-weight: 600;
 }
 
-.add_mem .input{
+.add_mem .input {
     flex-direction: column;
     align-items: flex-start;
 }
 
-.form_create{
+.form_create {
     width: 70vw;
 }
 
-
-.notify{
+.notify {
     display: flex;
     justify-content: center;
-       
-    
+
     align-self: center;
-  }
-  .not{background: white;  border-radius: 7px;
+}
+.not {
+    background: white;
+    border-radius: 7px;
     width: 100%;
     margin-right: 1rem;
     padding: 1rem;
-  }
-  .notify_body{
+}
+.notify_body {
     padding-top: 1rem;
-  
-  }
-  
-  .notify_head{
+}
+
+.notify_head {
     display: flex;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--blu);
     padding-bottom: 1.5rem;
-  }
-  
-  .notify_left{
+}
+
+.notify_left {
     gap: 1rem;
     display: flex;
     align-items: center;
-    
-  }
-  
-  .notify_left button{
+}
+
+.notify_left button {
     font-size: 1rem;
     cursor: pointer;
     font-weight: 600 !important;
     border: none;
     background: none;
     height: 3rem;
-  }
-  
-  .view_dot{
+}
+
+.view_dot {
     position: relative;
     text-align: center;
-  }
-  
-  .drop{
+}
+
+.drop {
     top: 0;
     z-index: 555;
-    left:-20px;
+    left: -20px;
     position: absolute;
     background: white;
-  }
-  
-  .drop a{
-    width:7rem;
-    padding: 0.5rem  ;
+}
+
+.drop a {
+    width: 7rem;
+    padding: 0.5rem;
     font-size: 0.8rem;
     color: black;
     border: rgb(149, 149, 149) 1px solid;
     border-radius: 7px;
     background: white;
     box-shadow: 0px 12px 30px 0px rgba(80, 143, 244, 0.1);
-  
-  }
-  
-  .mem{
+}
+
+.mem {
     background: black;
-  }
-  .unread-notification > span{
+}
+.unread-notification > span {
     background: var(--red);
     padding: 1rem;
     color: white;
     font-size: 2rem !important;
-  }
-  
-  .unread-notification > div{
+}
+
+.unread-notification > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -550,17 +529,15 @@ margin-top: 1rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     height: 4rem;
-  
-  
-  }
-  
-  .all-notification span{
+}
+
+.all-notification span {
     background: var(--red);
     padding: 1rem;
     color: white;
     font-size: 2rem !important;
-  }
-  .all-notification> div{
+}
+.all-notification > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -568,145 +545,133 @@ margin-top: 1rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     height: 4rem;
-  
-  }
-  .all-notification{
+}
+.all-notification {
     border-radius: 15px;
-  background: #f5f3f3;
-  margin: 1.5rem 1rem;
-  
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  }
-  .unread-notification{
+    background: #f5f3f3;
+    margin: 1.5rem 1rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.unread-notification {
     border-radius: 15px;
-  margin: 1.5rem 1rem;
-  display: flex;
-  align-items: center;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-  
-    
-  }
-  
-  .notification h3{
+    margin: 1.5rem 1rem;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+}
+
+.notification h3 {
     font-size: 1rem;
     font-weight: normal;
-  }
-  
-  .notification h3 span{
+}
+
+.notification h3 span {
     font-weight: 600;
-  }
-  .notification p{
-      font-size: 14px;
-  }
-  
-  
-  .notify_left button.active{
+}
+.notification p {
+    font-size: 14px;
+}
+
+.notify_left button.active {
     border-bottom: 3px solid var(--red);
-  
-  }
-  
-  .notify_left button span{
+}
+
+.notify_left button span {
     border-radius: 7px;
     padding: 0.2rem 0.5rem;
     background: #ececec;
-  
-  }
-  
-  .notification >span{
+}
+
+.notification > span {
     font-size: 1.2rem;
-  }
-  
-  .notification .drop{
+}
+
+.notification .drop {
     width: fit-content;
-  }
-  
-  
-  .notify .load{
+}
+
+.notify .load {
     height: fit-content;
     padding-bottom: 5rem;
     background: white;
-  }
-  
-  
+}
 
-
-@media screen and (max-width:1200px) {
-    .profile{
+@media screen and (max-width: 1200px) {
+    .profile {
         flex-direction: column;
         margin-right: 0;
-    }    
-    .profile_right{
+    }
+    .profile_right {
         width: 100%;
     }
-    .profile_left{
+    .profile_left {
         width: 100%;
     }
 }
 
-@media screen and (max-width:800px) {
-    .col{
+@media screen and (max-width: 800px) {
+    .col {
         flex-direction: column;
     }
 
-    .add_member{
+    .add_member {
         margin: 3rem 2rem;
     }
 }
-@media screen and (max-width:550px) {
-    .form_create{
+@media screen and (max-width: 550px) {
+    .form_create {
         width: 90vw;
     }
-    .profile_left{
+    .profile_left {
         padding: 1rem;
     }
-    .profile_head{
+    .profile_head {
         flex-direction: column;
     }
-    .profile_head div{
+    .profile_head div {
         align-self: start;
     }
-    .profile_right form{
+    .profile_right form {
         padding: 2rem 1.5rem;
     }
 
-    .profile_body> div{
+    .profile_body > div {
         overflow-x: scroll;
-        padding:0.5rem 2rem;
+        padding: 0.5rem 2rem;
     }
-    .admin_head{
+    .admin_head {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
     }
-    .create_input{
+    .create_input {
         display: flex;
-        align-items:    flex-start;
+        align-items: flex-start;
         flex-direction: column !important;
         gap: 0.6rem;
     }
-    .create_input input{
+    .create_input input {
         width: 100%;
     }
-    .admin_head > div{
+    .admin_head > div {
         flex-direction: column-reverse;
         align-items: flex-start;
-       
     }
 
-    .add_mem{
+    .add_mem {
         padding-left: 2rem;
         padding-right: 2rem;
     }
 }
 
-
-@media screen and (max-width:450px) {
-    .search_input{
+@media screen and (max-width: 450px) {
+    .search_input {
         width: 100%;
     }
-    .search_input input{
+    .search_input input {
         width: 100%;
     }
 }

@@ -6,9 +6,14 @@ import { toast } from "react-toastify";
 import { MdOutlineCancel } from "react-icons/md";
 import { uploadImage } from "../../services/api/routineApi";
 import { useNavigate } from "react-router-dom";
+import RichTextEditor from "../../Components/RichTextEditor";
+
+// Quill renders an empty editor as "<p><br></p>"; treat that as blank.
+const isRichTextEmpty = (html) =>
+  !html || !html.replace(/<(.|\n)*?>/g, "").trim();
 
 const CreateBlog = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const create = useMutation({
     mutationFn: createBlogpost,
     mutationKey: ["createPost"],
@@ -23,7 +28,7 @@ const CreateBlog = () => {
     description: "",
     brief: "",
     coverImage: "",
-    isPublished: 'false',
+    isPublished: "false",
   });
   const handleChange = (name, value) => {
     setPostDetail({ ...postDetail, [name]: value });
@@ -53,13 +58,13 @@ const CreateBlog = () => {
         ...postDetail,
         tags: addedTags.map(({ id }) => ({ id: id })),
         coverImage: data.image,
-        isPublished: postDetail.isPublished === "true"? true : false
+        isPublished: postDetail.isPublished === "true" ? true : false,
       };
       create.mutate(payload, {
         onSuccess: (data) => {
           toast.success(data.message);
           setIsBusy(false);
-          navigate('/blog')
+          navigate("/blog");
         },
         onError: (error) => {
           toast.error(error.response.data.message);
@@ -74,10 +79,14 @@ const CreateBlog = () => {
   });
   const submitAction = (e) => {
     e.preventDefault();
+    if (isRichTextEmpty(postDetail.description)) {
+      toast.error("Blog description is required");
+      return;
+    }
     setIsBusy(true);
-    const fd = new FormData()
-    fd.append('image', postDetail.coverImage)
-    mutation.mutate(fd)
+    const fd = new FormData();
+    fd.append("image", postDetail.coverImage);
+    mutation.mutate(fd);
   };
   return (
     <>
@@ -116,19 +125,13 @@ const CreateBlog = () => {
               </div>
             </div>
             <div>
-              <div className="input">
+              <div className="">
                 <label>Blog Description</label>
-                <div>
-                  <textarea
-                    placeholder="Enter Program Description"
-                    value={postDetail.description}
-                    className="h-24 w-full bg-transparent"
-                    required
-                    onChange={(e) =>
-                      handleChange("description", e.target.value)
-                    }
-                  />
-                </div>
+                <RichTextEditor
+                  value={postDetail.description}
+                  placeholder="Enter Blog Description"
+                  onChange={(value) => handleChange("description", value)}
+                />
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
@@ -139,17 +142,25 @@ const CreateBlog = () => {
                     type="file"
                     accept="image/*"
                     required
-                    onChange={(e) => handleChange("coverImage", e.target.files[0])}
+                    onChange={(e) =>
+                      handleChange("coverImage", e.target.files[0])
+                    }
                   />
                 </div>
               </div>
               <div className="input">
                 <label>Publish Status</label>
                 <div className="!p-5">
-                  <select className="w-full"  onChange={(e) => handleChange("isPublished", e.target.value)} id="">
+                  <select
+                    className="w-full"
+                    onChange={(e) =>
+                      handleChange("isPublished", e.target.value)
+                    }
+                    id=""
+                  >
                     <option value=" ">Select an option</option>
-                    <option value={'true'}>True</option>
-                    <option value={'false'}>False</option>
+                    <option value={"true"}>True</option>
+                    <option value={"false"}>False</option>
                   </select>
                 </div>
               </div>

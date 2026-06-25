@@ -6,6 +6,11 @@ import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
 import { MdOutlineCancel } from "react-icons/md";
 import { TbArrowBackUpDouble } from "react-icons/tb";
 import { toast } from "react-toastify";
+import RichTextEditor from "../../../Components/RichTextEditor";
+
+// Quill renders an empty editor as "<p><br></p>"; treat that as blank.
+const isRichTextEmpty = (html) =>
+  !html || !html.replace(/<(.|\n)*?>/g, "").trim();
 
 const EditBlog = ({ item, refetch, close }) => {
   const { data: tags } = useQuery({
@@ -18,18 +23,18 @@ const EditBlog = ({ item, refetch, close }) => {
     description: item?.description || "",
     brief: item?.brief || "",
   });
-  const [oldTags, setOldTags] = useState([])
+  const [oldTags, setOldTags] = useState([]);
   const getDefaultTags = () => {
     const filteredArray = tags?.data.filter((items) =>
-      item?.tags.some((filterItem) => filterItem.id === items.id)
+      item?.tags.some((filterItem) => filterItem.id === items.id),
     );
-    setOldTags(filteredArray.map(({ id, tag }) => ({ id: id, name: tag })),)
+    setOldTags(filteredArray.map(({ id, tag }) => ({ id: id, name: tag })));
   };
   useEffect(() => {
-    if(tags){
-      getDefaultTags()
+    if (tags) {
+      getDefaultTags();
     }
-  }, [tags])
+  }, [tags]);
   const handleChange = (name, value) => {
     setPostDetail({ ...postDetail, [name]: value });
   };
@@ -61,7 +66,7 @@ const EditBlog = ({ item, refetch, close }) => {
       };
       updateBlogPost(item?.id, payload)
         .then((res) => {
-          toast.success('Blog updated successfully');
+          toast.success("Blog updated successfully");
           setIsBusy(false);
           refetch();
           close();
@@ -78,6 +83,10 @@ const EditBlog = ({ item, refetch, close }) => {
   });
   const submitAction = (e) => {
     e.preventDefault();
+    if (isRichTextEmpty(postDetail.description)) {
+      toast.error("Blog description is required");
+      return;
+    }
     setIsBusy(true);
     const payload = {
       ...postDetail,
@@ -90,7 +99,7 @@ const EditBlog = ({ item, refetch, close }) => {
     } else {
       updateBlogPost(item?.id, payload)
         .then((res) => {
-          toast.success('Blog updated successfully');
+          toast.success("Blog updated successfully");
           setIsBusy(false);
           refetch();
           close();
@@ -105,7 +114,13 @@ const EditBlog = ({ item, refetch, close }) => {
     <div className="">
       <div className="mb-7 mt-7 flex justify-between items-center">
         <p className="text-2xl fw-600">Edit Blog Post</p>
-        <p className="flex items-center gap-x-2 cursor-pointer" onClick={() => close()}><TbArrowBackUpDouble/>Back</p>
+        <p
+          className="flex items-center gap-x-2 cursor-pointer"
+          onClick={() => close()}
+        >
+          <TbArrowBackUpDouble />
+          Back
+        </p>
       </div>
       <div className="">
         <form action="" onSubmit={submitAction}>
@@ -139,19 +154,13 @@ const EditBlog = ({ item, refetch, close }) => {
               </div>
             </div>
             <div>
-              <div className="input">
+              <div className="">
                 <label>Blog Description</label>
-                <div>
-                  <textarea
-                    placeholder="Enter Program Description"
-                    value={postDetail.description}
-                    className="h-36 w-full bg-transparent"
-                    required
-                    onChange={(e) =>
-                      handleChange("description", e.target.value)
-                    }
-                  />
-                </div>
+                <RichTextEditor
+                  value={postDetail.description}
+                  placeholder="Enter Blog Description"
+                  onChange={(value) => handleChange("description", value)}
+                />
               </div>
             </div>
             <div className="flex items-end gap-x-5">

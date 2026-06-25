@@ -11,7 +11,7 @@ import useAuth from "../../hooks/useAuth";
 import useModal from "../../hooks/useModal";
 import { IoNotifications } from "react-icons/io5";
 import { BsCalendar4Event } from "react-icons/bs";
-import { MdOutlineReviews } from "react-icons/md";
+import { MdOutlineReviews, MdQuestionAnswer } from "react-icons/md";
 
 const Sidebar = ({
   showSidebar,
@@ -256,6 +256,22 @@ const Sidebar = ({
                 </span>
               </NavLink>
             </li>
+            {user.role === "admin" && (
+              <li className="nav-item">
+                <NavLink
+                  onClick={closeSidebar}
+                  className="nav-link"
+                  to="/faqs"
+                >
+                  <span className="nav-icon">
+                    <span>
+                      <MdQuestionAnswer />
+                      {showSidebar && "FAQs"}
+                    </span>
+                  </span>
+                </NavLink>
+              </li>
+            )}
             {user.role === "instructor" && (
               <li className="nav-item">
                 <NavLink className="nav-link" to="/pack">

@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 // import ScrollToTop from "./components/ScrollToTop";
-import Admin from "./admin/pages/Admin"
+import Admin from "./admin/pages/Admin";
 import "./App.css";
-import Login from "./pages/Login"
+import Login from "./pages/Login";
 import Home from "./admin/pages/Home";
 import Profile from "./admin/pages/Profile";
 import Dashboard from "./admin/pages/Admin";
@@ -25,35 +25,39 @@ import EditBlogPost from "./admin/pages/EditBlogPost";
 import ViewAssessment from "./admin/components/programs/Assesment/viewAssessment";
 import TestimonialsPage from "./admin/pages/Testimonials";
 import InstructorPackage from "./admin/pages/Package";
+import Faqs from "./admin/pages/Faq";
+import Messages from "./admin/pages/Messages";
 
 function App() {
   return (
     <>
       <ScrollToTop />
       <Routes>
-        <Route element={<Dashboard/>}>
+        <Route element={<Dashboard />}>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/admins" element={<AdminManage/>}/>
-          <Route path="/instructors" element={<InstructorManage/>}/>
-          <Route path="/adduser" element={<Usercreate/>}/>
-          <Route path="/students" element={<Student/>}  />
-          <Route path="/studentdetails/:id" element={<Studentdetails/>}/>
-          <Route path="/programs" element={<Programs/>}/>
-          <Route path="/courses" element={<Courses/>}/>
-          <Route path="/courses/:id" element={<CourseDetails/>}/>
-          <Route path="/assessment/:id" element={<ViewAssessment/>}/>
-          <Route path="/notify" element={<Notify/>}/>
-          <Route path="/support" element={<Support/>}/>
-          <Route path="/payments" element={<Payments/>}/>
-          <Route path="/blog" element={<BlogPost/>}/>
-          <Route path="/blog/add" element={<CreateBlog/>}/>
-          <Route path="/blog-tags" element={<BlogTags/>}/>
-          <Route path="/blog/edit/:id" element={<EditBlogPost/>}/>
-          <Route path="/testimonials" element={<TestimonialsPage/>}/>
-          <Route path="/pack" element={<InstructorPackage/>}/>
+          <Route path="/admins" element={<AdminManage />} />
+          <Route path="/instructors" element={<InstructorManage />} />
+          <Route path="/adduser" element={<Usercreate />} />
+          <Route path="/students" element={<Student />} />
+          <Route path="/studentdetails/:id" element={<Studentdetails />} />
+          <Route path="/programs" element={<Programs />} />
+          <Route path="/faqs" element={<Faqs />} />
+          <Route path="/contacts" element={<Messages />} />
+          <Route path="/courses" element={<Courses />} />
+          <Route path="/courses/:id" element={<CourseDetails />} />
+          <Route path="/assessment/:id" element={<ViewAssessment />} />
+          <Route path="/notify" element={<Notify />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/payments" element={<Payments />} />
+          <Route path="/blog" element={<BlogPost />} />
+          <Route path="/blog/add" element={<CreateBlog />} />
+          <Route path="/blog-tags" element={<BlogTags />} />
+          <Route path="/blog/edit/:id" element={<EditBlogPost />} />
+          <Route path="/testimonials" element={<TestimonialsPage />} />
+          <Route path="/pack" element={<InstructorPackage />} />
         </Route>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<Login />} />
       </Routes>
     </>
   );
