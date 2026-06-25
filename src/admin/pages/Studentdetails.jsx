@@ -12,6 +12,8 @@ import { useParams } from "react-router-dom";
 import { getSingleStudents } from "../../services/api/usersApi";
 import { useQuery } from "@tanstack/react-query";
 import ClipLoader from "react-spinners/ClipLoader";
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import StudentOrders from "../components/users/StudentOrders";
 
 const Studentdetails = () => {
   const { id } = useParams();
@@ -22,17 +24,24 @@ const Studentdetails = () => {
   return (
     <div className="profile_left stu_det">
       <h2>Student Details</h2>
-      {isLoading ? (
-        <div className="flex justify-center py-12">
-      <ClipLoader
-        color={'#173c88'}
-        size={150}
-        aria-label="Loading Spinner"
-        data-testid="loader"
-      />
-        </div>
-      ) : (
-        <>
+      <Tabs>
+        <TabList>
+          <Tab className="fw-600">Details</Tab>
+          <Tab className="fw-600">Orders</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel px={0}>
+            {isLoading ? (
+              <div className="flex justify-center py-12">
+                <ClipLoader
+                  color={"#173c88"}
+                  size={150}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              </div>
+            ) : (
+              <>
           <div className="profile_head">
             <img src={data?.picture ? data?.picture : profile} alt="" />
             <div>
@@ -139,7 +148,13 @@ const Studentdetails = () => {
             </div>
           </div>
         </>
-      )}
+            )}
+          </TabPanel>
+          <TabPanel px={0}>
+            <StudentOrders studentId={id} />
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
     </div>
   );
 };

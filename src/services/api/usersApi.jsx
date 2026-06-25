@@ -20,4 +20,7 @@ export const getStudents = async(params) => {
  } 
  export const getSingleStudents = async(id) => {
    return  axios.get(`/user/student/${id}`).then((response) => response.data)
-} 
+}
+ export const getStudentOrders = async(studentId) => {
+   return  axios.get(`/orders/student-purchased-courses/${studentId}`).then((response) => response.data)
+}
