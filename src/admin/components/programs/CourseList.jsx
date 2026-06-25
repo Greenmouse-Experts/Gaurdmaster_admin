@@ -13,12 +13,18 @@ import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 import {
   MdOutlinePublishedWithChanges,
   MdOutlineUnpublished,
+  MdOutlineStar,
+  MdOutlineStarBorder,
 } from "react-icons/md";
 import useModal from "../../../hooks/useModal";
 import EditProgram from "./EditProgram";
 import { FaRegEdit } from "react-icons/fa";
 import ReusableModal from "../../../Components/ReusableModal";
-import { deleteCourse, updateCourse } from "../../../services/api/programsApi";
+import {
+  deleteCourse,
+  updateCourse,
+  featureCourse,
+} from "../../../services/api/programsApi";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { FaRegEye } from "react-icons/fa6";
@@ -34,6 +40,8 @@ const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
   const { Modal: Retract, setShowModal: ShowRetract } = useModal();
   const { Modal: Publish, setShowModal: ShowPublish } = useModal();
   const { Modal: Delete, setShowModal: ShowDelete } = useModal();
+  const { Modal: Feature, setShowModal: ShowFeature } = useModal();
+  const { Modal: Unfeature, setShowModal: ShowUnfeature } = useModal();
   const [selected, setSelected] = useState();
   const [selectedId, setSelectedId] = useState();
   const navigate = useNavigate();
@@ -56,6 +64,14 @@ const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
     setSelectedId(id);
     ShowDelete(true);
   };
+  const openFeature = (id) => {
+    setSelectedId(id);
+    ShowFeature(true);
+  };
+  const openUnfeature = (id) => {
+    setSelectedId(id);
+    ShowUnfeature(true);
+  };
   const [isBusy, setIsBusy] = useState(false);
   const updateCourseStatus = (val) => {
     const payload = {
@@ -70,6 +86,21 @@ const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
         refetch();
         ShowPublish(false);
         ShowRetract(false);
+      })
+      .catch((error) => {
+        toast.error(error.response.data.message);
+        setIsBusy(false);
+      });
+  };
+  const updateCourseFeatured = (featured) => {
+    setIsBusy(true);
+    featureCourse(selectedId, featured)
+      .then((data) => {
+        toast.success(data.message);
+        setIsBusy(false);
+        refetch();
+        ShowFeature(false);
+        ShowUnfeature(false);
       })
       .catch((error) => {
         toast.error(error.response.data.message);
@@ -205,6 +236,21 @@ const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
                   <MdOutlinePublishedWithChanges /> Publish
                 </MenuItem>
               ) : ''}
+              {info.row.original.featured ? (
+                <MenuItem
+                  className="my-1 fw-500 flex items-center gap-x-2 pt-1"
+                  onClick={() => openUnfeature(info.getValue())}
+                >
+                  <MdOutlineStar /> Unfeature
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  className="my-1 fw-500 flex items-center gap-x-2 pt-1"
+                  onClick={() => openFeature(info.getValue())}
+                >
+                  <MdOutlineStarBorder /> Feature
+                </MenuItem>
+              )}
               <MenuItem
                 className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
                 onClick={() => openDelete(info.getValue())}
@@ -274,6 +320,26 @@ const CoursesList = ({ data, refetch, isLoading, next, prev, page, count }) => {
             isBusy={isBusy}
           />
         </Delete>
+        <Feature title={""} size={"xs"}>
+          <ReusableModal
+            title={"Are you sure you want to feature this course"}
+            actionTitle={"Feature"}
+            cancelTitle={"Cancel"}
+            closeModal={() => ShowFeature(false)}
+            action={() => updateCourseFeatured(true)}
+            isBusy={isBusy}
+          />
+        </Feature>
+        <Unfeature title={""} size={"xs"}>
+          <ReusableModal
+            title={"Are you sure you want to unfeature this course"}
+            actionTitle={"Unfeature"}
+            cancelTitle={"Cancel"}
+            closeModal={() => ShowUnfeature(false)}
+            action={() => updateCourseFeatured(false)}
+            isBusy={isBusy}
+          />
+        </Unfeature>
       </div>
     </>
   );

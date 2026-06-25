@@ -45,6 +45,12 @@ export const deleteCourse = async (id) => {
   return axios.delete(`/courses/${id}`).then((response) => response.data);
 };
 
+export const featureCourse = async (id, featured) => {
+  return axios
+    .patch(`/courses/feature/${id}`, { featured })
+    .then((response) => response.data);
+};
+
 export const getCourseContent = async (route) => {
   return axios
     .get(`${route}`)
