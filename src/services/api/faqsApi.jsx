@@ -8,7 +8,7 @@ export const getFaqs = async () => {
 };
 
 export const createFaq = async (payload) => {
-  return axios.post(`/faqs/create`, payload).then((response) => response.data);
+  return axios.post(`/faqs/`, payload).then((response) => response.data);
 };
 
 export const updateFaq = async (id, payload) => {
