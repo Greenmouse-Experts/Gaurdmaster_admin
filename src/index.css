@@ -15,7 +15,7 @@
     --font-sans: var(--mont);
 }
 @utility bg-primary {
-    @apply bg-[var(--blue)];
+    @apply bg-[var(--blue)] text-white;
 }
 
 @utility btn-primary {

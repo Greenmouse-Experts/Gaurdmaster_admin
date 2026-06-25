@@ -61,7 +61,7 @@ const AddFaq = ({ close, refetch }) => {
             </div>
           </div>
           <div className="mt-12 flex justify-end">
-            <button className="bg-primary w-full py-3 fw-500 lg:text-lg">
+            <button className="bg-primary w-full py-3 fw-500 lg:text-lg ">
               {isBusy ? "Submiting..." : "Submit"}
             </button>
           </div>
