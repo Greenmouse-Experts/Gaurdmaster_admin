@@ -407,6 +407,7 @@
     margin-top: 1rem;
     width: 100%;
     font-family: var(--mont) !important;
+    z-index: -1;
 }
 
 .stu_det > h2 {

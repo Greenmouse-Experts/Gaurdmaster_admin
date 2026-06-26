@@ -22,7 +22,7 @@ const Studentdetails = () => {
     queryFn: () => getSingleStudents(id),
   });
   return (
-    <div className="profile_left stu_det">
+    <div className="profile_left stu_det isolate">
       <h2>Student Details</h2>
       <Tabs>
         <TabList>
@@ -42,112 +42,114 @@ const Studentdetails = () => {
               </div>
             ) : (
               <>
-          <div className="profile_head">
-            <img src={data?.picture ? data?.picture : profile} alt="" />
-            <div>
-              <h3>{`${data?.firstName} ${data?.lastName}`}</h3>
-              <div>
-                {data?.isActive ? (
-                  <div className="flex items-center gap-x-2">
-                    <span className="bg-green-600 w-4 h-4 circle"></span>{" "}
-                    <span className="fw-500 text-green-600">Active</span>
+                <div className="profile_head">
+                  <img src={data?.picture ? data?.picture : profile} alt="" />
+                  <div>
+                    <h3>{`${data?.firstName} ${data?.lastName}`}</h3>
+                    <div>
+                      {data?.isActive ? (
+                        <div className="flex items-center gap-x-2">
+                          <span className="bg-green-600 w-4 h-4 circle"></span>{" "}
+                          <span className="fw-500 text-green-600">Active</span>
+                        </div>
+                      ) : (
+                        <div className="flex items-center gap-x-2">
+                          <span className="bg-orange-600 w-4 h-4 circle"></span>{" "}
+                          <span className="fw-500 text-orange-600">
+                            Inactive
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </div>
-                ) : (
-                  <div className="flex items-center gap-x-2">
-                    <span className="bg-orange-600 w-4 h-4 circle"></span>{" "}
-                    <span className="fw-500 text-orange-600">Inactive</span>
+                </div>
+                <div className="profile_body">
+                  <div>
+                    <span>
+                      <BiLogoGmail />
+                    </span>{" "}
+                    <div className="prof_card">
+                      <label htmlFor="email">Email</label>
+                      <h3>{data?.email}</h3>
+                    </div>
                   </div>
-                )}
-              </div>
-            </div>
-          </div>
-          <div className="profile_body">
-            <div>
-              <span>
-                <BiLogoGmail />
-              </span>{" "}
-              <div className="prof_card">
-                <label htmlFor="email">Email</label>
-                <h3>{data?.email}</h3>
-              </div>
-            </div>
-            <div>
-              <span>
-                <FaPhoneAlt />
-              </span>
-              <div className="prof_card">
-                <label htmlFor="phone">Phone</label>
-                <h3>{data?.phone}</h3>
-              </div>
-            </div>
-            <div>
-              <span>
-                <FaAddressBook />
-              </span>
-              <div className="prof_card">
-                <label htmlFor="register">Address</label>
-                <h3>{data?.address ? data?.address : "N/A"}</h3>
-              </div>
-            </div>
-            <div>
-              <span>
-                <FaLinkedinIn />
-              </span>
-              <div className="prof_card">
-                <label htmlFor="register">Linkedin</label>
-                <h3>
-                  {data?.linkedinUrl ? (
-                    <a
-                      href={data?.linkedinUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    ></a>
-                  ) : (
-                    "N/A"
-                  )}
-                </h3>
-              </div>
-            </div>
-            <div>
-              <span>
-                <FaFacebookF />
-              </span>
-              <div className="prof_card">
-                <label htmlFor="register">Facebook</label>
-                <h3>
-                  {data?.facebookUrl ? (
-                    <a
-                      href={data?.facebookUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    ></a>
-                  ) : (
-                    "N/A"
-                  )}
-                </h3>
-              </div>
-            </div>
-            <div>
-              <span>
-                <FaXTwitter />
-              </span>
-              <div className="prof_card">
-                <label htmlFor="register">Twitter</label>
-                <h3>
-                  {data?.twitterUrl ? (
-                    <a
-                      href={data?.twitterUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    ></a>
-                  ) : (
-                    "N/A"
-                  )}
-                </h3>
-              </div>
-            </div>
-          </div>
-        </>
+                  <div>
+                    <span>
+                      <FaPhoneAlt />
+                    </span>
+                    <div className="prof_card">
+                      <label htmlFor="phone">Phone</label>
+                      <h3>{data?.phone}</h3>
+                    </div>
+                  </div>
+                  <div>
+                    <span>
+                      <FaAddressBook />
+                    </span>
+                    <div className="prof_card">
+                      <label htmlFor="register">Address</label>
+                      <h3>{data?.address ? data?.address : "N/A"}</h3>
+                    </div>
+                  </div>
+                  <div>
+                    <span>
+                      <FaLinkedinIn />
+                    </span>
+                    <div className="prof_card">
+                      <label htmlFor="register">Linkedin</label>
+                      <h3>
+                        {data?.linkedinUrl ? (
+                          <a
+                            href={data?.linkedinUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          ></a>
+                        ) : (
+                          "N/A"
+                        )}
+                      </h3>
+                    </div>
+                  </div>
+                  <div>
+                    <span>
+                      <FaFacebookF />
+                    </span>
+                    <div className="prof_card">
+                      <label htmlFor="register">Facebook</label>
+                      <h3>
+                        {data?.facebookUrl ? (
+                          <a
+                            href={data?.facebookUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          ></a>
+                        ) : (
+                          "N/A"
+                        )}
+                      </h3>
+                    </div>
+                  </div>
+                  <div>
+                    <span>
+                      <FaXTwitter />
+                    </span>
+                    <div className="prof_card">
+                      <label htmlFor="register">Twitter</label>
+                      <h3>
+                        {data?.twitterUrl ? (
+                          <a
+                            href={data?.twitterUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          ></a>
+                        ) : (
+                          "N/A"
+                        )}
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </>
             )}
           </TabPanel>
           <TabPanel px={0}>

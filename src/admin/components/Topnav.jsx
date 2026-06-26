@@ -74,16 +74,16 @@ export const Topnav = ({ toggleSidebar }) => {
             </div>
 
             {activeDropdown && (
-              <div className="bell_drop">
+              <div className="bell_drop z-1000">
                 {data?.data?.length > 0 ? (
                   <div>
                     <div className="add_head">
                       <p>Notification</p>{" "}
                     </div>
-                    {data?.data?.slice(0,4).map((item) => (
+                    {data?.data?.slice(0, 4).map((item) => (
                       <div key={item.id}>
                         <div className="bell_body">
-                          <GoBell className="shrink-0"/>
+                          <GoBell className="shrink-0" />
                           <div>
                             <h3 className="!fs-500">{item.body}</h3>
                           </div>
