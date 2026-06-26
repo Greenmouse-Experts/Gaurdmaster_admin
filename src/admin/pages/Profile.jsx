@@ -12,14 +12,14 @@ import { toast } from "react-toastify";
 const Profile = () => {
   const [isBusy, setIsBusy] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
-  const [change, setChange] = useState(false)
+  const [change, setChange] = useState(false);
   const { user, saveUser } = useAuth();
   const [userDetail, setUserDetail] = useState({
     firstName: user.firstName,
     lastName: user.lastName,
     oldPassword: "",
     newPassword: "",
-    newPasswordConfirmation: ""
+    newPasswordConfirmation: "",
   });
   const handleChange = (name, value) => {
     setUserDetail({ ...userDetail, [name]: value });
@@ -30,8 +30,8 @@ const Profile = () => {
   });
   const changePass = useMutation({
     mutationFn: changePassword,
-    mutationKey: ['password-change']
-  })
+    mutationKey: ["password-change"],
+  });
   const mutation = useMutation({
     mutationFn: uploadImage,
     onSuccess: (data) => {
@@ -90,28 +90,28 @@ const Profile = () => {
     });
   };
   const handleChangePassword = (e) => {
-    e.preventDefault()
-    if(userDetail.newPassword !== userDetail.newPasswordConfirmation){
-      toast.info('Password does not match')
+    e.preventDefault();
+    if (userDetail.newPassword !== userDetail.newPasswordConfirmation) {
+      toast.info("Password does not match");
       return;
     }
-    setChange(true)
+    setChange(true);
     const payload = {
       oldPassword: userDetail.oldPassword,
       newPassword: userDetail.newPassword,
-      newPasswordConfirmation: userDetail.newPasswordConfirmation
-    }
+      newPasswordConfirmation: userDetail.newPasswordConfirmation,
+    };
     changePass.mutate(payload, {
       onSuccess: (data) => {
-        toast.success(data.message)
-        setChange(false)
+        toast.success(data.message);
+        setChange(false);
       },
       onError: (error) => {
         toast.error(error.response.data.message);
         setChange(false);
       },
-    })
-  }
+    });
+  };
   return (
     <div className="profile">
       <div className="profile_left">
@@ -127,7 +127,7 @@ const Profile = () => {
                 onChange={handleChangePicture}
                 className="absolute top-0 right-0"
               />
-              {isUpdate? "..." : "Update Photo"}
+              {isUpdate ? "..." : "Update Photo"}
             </button>
           </div>
         </div>
@@ -147,7 +147,9 @@ const Profile = () => {
             </span>
             <div className="prof_card">
               <label htmlFor="phone">Type</label>
-              <h3>{user.type === 'admin'? "Administrator" : "Instructor"}</h3>
+              <h3>
+                {user.type === "admin" ? "Administrator" : "Administrator"}
+              </h3>
             </div>
           </div>
         </div>
@@ -183,7 +185,7 @@ const Profile = () => {
             </div>
           </div>
 
-          <button>{isBusy? "Updating..." : "Update Profile"}</button>
+          <button>{isBusy ? "Updating..." : "Update Profile"}</button>
         </form>
         <form action="submit" onSubmit={handleChangePassword}>
           <h2>Change Password</h2>
@@ -194,7 +196,7 @@ const Profile = () => {
                 type="password"
                 name="login_details"
                 value={userDetail.oldPassword}
-                onChange={(e) => handleChange('oldPassword', e.target.value)}
+                onChange={(e) => handleChange("oldPassword", e.target.value)}
                 placeholder="Enter Old Password"
               />
             </div>
@@ -207,7 +209,7 @@ const Profile = () => {
                 name="login_details"
                 placeholder="Enter New Password"
                 value={userDetail.newPassword}
-                onChange={(e) => handleChange('newPassword', e.target.value)}
+                onChange={(e) => handleChange("newPassword", e.target.value)}
               />
             </div>
           </div>
@@ -219,12 +221,14 @@ const Profile = () => {
                 name="login_details"
                 placeholder="Re-Enter Password"
                 value={userDetail.newPasswordConfirmation}
-                onChange={(e) => handleChange('newPasswordConfirmation', e.target.value)}
+                onChange={(e) =>
+                  handleChange("newPasswordConfirmation", e.target.value)
+                }
               />
             </div>
           </div>
 
-          <button>{change? "Updating..." : "Update Password"}</button>
+          <button>{change ? "Updating..." : "Update Password"}</button>
         </form>
       </div>
     </div>
