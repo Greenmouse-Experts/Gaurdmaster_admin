@@ -1,38 +1,45 @@
 import React, { useState } from "react";
 import { createProgram } from "../../../services/api/programsApi";
-import { useMutation } from "@tanstack/react-query";
+import { uploadImage } from "../../../services/api/routineApi";
+import { toast } from "react-toastify";
 
 const AddProgram = ({ close, refetch }) => {
-  const create = useMutation({
-    mutationFn: createProgram,
-    mutationKey: ["addProgram"],
-  });
   const [isBusy, setIsBusy] = useState(false);
   const [userDetail, setUserDetail] = useState({
     title: "",
+    coverImage: "",
   });
   const handleChange = (name, value) => {
     setUserDetail({ ...userDetail, [name]: value });
   };
-  const submitAction = (e) => {
-    e.preventDefault();
-    if (userDetail.password !== userDetail.confirmPassword) {
-      toast.error("Password does not match");
-      return;
-    }
-    setIsBusy(true);
-    create.mutate(userDetail, {
-      onSuccess: (data) => {
+  const createWith = (coverImage) => {
+    createProgram({ title: userDetail.title, coverImage })
+      .then((data) => {
         toast.success(data.message);
         setIsBusy(false);
         refetch();
         close();
-      },
-      onError: (error) => {
-        toast.error(error.response.data.message);
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message || "Something went wrong");
         setIsBusy(false);
-      },
-    });
+      });
+  };
+  const submitAction = (e) => {
+    e.preventDefault();
+    setIsBusy(true);
+    if (userDetail.coverImage) {
+      const fd = new FormData();
+      fd.append("image", userDetail.coverImage);
+      uploadImage(fd)
+        .then((res) => createWith(res.image))
+        .catch((error) => {
+          toast.error(error?.response?.data?.message || "Image upload failed");
+          setIsBusy(false);
+        });
+    } else {
+      createWith(null);
+    }
   };
   return (
     <>
@@ -47,6 +54,16 @@ const AddProgram = ({ close, refetch }) => {
                 value={userDetail.title}
                 required
                 onChange={(e) => handleChange("title", e.target.value)}
+              />
+            </div>
+          </div>
+          <div className="input mt-4">
+            <label>Cover Image</label>
+            <div>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => handleChange("coverImage", e.target.files[0])}
               />
             </div>
           </div>

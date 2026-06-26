@@ -18,7 +18,7 @@ import useModal from "../../../hooks/useModal";
 import EditFaq from "./EditFaq";
 import { FaRegEdit } from "react-icons/fa";
 import ReusableModal from "../../../Components/ReusableModal";
-import { deleteFaq, updateFaq } from "../../../services/api/faqsApi";
+import { deleteFaq, publishFaq } from "../../../services/api/faqsApi";
 import { toast } from "react-toastify";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Picker from "../../../Components/Loaders/Picker";
@@ -52,7 +52,7 @@ const FaqsList = ({ data, refetch, isLoading }) => {
       isPublished: val === "active" ? true : false,
     };
     setIsBusy(true);
-    updateFaq(selectedId, payload)
+    publishFaq(selectedId, payload)
       .then((data) => {
         toast.success(data.message);
         setIsBusy(false);

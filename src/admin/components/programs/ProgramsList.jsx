@@ -81,6 +81,22 @@ const ProgramsList = ({ data, refetch, isLoading }) => {
   };
   const columnHelper = createColumnHelper();
   const columns = [
+    columnHelper.accessor((row) => row.coverImage, {
+      id: "Cover",
+      cell: (info) =>
+        info.getValue() ? (
+          <img
+            src={info.getValue()}
+            alt="cover"
+            className="w-14 h-10 object-cover rounded"
+          />
+        ) : (
+          <div className="w-14 h-10 rounded bg-gray-100 flex items-center justify-center text-[10px] text-gray-400">
+            No image
+          </div>
+        ),
+      header: (info) => info.column.id,
+    }),
     columnHelper.accessor((row) => row.title, {
       id: "Title",
       cell: (info) => <>{info.getValue()}</>,

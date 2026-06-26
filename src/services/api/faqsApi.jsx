@@ -18,3 +18,9 @@ export const updateFaq = async (id, payload) => {
 export const deleteFaq = async (id) => {
   return axios.delete(`/faqs/${id}`).then((response) => response.data);
 };
+
+export const publishFaq = async (id, payload) => {
+  return axios
+    .patch(`/faqs/publish/${id}`, payload)
+    .then((response) => response.data);
+};
