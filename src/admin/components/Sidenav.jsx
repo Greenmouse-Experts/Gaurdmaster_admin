@@ -205,11 +205,12 @@ const Sidebar = ({
                 </span>
                 {showIdMenu && (
                   <div className="nav">
-                    {user.role === "admin" && (
-                      <NavLink onClick={closeSidebar} to="programs">
-                        Programs
-                      </NavLink>
-                    )}
+                    {user.role === "admin" ||
+                      (user.role == "sub-admin" && (
+                        <NavLink onClick={closeSidebar} to="programs">
+                          Programs
+                        </NavLink>
+                      ))}
                     <NavLink onClick={closeSidebar} to="courses">
                       All Courses
                     </NavLink>
@@ -258,11 +259,7 @@ const Sidebar = ({
             </li>
             {user.role === "admin" && (
               <li className="nav-item">
-                <NavLink
-                  onClick={closeSidebar}
-                  className="nav-link"
-                  to="/faqs"
-                >
+                <NavLink onClick={closeSidebar} className="nav-link" to="/faqs">
                   <span className="nav-icon">
                     <span>
                       <MdQuestionAnswer />

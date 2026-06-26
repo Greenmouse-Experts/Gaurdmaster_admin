@@ -10,9 +10,10 @@ import {
   MenuItem,
   MenuList,
 } from "@material-tailwind/react";
-import { BsArrowsExpand, BsThreeDotsVertical } from 'react-icons/bs'
+import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 
 const AdminsList = ({ data }) => {
+  const gotodetails = () => {};
   const columnHelper = createColumnHelper();
   const columns = [
     columnHelper.accessor((row) => row.firstName, {
@@ -83,7 +84,7 @@ const AdminsList = ({ data }) => {
                 className="my-1 fw-500 flex items-center gap-x-2 pt-1"
                 onClick={() => gotoDetails(info.getValue())}
               >
-                <BsArrowsExpand/> View Details
+                <BsArrowsExpand /> View Details
               </MenuItem>
             </MenuList>
           </Menu>
