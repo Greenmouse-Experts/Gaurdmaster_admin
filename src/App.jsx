@@ -27,6 +27,8 @@ import TestimonialsPage from "./admin/pages/Testimonials";
 import InstructorPackage from "./admin/pages/Package";
 import Faqs from "./admin/pages/Faq";
 import Messages from "./admin/pages/Messages";
+import Certificates from "./admin/pages/certificates/Certificates";
+import Templates from "./admin/pages/certificates/Templates";
 
 function App() {
   return (
@@ -45,6 +47,8 @@ function App() {
           <Route path="/faqs" element={<Faqs />} />
           <Route path="/contacts" element={<Messages />} />
           <Route path="/courses" element={<Courses />} />
+          <Route path="/certificates" element={<Certificates />} />
+          <Route path="/certificates/templates" element={<Templates />} />
           <Route path="/courses/:id" element={<CourseDetails />} />
           <Route path="/assessment/:id" element={<ViewAssessment />} />
           <Route path="/notify" element={<Notify />} />
