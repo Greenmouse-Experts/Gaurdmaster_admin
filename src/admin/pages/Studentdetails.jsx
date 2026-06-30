@@ -14,6 +14,7 @@ import { useQuery } from "@tanstack/react-query";
 import ClipLoader from "react-spinners/ClipLoader";
 import { Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
 import StudentOrders from "../components/users/StudentOrders";
+import StudentCertificates from "../components/users/StudentCertificates";
 
 const Studentdetails = () => {
   const { id } = useParams();
@@ -28,6 +29,7 @@ const Studentdetails = () => {
         <TabList>
           <Tab className="fw-600">Details</Tab>
           <Tab className="fw-600">Orders</Tab>
+          <Tab className="fw-600">Certificates</Tab>
         </TabList>
         <TabPanels>
           <TabPanel px={0}>
@@ -154,6 +156,9 @@ const Studentdetails = () => {
           </TabPanel>
           <TabPanel px={0}>
             <StudentOrders studentId={id} />
+          </TabPanel>
+          <TabPanel px={0}>
+            <StudentCertificates studentId={id} />
           </TabPanel>
         </TabPanels>
       </Tabs>

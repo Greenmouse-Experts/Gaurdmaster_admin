@@ -12,6 +12,7 @@ import useModal from "../../hooks/useModal";
 import { IoNotifications } from "react-icons/io5";
 import { BsCalendar4Event } from "react-icons/bs";
 import { MdOutlineReviews, MdQuestionAnswer } from "react-icons/md";
+import { FaCertificate } from "react-icons/fa6";
 
 const Sidebar = ({
   showSidebar,
@@ -28,6 +29,8 @@ const Sidebar = ({
   setshowPaymentMenu,
   showIdMenu,
   setShowIdMenu,
+  showCertMenu,
+  setShowCertMenu,
 }) => {
   const toggleIdMenu = () => {
     if (showSidebar) {
@@ -37,6 +40,7 @@ const Sidebar = ({
       setShowVerificationMenu(false);
       setShowUsersMenu(false);
       setshowPaymentMenu(false);
+      setShowCertMenu(false);
     }
   };
   const toggleEventMenu = () => {
@@ -47,6 +51,7 @@ const Sidebar = ({
       setShowVerificationMenu(false);
       setShowUsersMenu(false);
       setshowPaymentMenu(false);
+      setShowCertMenu(false);
     }
   };
 
@@ -58,6 +63,7 @@ const Sidebar = ({
       setShowMembershipMenu(false);
       setShowVerificationMenu(false);
       setShowUsersMenu(false);
+      setShowCertMenu(false);
     }
   };
   const toggleMembershipMenu = () => {
@@ -69,6 +75,7 @@ const Sidebar = ({
       setShowVerificationMenu(false);
       setShowUsersMenu(false);
       setshowPaymentMenu(false);
+      setShowCertMenu(false);
     }
   };
 
@@ -80,6 +87,7 @@ const Sidebar = ({
       setShowMembershipMenu(false);
       setShowUsersMenu(false);
       setshowPaymentMenu(false);
+      setShowCertMenu(false);
     }
   };
 
@@ -90,6 +98,19 @@ const Sidebar = ({
       setShowIdMenu(false);
       setShowMembershipMenu(false);
       setShowVerificationMenu(false);
+      setshowPaymentMenu(false);
+      setShowCertMenu(false);
+    }
+  };
+
+  const toggleCertMenu = () => {
+    if (showSidebar) {
+      setShowCertMenu(!showCertMenu);
+      setShowEventMenu(false);
+      setShowIdMenu(false);
+      setShowMembershipMenu(false);
+      setShowVerificationMenu(false);
+      setShowUsersMenu(false);
       setshowPaymentMenu(false);
     }
   };
@@ -267,6 +288,34 @@ const Sidebar = ({
                     </span>
                   </span>
                 </NavLink>
+              </li>
+            )}
+            {user.role === "admin" && (
+              <li className="nav-item">
+                <span onClick={toggleCertMenu} className="nav-link">
+                  <span className="nav-icon">
+                    <span className="cursor-pointer">
+                      <FaCertificate />
+                      {showSidebar && "Certificates"}
+                    </span>
+                    {showSidebar &&
+                      (showCertMenu ? (
+                        <IoIosArrowUp className="nav-arrow" />
+                      ) : (
+                        <IoIosArrowDown className="nav-arrow" />
+                      ))}
+                  </span>
+                  {showCertMenu && (
+                    <div className="nav">
+                      <NavLink onClick={closeSidebar} to="/certificates">
+                        All Certificates
+                      </NavLink>
+                      <NavLink onClick={closeSidebar} to="/certificates/templates">
+                        Templates
+                      </NavLink>
+                    </div>
+                  )}
+                </span>
               </li>
             )}
             {user.role === "instructor" && (

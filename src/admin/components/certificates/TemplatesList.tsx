@@ -1,9 +1,62 @@
+import { useState } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
+import { Button, Menu, MenuHandler, MenuItem, MenuList } from "@material-tailwind/react";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { MdOutlineCheckCircle } from "react-icons/md";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { toast } from "react-toastify";
 import { DataTable } from "../../../Components/table";
 import Picker from "../../../Components/Loaders/Picker";
+import useModal from "../../../hooks/useModal";
+import ReusableModal from "../../../Components/ReusableModal";
+import { setDefaultTemplate, deleteTemplate } from "../../../services/api/certificatesApi";
 
-const TemplatesList = ({ data, isLoading }) => {
+const TemplatesList = ({ data, refetch, isLoading }) => {
+  const { Modal: SetDefault, setShowModal: ShowSetDefault } = useModal();
+  const { Modal: Delete, setShowModal: ShowDelete } = useModal();
+  const [selectedId, setSelectedId] = useState();
+  const [isBusy, setIsBusy] = useState(false);
+
+  const openSetDefault = (id) => {
+    setSelectedId(id);
+    ShowSetDefault(true);
+  };
+  const openDelete = (id) => {
+    setSelectedId(id);
+    ShowDelete(true);
+  };
+
+  const setThisDefault = () => {
+    setIsBusy(true);
+    setDefaultTemplate(selectedId)
+      .then((data) => {
+        toast.success(data.message || "Template set as default");
+        setIsBusy(false);
+        refetch();
+        ShowSetDefault(false);
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message || "Something went wrong");
+        setIsBusy(false);
+      });
+  };
+
+  const deleteThisTemplate = () => {
+    setIsBusy(true);
+    deleteTemplate(selectedId)
+      .then((data) => {
+        toast.success(data.message || "Template deleted");
+        setIsBusy(false);
+        refetch();
+        ShowDelete(false);
+      })
+      .catch((error) => {
+        toast.error(error?.response?.data?.message || "Something went wrong");
+        setIsBusy(false);
+      });
+  };
+
   const columnHelper = createColumnHelper();
   const columns = [
     columnHelper.accessor((row) => row.name, {
@@ -57,6 +110,35 @@ const TemplatesList = ({ data, isLoading }) => {
       ),
       header: (info) => info.column.id,
     }),
+    columnHelper.accessor((row) => row.id, {
+      id: "Action",
+      header: (info) => info.column.id,
+      cell: (info) => (
+        <Menu placement="bottom-end">
+          <MenuHandler>
+            <Button className="bg-transparent px-0 mx-0 hover:shadow-none text-md flex items-center font-normal shadow-none capitalize">
+              <BsThreeDotsVertical className="text-xl text-black" />
+            </Button>
+          </MenuHandler>
+          <MenuList>
+            {!info.row.original.isActive && (
+              <MenuItem
+                className="my-1 fw-500 flex items-center gap-x-2 pt-1"
+                onClick={() => openSetDefault(info.getValue())}
+              >
+                <MdOutlineCheckCircle /> Set Default
+              </MenuItem>
+            )}
+            <MenuItem
+              className="my-1 fw-500 bg-red-500 text-white flex items-center gap-x-2 pt-1"
+              onClick={() => openDelete(info.getValue())}
+            >
+              <RiDeleteBinLine /> Delete
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      ),
+    }),
   ];
 
   return (
@@ -67,6 +149,26 @@ const TemplatesList = ({ data, isLoading }) => {
         </div>
       )}
       {data && !!data?.length && <DataTable data={data} columns={columns} />}
+      <SetDefault title={""} size={"xs"}>
+        <ReusableModal
+          title={"Are you sure you want to set this as the default template"}
+          actionTitle={"Set Default"}
+          cancelTitle={"Cancel"}
+          closeModal={() => ShowSetDefault(false)}
+          action={setThisDefault}
+          isBusy={isBusy}
+        />
+      </SetDefault>
+      <Delete title={""} size={"xs"}>
+        <ReusableModal
+          title={"Are you sure you want to delete this template"}
+          actionTitle={"Delete"}
+          cancelTitle={"Cancel"}
+          closeModal={() => ShowDelete(false)}
+          action={deleteThisTemplate}
+          isBusy={isBusy}
+        />
+      </Delete>
     </div>
   );
 };

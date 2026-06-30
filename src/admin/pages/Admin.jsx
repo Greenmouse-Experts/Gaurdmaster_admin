@@ -12,6 +12,7 @@ const Dashboard = () => {
   const [showMembershipMenu, setShowMembershipMenu] = useState(false);
   const [showVerificationMenu, setShowVerificationMenu] = useState(false);
   const [showPaymentMenu, setshowPaymentMenu] = useState(false)
+  const [showCertMenu, setShowCertMenu] = useState(false)
   const [showSidebar, setShowSidebar] = useState(window.innerWidth >= 650);
 
   const toggleSidebar = () => {
@@ -22,6 +23,7 @@ const Dashboard = () => {
     setShowEventMenu(false);
     setShowIdMenu(false)
     setshowPaymentMenu(false)
+    setShowCertMenu(false)
   };
   const token = localStorage.getItem('guardadmin_token')
   const navigate = useNavigate()
@@ -52,6 +54,8 @@ const Dashboard = () => {
           toggleSidebar={toggleSidebar}
           showIdMenu={showIdMenu}
           setShowIdMenu={setShowIdMenu}
+          showCertMenu={showCertMenu}
+          setShowCertMenu={setShowCertMenu}
         />
       </div>
       <div className={showSidebar ? "component" : "close-side"}>
