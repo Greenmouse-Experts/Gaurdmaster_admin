@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../constant.Jsx";
+import { BASE_URL } from "../constant.jsx";
 import { getToken } from "../helpers";
 
 // const Base = ENDPOINT.BASE_URL
@@ -12,11 +12,11 @@ axios.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401) {
-          localStorage.clear()
-        return (window.location.href = "/login");
+      localStorage.clear();
+      return (window.location.href = "/login");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export const uploadVideo = async (payload) => {
@@ -69,9 +69,7 @@ export const markUserNotify = async (id) => {
 };
 
 export const getTestimonials = async (route, page) => {
-  return axios
-    .get(`${route}?page=${page}`)
-    .then((response) => response.data);
+  return axios.get(`${route}?page=${page}`).then((response) => response.data);
 };
 
 export const updateTestimonial = async (id, payload) => {
@@ -81,7 +79,5 @@ export const updateTestimonial = async (id, payload) => {
 };
 
 export const deleteTestimonial = async (id) => {
-  return axios
-    .delete(`/testimonials/${id}`)
-    .then((response) => response.data);
+  return axios.delete(`/testimonials/${id}`).then((response) => response.data);
 };

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../constant.Jsx";
+import { BASE_URL } from "../constant.jsx";
 import { getToken } from "../helpers";
 
 axios.defaults.baseURL = BASE_URL;

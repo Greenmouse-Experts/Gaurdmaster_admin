@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../constant.Jsx";
+import { BASE_URL } from "../constant.jsx";
 
 axios.defaults.baseURL = BASE_URL;
 
@@ -53,11 +53,11 @@ export const deleteBlogPost = async (id) => {
 
 export const addBlogPostTag = async (id) => {
   return axios
-  .patch(`/blog/remove-post-tag/${id}`)
-  .then((response) => response.data);
-}
+    .patch(`/blog/remove-post-tag/${id}`)
+    .then((response) => response.data);
+};
 export const removeBlogPostTag = async (id, payload) => {
   return axios
-  .patch(`/blog/remove-post-tag/${id}`, payload)
-  .then((response) => response.data);
-}
+    .patch(`/blog/remove-post-tag/${id}`, payload)
+    .then((response) => response.data);
+};

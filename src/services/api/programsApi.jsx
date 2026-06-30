@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../constant.Jsx";
+import { BASE_URL } from "../constant.jsx";
 import useAuthStore from "../../store/userStore";
 
 axios.defaults.baseURL = BASE_URL;
@@ -36,9 +36,7 @@ export const getSingleCourse = async (route) => {
 };
 
 export const updateCourse = async (route, payload) => {
-  return axios
-    .patch(`${route}`, payload)
-    .then((response) => response.data);
+  return axios.patch(`${route}`, payload).then((response) => response.data);
 };
 
 export const deleteCourse = async (id) => {
@@ -52,9 +50,7 @@ export const featureCourse = async (id, featured) => {
 };
 
 export const getCourseContent = async (route) => {
-  return axios
-    .get(`${route}`)
-    .then((response) => response.data);
+  return axios.get(`${route}`).then((response) => response.data);
 };
 
 export const createCourseContent = async (payload) => {
@@ -106,15 +102,21 @@ export const getAssessmentQuestions = async (id) => {
 };
 
 export const createQuestion = async (payload) => {
-  return axios.post(`/assessments/add-question`, payload).then((response) => response.data)
-}
+  return axios
+    .post(`/assessments/add-question`, payload)
+    .then((response) => response.data);
+};
 export const editQuestion = async (id, payload) => {
-  return axios.patch(`/assessments/question/${id}`, payload).then((response) => response.data)
-}
+  return axios
+    .patch(`/assessments/question/${id}`, payload)
+    .then((response) => response.data);
+};
 
 export const deleteQuestion = async (id) => {
-  return axios.delete(`/assessments/question/${id}`).then((response) => response.data)
-}
+  return axios
+    .delete(`/assessments/question/${id}`)
+    .then((response) => response.data);
+};
 
 export const getCourseReviews = async (id) => {
   return axios
@@ -123,11 +125,13 @@ export const getCourseReviews = async (id) => {
 };
 
 export const muteCourseReview = async (id) => {
-  return axios.post(`/reviews/mute-course-review/${id}`).then((response) => response.data)
-}
+  return axios
+    .post(`/reviews/mute-course-review/${id}`)
+    .then((response) => response.data);
+};
 
 export const unmuteCourseReview = async (id) => {
-  return axios.post(`/reviews/unmute-course-review/${id}`).then((response) => response.data)
-}
-
-
+  return axios
+    .post(`/reviews/unmute-course-review/${id}`)
+    .then((response) => response.data);
+};
