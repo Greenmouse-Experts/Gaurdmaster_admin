@@ -18,11 +18,29 @@ const EditCourse = ({ item, close, refetch }) => {
     shortDesc: item?.shortDesc || "",
     fullDesc: item.fullDesc || "",
     price: Number(item.price) || "",
+    discount: item?.discount || "",
     program: item.program.id || "",
     coverImg: ''
   });
+  const [outcomes, setOutcomes] = useState(
+    item?.outcomes?.length ? item.outcomes : [{ description: "", order: 1 }]
+  );
+
   const handleChange = (name, value) => {
     setUserDetail({ ...userDetail, [name]: value });
+  };
+
+  const addOutcome = () => {
+    setOutcomes([...outcomes, { description: "", order: outcomes.length + 1 }]);
+  };
+  const removeOutcome = (index) => {
+    setOutcomes(outcomes.filter((_, i) => i !== index));
+  };
+  const handleOutcomeChange = (index, field, value) => {
+    const updated = outcomes.map((o, i) =>
+      i === index ? { ...o, [field]: field === "order" ? Number(value) : value } : o
+    );
+    setOutcomes(updated);
   };
   const mutation = useMutation({
     mutationFn: uploadImage,
@@ -30,7 +48,9 @@ const EditCourse = ({ item, close, refetch }) => {
       const payload = {
         ...userDetail,
         price: Number(userDetail.price),
-        coverImage: data.image
+        discount: Number(userDetail.discount) || 0,
+        coverImage: data.image,
+        outcomes,
       };
       const route = role === "admin"? `/courses/${item.id}` : `/courses/instructor/${item.id}`
       updateCourse(route, payload)
@@ -60,7 +80,9 @@ const EditCourse = ({ item, close, refetch }) => {
     } else {
       const payload = {
         ...userDetail,
-        price: Number(item.price)
+        price: Number(userDetail.price),
+        discount: Number(userDetail.discount) || 0,
+        outcomes,
       }
       const route = role === "admin"? `/courses/${item.id}` : `/courses/instructor/${item.id}`
       updateCourse(route, payload)
@@ -136,6 +158,19 @@ const EditCourse = ({ item, close, refetch }) => {
                 />
               </div>
             </div>
+            <div className="input">
+              <label>Discount (%)</label>
+              <div>
+                <input
+                  type="number"
+                  placeholder="Enter Discount"
+                  min={0}
+                  max={100}
+                  value={userDetail.discount}
+                  onChange={(e) => handleChange("discount", e.target.value)}
+                />
+              </div>
+            </div>
           </div>
          <div className="flex gap-x-2 items-center">
          <div className="input mt-3">
@@ -164,7 +199,58 @@ const EditCourse = ({ item, close, refetch }) => {
               />
             </div>
           </div>
-          <div className="mt-12 flex justify-end">
+          <div className="mt-4">
+            <div className="flex items-center justify-between mb-2">
+              <label className="fw-500">Learning Outcomes</label>
+              <button
+                type="button"
+                onClick={addOutcome}
+                className="text-sm text-primary fw-500 underline"
+              >
+                + Add Outcome
+              </button>
+            </div>
+            {outcomes.map((outcome, index) => (
+              <div key={index} className="flex gap-2 items-start mb-2">
+                <div className="input flex-1">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Outcome description"
+                      value={outcome.description}
+                      required
+                      onChange={(e) =>
+                        handleOutcomeChange(index, "description", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="input w-20 shrink-0">
+                  <div>
+                    <input
+                      type="number"
+                      placeholder="Order"
+                      min={1}
+                      value={outcome.order}
+                      onChange={(e) =>
+                        handleOutcomeChange(index, "order", e.target.value)
+                      }
+                    />
+                  </div>
+                </div>
+                {outcomes.length > 1 && (
+                  <button
+                    type="button"
+                    onClick={() => removeOutcome(index)}
+                    className="mt-2 text-red-500 fw-500 text-lg leading-none"
+                  >
+                    ✕
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 flex justify-end">
             <button className="btn-primary w-full py-3 fw-500 lg:text-lg">
               {isBusy ? "Submiting..." : "Submit"}
             </button>
