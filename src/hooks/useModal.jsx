@@ -4,12 +4,12 @@ import { FaTimes } from "react-icons/fa";
 
 // Map the old @material-tailwind dialog sizes onto tailwind max-widths.
 const sizeMap = {
-  xs: "max-w-sm",
-  sm: "max-w-md",
-  md: "max-w-lg",
-  lg: "max-w-2xl",
-  xl: "max-w-3xl",
-  "2xl": "max-w-4xl",
+  xs: "max-w-md",
+  sm: "max-w-xl",
+  md: "max-w-2xl",
+  lg: "max-w-4xl",
+  xl: "max-w-5xl",
+  "2xl": "max-w-6xl",
 };
 
 const useModal = () => {
