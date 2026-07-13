@@ -24,8 +24,11 @@ const EditCourse = ({ item, close, refetch }) => {
       price: Number(item?.price) || "",
       discount: item?.discount || "",
       program: item?.program?.id || "",
-      outcomes: item?.outcomes?.length
-        ? item.outcomes
+      outcomes: item?.courseOutcomes?.length
+        ? item.courseOutcomes.map((o) => ({
+            description: o.description,
+            order: o.order,
+          }))
         : [{ description: "", order: 1 }],
     },
   });
@@ -71,7 +74,9 @@ const EditCourse = ({ item, close, refetch }) => {
               close();
             })
             .catch((err) => {
-              toast.error(err.response?.data?.message || "Something went wrong");
+              toast.error(
+                err.response?.data?.message || "Something went wrong",
+              );
               setIsBusy(false);
             });
         },
@@ -115,7 +120,11 @@ const EditCourse = ({ item, close, refetch }) => {
           <div className="input">
             <label>Course Program</label>
             <div>
-              <select name="program" className="p-[15px] w-full" {...register("program")}>
+              <select
+                name="program"
+                className="p-[15px] w-full"
+                {...register("program")}
+              >
                 <option value="">Select an option</option>
                 {!!data?.data?.length &&
                   data.data.map((p) => (
@@ -199,7 +208,9 @@ const EditCourse = ({ item, close, refetch }) => {
             <label className="fw-500">Learning Outcomes</label>
             <button
               type="button"
-              onClick={() => append({ description: "", order: fields.length + 1 })}
+              onClick={() =>
+                append({ description: "", order: fields.length + 1 })
+              }
               className="text-sm text-primary fw-500 underline"
             >
               + Add Outcome
