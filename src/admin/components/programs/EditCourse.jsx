@@ -228,7 +228,7 @@ const EditCourse = ({ item, close, refetch }) => {
                   />
                 </div>
               </div>
-              <div className="input w-20 shrink-0">
+              <div className="input w-24 flex justify-center items-center">
                 <div>
                   <input
                     type="number"

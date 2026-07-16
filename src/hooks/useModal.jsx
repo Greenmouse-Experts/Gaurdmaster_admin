@@ -41,9 +41,7 @@ const useModal = () => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className={`w-full ${
-              sizeMap[size] || sizeMap.md
-            } max-h-[90vh] overflow-y-auto rounded-lg bg-white py-5 shadow-2xl outline-none`}
+            className={`w-full max-w-4xl max-h-[90vh] overflow-y-auto rounded-lg bg-white py-5 shadow-2xl outline-none`}
           >
             <div className="px-4 pb-2">
               {type === "withCancel" ? (
