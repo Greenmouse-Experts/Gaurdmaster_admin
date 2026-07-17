@@ -61,7 +61,7 @@ export const createCourseContent = async (payload) => {
 
 export const updateCourseContent = async (id, payload) => {
   return axios
-    .patch(`/course-content-sub/${id}`, payload)
+    .patch(`/course-content/${id}`, payload)
     .then((response) => response.data);
 };
 

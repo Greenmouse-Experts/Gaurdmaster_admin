@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { RiArrowDropDownLine, RiArrowDropUpLine, RiDeleteBin6Line } from "react-icons/ri";
+import { FaRegEdit } from "react-icons/fa";
 import {
   Accordion,
   AccordionBody,
@@ -7,19 +8,27 @@ import {
 } from "@material-tailwind/react";
 import { MdOutlineOndemandVideo } from "react-icons/md";
 import SubContent from "./SubContent";
+import EditContent from "./EditContent";
 import { deleteCourseContent } from "../../../../services/api/programsApi";
 import { toast } from "react-toastify";
 import ReusableModal from "../../../../Components/ReusableModal";
 import useDialog from "../../../../hooks/useDialog";
+import useModal from "../../../../hooks/useModal";
 
-const ContentList = ({ data, courseId }) => {
+const ContentList = ({ data, courseId, refetch }) => {
   const [open, setOpen] = React.useState(1);
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
   const { Dialog: Delete, setShowModal: ShowDelete } = useDialog();
+  const { Modal: Edit, setShowModal: ShowEdit } = useModal();
   const [selectedId, setSelectedId] = useState();
+  const [selected, setSelected] = useState();
   const openDelete = (id) => {
     setSelectedId(id);
     ShowDelete(true);
+  };
+  const openEdit = (item) => {
+    setSelected(item);
+    ShowEdit(true);
   };
   const [isBusy, setIsBusy] = useState(false)
   const deleteThisCourseContent = (val) => {
@@ -61,7 +70,8 @@ const ContentList = ({ data, courseId }) => {
               <div className="flex gap-x-2 items-center">
                 <MdOutlineOndemandVideo className="text-" />
                 <p className="text-lg">{item.title}</p>
-                <div onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center gap-x-3" onClick={(e) => e.stopPropagation()}>
+                  <FaRegEdit className="cursor-pointer text-xl" onClick={() => openEdit(item)} />
                   <RiDeleteBin6Line className="cursor-pointer text-xl" onClick={() => openDelete(item.id)} />
                 </div>
               </div>
@@ -84,6 +94,14 @@ const ContentList = ({ data, courseId }) => {
           isBusy={isBusy}
         />
       </Delete>
+      <Edit title={"Edit Course Content"} size={"md"} type={"withCancel"}>
+        <EditContent
+          item={selected}
+          courseId={courseId}
+          close={() => ShowEdit(false)}
+          refetch={refetch}
+        />
+      </Edit>
     </div>
   );
 };

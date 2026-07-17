@@ -41,7 +41,7 @@ const CourseContent = ({ id }) => {
             )}
             {!isLoading && data && (
               <div>
-                <ContentList data={data?.data} courseId={id} />
+                <ContentList data={data?.data} courseId={id} refetch={refetch} />
               </div>
             )}
           </div>
