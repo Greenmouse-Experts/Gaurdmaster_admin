@@ -89,6 +89,12 @@ export const updateSubContent = async (id, payload) => {
     .then((response) => response.data);
 };
 
+export const deleteSubContent = async (id) => {
+  return axios
+    .delete(`/course-content-sub/${id}`)
+    .then((response) => response.data);
+};
+
 export const viewSingleSubContent = async (id) => {
   return axios
     .get(`/course-content-sub/${id}`)
