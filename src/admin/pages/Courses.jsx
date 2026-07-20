@@ -1,6 +1,6 @@
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import React, { useEffect, useState } from "react";
-import { getCourses } from "../../services/api/programsApi";
+import { getCourses, getPrograms } from "../../services/api/programsApi";
 import useModal from "../../hooks/useModal";
 import AddCourse from "../components/programs/AddCourse";
 import CoursesList from "../components/programs/CourseList";
@@ -14,6 +14,7 @@ const defaultFilters = {
   search: "",
   title: "",
   price: "",
+  programId: "",
   orderBy: "createdDate",
   sortOrder: "DESC",
 };
@@ -24,6 +25,12 @@ const Courses = () => {
   const [filters, setFilters] = useState(defaultFilters);
   const [debouncedFilters, setDebouncedFilters] = useState(defaultFilters);
   const route = role === "admin" ? "courses" : "courses/instructor";
+  const programsRoute = role === "admin" ? "programs" : "programs/fetch-programs";
+
+  const { data: programsData } = useQuery({
+    queryKey: ["getPrograms", programsRoute],
+    queryFn: () => getPrograms(programsRoute),
+  });
 
   // Debounce the filters so we don't fire a request on every keystroke.
   useEffect(() => {
@@ -115,6 +122,22 @@ const Courses = () => {
               placeholder="Filter by price"
               className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-36"
             />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700">Program</label>
+            <select
+              name="programId"
+              value={filters.programId}
+              onChange={handleFilterChange}
+              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-48 bg-white"
+            >
+              <option value="">All Programs</option>
+              {programsData?.data?.map((program) => (
+                <option key={program.id} value={program.id}>
+                  {program.title}
+                </option>
+              ))}
+            </select>
           </div>
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">
