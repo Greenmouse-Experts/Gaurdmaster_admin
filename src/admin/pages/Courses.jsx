@@ -82,7 +82,7 @@ const Courses = () => {
             Add New Course
           </div>
         </div>
-        <div className="flex flex-wrap items-end gap-3 mb-4">
+        <div className="flex flex-wrap items-end gap-3 mb-4 mt-4">
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">Search</label>
             <input
@@ -91,7 +91,7 @@ const Courses = () => {
               value={filters.search}
               onChange={handleFilterChange}
               placeholder="Search courses"
-              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-48"
+              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-48"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -102,7 +102,7 @@ const Courses = () => {
               value={filters.title}
               onChange={handleFilterChange}
               placeholder="Filter by title"
-              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-48"
+              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-48"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -113,16 +113,18 @@ const Courses = () => {
               value={filters.price}
               onChange={handleFilterChange}
               placeholder="Filter by price"
-              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-36"
+              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-36"
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium text-gray-700">Order By</label>
+            <label className="text-sm font-medium text-gray-700">
+              Order By
+            </label>
             <select
               name="orderBy"
               value={filters.orderBy}
               onChange={handleFilterChange}
-              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-40 bg-white"
+              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-40 bg-white"
             >
               <option value="createdDate">Created Date</option>
               <option value="title">Title</option>
@@ -130,12 +132,14 @@ const Courses = () => {
             </select>
           </div>
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium text-gray-700">Sort Order</label>
+            <label className="text-sm font-medium text-gray-700">
+              Sort Order
+            </label>
             <select
               name="sortOrder"
               value={filters.sortOrder}
               onChange={handleFilterChange}
-              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-40 bg-white"
+              className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-40 bg-white"
             >
               <option value="DESC">Descending</option>
               <option value="ASC">Ascending</option>
@@ -144,7 +148,7 @@ const Courses = () => {
           <button
             type="button"
             onClick={resetFilters}
-            className="self-end border border-gray-400 rounded-md px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
+            className="self-end border border-gray-400 rounded-md px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
           >
             Reset
           </button>
