@@ -7,7 +7,6 @@ import CoursesList from "../components/programs/CourseList";
 import { FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
-import ThemeProvider from "../components/programs/ThemeProvider";
 
 const PAGE_SIZE = 200;
 
@@ -83,83 +82,73 @@ const Courses = () => {
             Add New Course
           </div>
         </div>
-        <ThemeProvider className="flex flex-wrap items-end gap-3 mb-4">
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text ">Search</span>
-            </div>
+        <div className="flex flex-wrap items-end gap-3 mb-4">
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700">Search</label>
             <input
               type="text"
               name="search"
               value={filters.search}
               onChange={handleFilterChange}
               placeholder="Search courses"
-              className="input input-bordered input-sm w-full max-w-xs"
+              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-48"
             />
-          </label>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Title</span>
-            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700">Title</label>
             <input
               type="text"
               name="title"
               value={filters.title}
               onChange={handleFilterChange}
               placeholder="Filter by title"
-              className="input input-bordered input-sm w-full max-w-xs"
+              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-48"
             />
-          </label>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Price</span>
-            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700">Price</label>
             <input
               type="number"
               name="price"
               value={filters.price}
               onChange={handleFilterChange}
               placeholder="Filter by price"
-              className="input input-bordered input-sm w-full max-w-xs"
+              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-36"
             />
-          </label>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Order By</span>
-            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700">Order By</label>
             <select
               name="orderBy"
               value={filters.orderBy}
               onChange={handleFilterChange}
-              className="select select-bordered select-sm w-full max-w-xs"
+              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-40 bg-white"
             >
               <option value="createdDate">Created Date</option>
               <option value="title">Title</option>
               <option value="price">Price</option>
             </select>
-          </label>
-          <label className="form-control w-full max-w-xs">
-            <div className="label">
-              <span className="label-text">Sort Order</span>
-            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-medium text-gray-700">Sort Order</label>
             <select
               name="sortOrder"
               value={filters.sortOrder}
               onChange={handleFilterChange}
-              className="select select-bordered select-sm w-full max-w-xs"
+              className="border border-gray-300 rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-40 bg-white"
             >
               <option value="DESC">Descending</option>
               <option value="ASC">Ascending</option>
             </select>
-          </label>
+          </div>
           <button
             type="button"
             onClick={resetFilters}
-            className="btn btn-outline btn-sm self-end"
+            className="self-end border border-gray-400 rounded-md px-4 py-1.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
           >
             Reset
           </button>
-        </ThemeProvider>
+        </div>
         <div className="card_table">
           <CoursesList
             data={data?.data}
