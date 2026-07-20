@@ -1,5 +1,9 @@
 @import "tailwindcss";
-
+@import "tailwindcss";
+@plugin "daisyui" {
+    root: "#gm";
+    themes: all;
+}
 @media screen and (max-width: 1024px) {
     html {
         font-size: 90%;

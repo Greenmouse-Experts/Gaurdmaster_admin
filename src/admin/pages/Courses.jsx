@@ -7,13 +7,7 @@ import CoursesList from "../components/programs/CourseList";
 import { FaPlus } from "react-icons/fa";
 import { toast } from "react-toastify";
 import useAuth from "../../hooks/useAuth";
-import {
-  ThemeProvider,
-  Input,
-  Select,
-  Option,
-  Button,
-} from "@material-tailwind/react";
+import ThemeProvider from "../components/programs/ThemeProvider";
 
 const PAGE_SIZE = 10;
 
@@ -89,76 +83,82 @@ const Courses = () => {
             Add New Course
           </div>
         </div>
-        <ThemeProvider>
-          <div className="flex flex-wrap items-end gap-4 mb-4 mt-4">
-            <div className="w-48">
-              <Input
-                label="Search"
-                name="search"
-                value={filters.search}
-                onChange={handleFilterChange}
-                placeholder="Search courses"
-                size="md"
-              />
+        <ThemeProvider className="flex flex-wrap items-end gap-3 mb-4">
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text ">Search</span>
             </div>
-            <div className="w-48">
-              <Input
-                label="Title"
-                name="title"
-                value={filters.title}
-                onChange={handleFilterChange}
-                placeholder="Filter by title"
-                size="md"
-              />
+            <input
+              type="text"
+              name="search"
+              value={filters.search}
+              onChange={handleFilterChange}
+              placeholder="Search courses"
+              className="input input-bordered input-sm w-full max-w-xs"
+            />
+          </label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Title</span>
             </div>
-            <div className="w-36">
-              <Input
-                label="Price"
-                type="number"
-                name="price"
-                value={filters.price}
-                onChange={handleFilterChange}
-                placeholder="Filter by price"
-                size="md"
-              />
+            <input
+              type="text"
+              name="title"
+              value={filters.title}
+              onChange={handleFilterChange}
+              placeholder="Filter by title"
+              className="input input-bordered input-sm w-full max-w-xs"
+            />
+          </label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Price</span>
             </div>
-            <div className="w-40">
-              <Select
-                label="Order By"
-                value={filters.orderBy}
-                onChange={(val) =>
-                  setFilters((old) => ({ ...old, orderBy: val }))
-                }
-                size="md"
-              >
-                <Option value="createdDate">Created Date</Option>
-                <Option value="title">Title</Option>
-                <Option value="price">Price</Option>
-              </Select>
+            <input
+              type="number"
+              name="price"
+              value={filters.price}
+              onChange={handleFilterChange}
+              placeholder="Filter by price"
+              className="input input-bordered input-sm w-full max-w-xs"
+            />
+          </label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Order By</span>
             </div>
-            <div className="w-40">
-              <Select
-                label="Sort Order"
-                value={filters.sortOrder}
-                onChange={(val) =>
-                  setFilters((old) => ({ ...old, sortOrder: val }))
-                }
-                size="md"
-              >
-                <Option value="DESC">Descending</Option>
-                <Option value="ASC">Ascending</Option>
-              </Select>
-            </div>
-            <Button
-              type="button"
-              variant="outlined"
-              size="sm"
-              onClick={resetFilters}
-              className="self-end"
+            <select
+              name="orderBy"
+              value={filters.orderBy}
+              onChange={handleFilterChange}
+              className="select select-bordered select-sm w-full max-w-xs"
             >
-              Reset
-            </Button>
-          </div>
+              <option value="createdDate">Created Date</option>
+              <option value="title">Title</option>
+              <option value="price">Price</option>
+            </select>
+          </label>
+          <label className="form-control w-full max-w-xs">
+            <div className="label">
+              <span className="label-text">Sort Order</span>
+            </div>
+            <select
+              name="sortOrder"
+              value={filters.sortOrder}
+              onChange={handleFilterChange}
+              className="select select-bordered select-sm w-full max-w-xs"
+            >
+              <option value="DESC">Descending</option>
+              <option value="ASC">Ascending</option>
+            </select>
+          </label>
+          <button
+            type="button"
+            onClick={resetFilters}
+            className="btn btn-outline btn-sm self-end"
+          >
+            Reset
+          </button>
         </ThemeProvider>
         <div className="card_table">
           <CoursesList
