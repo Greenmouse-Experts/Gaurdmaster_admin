@@ -3,10 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 @import "tailwindcss";
-@plugin "daisyui" {
+/*@plugin "daisyui" {
     root: "#gm";
     themes: all;
-}
+}*/
 @plugin "daisyui/theme" {
     name: "guard";
     default: false;
