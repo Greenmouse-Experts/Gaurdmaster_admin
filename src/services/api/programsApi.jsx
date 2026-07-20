@@ -52,8 +52,10 @@ export const featureCourse = async (id, featured) => {
     .then((response) => response.data);
 };
 
-export const getCourseContent = async (route) => {
-  return axios.get(`${route}`).then((response) => response.data);
+export const getCourseContent = async (route, page = 1) => {
+  return axios
+    .get(`${route}?page=${page}&pageSize=10`)
+    .then((response) => response.data);
 };
 
 export const createCourseContent = async (payload) => {

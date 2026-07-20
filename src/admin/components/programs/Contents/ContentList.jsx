@@ -14,8 +14,9 @@ import { toast } from "react-toastify";
 import ReusableModal from "../../../../Components/ReusableModal";
 import useDialog from "../../../../hooks/useDialog";
 import useModal from "../../../../hooks/useModal";
+import { getPageCount } from "../../../../Components/utils";
 
-const ContentList = ({ data, courseId, refetch }) => {
+const ContentList = ({ data, courseId, refetch, next, prev, page, count }) => {
   const [open, setOpen] = React.useState(1);
   const handleOpen = (value) => setOpen(open === value ? 0 : value);
   const { Dialog: Delete, setShowModal: ShowDelete } = useDialog();
@@ -84,6 +85,29 @@ const ContentList = ({ data, courseId, refetch }) => {
           </Accordion>
         );
       })}
+      {count > 0 && (
+        <div className="flex items-center justify-between mt-6 text-sm text-gray-600">
+          <p>
+            Page {page} of {getPageCount(count, 10)}
+          </p>
+          <div className="flex gap-2">
+            <button
+              onClick={prev}
+              className="px-3 py-1.5 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors disabled:opacity-40"
+              disabled={page === 1}
+            >
+              Previous
+            </button>
+            <button
+              onClick={next}
+              className="px-3 py-1.5 border border-gray-300 rounded-md hover:bg-gray-100 transition-colors disabled:opacity-40"
+              disabled={page >= getPageCount(count, 10)}
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      )}
       <Delete title={""} size={"xs"}>
         <ReusableModal
           title={"Are you sure you want to Delete this course content"}
