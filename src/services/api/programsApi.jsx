@@ -25,10 +25,13 @@ export const createCourse = async (payload) => {
 export const getPrograms = async (route) => {
   return axios.get(`/${route}`).then((response) => response.data);
 };
-export const getCourses = async (payload, route) => {
-  return axios
-    .get(`/${route}?page=${payload}`)
-    .then((response) => response.data);
+export const getCourses = async (params, route) => {
+  const query = new URLSearchParams(
+    Object.entries(params).filter(
+      ([, value]) => value !== "" && value !== undefined && value !== null
+    )
+  ).toString();
+  return axios.get(`/${route}?${query}`).then((response) => response.data);
 };
 
 export const getSingleCourse = async (route) => {
