@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createColumnHelper } from "@tanstack/react-table";
-import { DataTable } from "../../../Components/table";
+import { DynamicTable } from "../../../Components/DynamicTable";
 import dayjs from "dayjs";
 import {
   Button,
@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 import { RiDeleteBinLine } from "react-icons/ri";
 import Picker from "../../../Components/Loaders/Picker";
 
-const FaqsList = ({ data, refetch, isLoading }) => {
+const FaqsList = ({ data, refetch, isLoading, next, prev, page, count }) => {
   const { Modal: Edit, setShowModal: ShowEdit } = useModal();
   const { Modal: Retract, setShowModal: ShowRetract } = useModal();
   const { Modal: Publish, setShowModal: ShowPublish } = useModal();
@@ -172,7 +172,16 @@ const FaqsList = ({ data, refetch, isLoading }) => {
             <Picker size={1.7} />
           </div>
         )}
-        {data && !!data?.length && <DataTable data={data} columns={columns} />}
+        {data && !!data?.length && (
+          <DynamicTable
+            data={data}
+            columns={columns}
+            next={next}
+            prev={prev}
+            page={page}
+            count={count}
+          />
+        )}
       </div>
       <Edit title={"Edit FAQ"} size={"md"} type={"withCancel"}>
         <EditFaq

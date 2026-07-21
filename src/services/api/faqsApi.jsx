@@ -3,8 +3,10 @@ import { BASE_URL } from "../constant.jsx";
 
 axios.defaults.baseURL = BASE_URL;
 
-export const getFaqs = async () => {
-  return axios.get(`/faqs`).then((response) => response.data);
+export const getFaqs = async (page = 1) => {
+  return axios
+    .get(`/faqs?page=${page}&pageSize=10`)
+    .then((response) => response.data);
 };
 
 export const createFaq = async (payload) => {
