@@ -25,8 +25,10 @@ export const deleteBlogTag = async (id) => {
     .then((response) => response.data);
 };
 
-export const getBlogPost = async () => {
-  return axios.get(`/blog/fetch-posts`).then((response) => response.data);
+export const getBlogPost = async (page = 1) => {
+  return axios
+    .get(`/blog/fetch-posts?page=${page}&pageSize=10`)
+    .then((response) => response.data);
 };
 
 export const getSinglePost = async (id) => {
