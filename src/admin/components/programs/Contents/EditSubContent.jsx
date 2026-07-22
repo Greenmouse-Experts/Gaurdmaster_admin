@@ -73,6 +73,7 @@ const EditSubContent = ({ close, refetch, item }) => {
   );
   const [userDetail, setUserDetail] = useState({
     title: item?.title || "",
+    description: item?.description || "",
     duration: item?.duration || 0,
     media: "",
     previewUrl: "",
@@ -103,6 +104,7 @@ const EditSubContent = ({ close, refetch, item }) => {
 
     let payload = {
       title: userDetail.title,
+      description: userDetail.description,
       duration: Number(userDetail.duration),
     };
 
@@ -179,6 +181,17 @@ const EditSubContent = ({ close, refetch, item }) => {
                   onChange={(e) => handleChange("duration", e.target.value)}
                 />
               </div>
+            </div>
+          </div>
+          <div className="input mt-5">
+            <label>Description</label>
+            <div>
+              <textarea
+                rows={4}
+                placeholder="Enter Description"
+                value={userDetail.description}
+                onChange={(e) => handleChange("description", e.target.value)}
+              />
             </div>
           </div>
           <div>

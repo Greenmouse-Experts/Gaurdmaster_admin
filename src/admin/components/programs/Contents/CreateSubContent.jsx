@@ -51,6 +51,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
   }
   const [userDetail, setUserDetail] = useState({
     title: "",
+    description: "",
     course: courseId,
     courseContent: id,
     duration: 0,
@@ -213,6 +214,17 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
                   onChange={(e) => handleChange("duration", e.target.value)}
                 />
               </div>
+            </div>
+          </div>
+          <div className="input mt-5">
+            <label>Description</label>
+            <div>
+              <textarea
+                rows={4}
+                placeholder="Enter Description"
+                value={userDetail.description}
+                onChange={(e) => handleChange("description", e.target.value)}
+              />
             </div>
           </div>
           <div>
