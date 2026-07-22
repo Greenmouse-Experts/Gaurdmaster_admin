@@ -58,8 +58,16 @@ export const uploadAudio = async (payload) => {
     .then((response) => response.data);
 };
 
-export const getNotify = async (path) => {
-  return axios.get(`/notifications/${path}`).then((response) => response.data);
+export const getNotify = async () => {
+  return axios.get(`/notifications`).then((response) => response.data);
+};
+
+export const getReadNotify = async () => {
+  return axios.get(`/notifications/read`).then((response) => response.data);
+};
+
+export const getUnreadNotify = async () => {
+  return axios.get(`/notifications/unread`).then((response) => response.data);
 };
 
 export const markUserNotify = async (id) => {
