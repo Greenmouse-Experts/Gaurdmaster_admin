@@ -14,7 +14,7 @@ const defaultFilters = {
   search: "",
   title: "",
   price: "",
-  "program[Id]": "",
+  "program[id]": "",
   orderBy: "createdDate",
   sortOrder: "DESC",
 };
@@ -127,7 +127,7 @@ const Courses = () => {
           <div className="flex flex-col gap-1">
             <label className="text-sm font-medium text-gray-700">Program</label>
             <select
-              name="program[Id]"
+              name="program[id]"
               value={filters.programId}
               onChange={handleFilterChange}
               className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-gray-400 w-48 bg-white"
