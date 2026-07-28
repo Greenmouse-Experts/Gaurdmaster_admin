@@ -45,7 +45,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
   ];
   const formatSize = {
     image: "Image size must not be above 1mb",
-    video: "Video size should not be above 100mb",
+    video: "Video size should not be above 500mb",
     audio: "Audio file size should not be above 8mb",
     document: "Document size should not be above 10mb"
   }
@@ -129,8 +129,8 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
       }
     }
     if(userDetail.mediaType === "video"){
-      if (userDetail.media.size > 50 * 1000 * 1024) {
-        toast.info("Only video with maximum size of 50MB is allowed");
+      if (userDetail.media.size > 500 * 1000 * 1024) {
+        toast.info("Only video with maximum size of 500MB is allowed");
         return;
       }
     }

@@ -38,7 +38,7 @@ const medias = [
 
 const formatSize = {
   image: "Image size must not be above 1mb",
-  video: "Video size should not be above 50mb",
+  video: "Video size should not be above 500mb",
   audio: "Audio file size should not be above 8mb",
   document: "Document size should not be above 10mb",
 };
@@ -46,7 +46,7 @@ const formatSize = {
 // max size (MB) per media type, matching the create flow
 const sizeLimits = {
   image: 1,
-  video: 50,
+  video: 500,
   document: 10,
   audio: 8,
 };
