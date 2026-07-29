@@ -43,12 +43,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
       accepts: "audio/mp3,audio/*;capture=microphone",
     },
   ];
-  const formatSize = {
-    image: "Image size must not be above 1mb",
-    video: "Video size should not be above 500mb",
-    audio: "Audio file size should not be above 8mb",
-    document: "Document size should not be above 10mb"
-  }
+  const formatSize = {}
   const [userDetail, setUserDetail] = useState({
     title: "",
     description: "",
@@ -121,31 +116,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
       toast.info("Please fill the required fields");
       return;
     }
-    // validate sizes
-    if(userDetail.mediaType === "image"){
-      if (userDetail.media.size > 1 * 1000 * 1024) {
-        toast.info("Only images with maximum size of 1MB is allowed");
-        return;
-      }
-    }
-    if(userDetail.mediaType === "video"){
-      if (userDetail.media.size > 500 * 1000 * 1024) {
-        toast.info("Only video with maximum size of 500MB is allowed");
-        return;
-      }
-    }
-    if(userDetail.mediaType === "document"){
-      if (userDetail.media.size > 10 * 1000 * 1024) {
-        toast.info("Only documents with maximum size of 10MB is allowed");
-        return;
-      }
-    }
-    if(userDetail.mediaType === "audio"){
-      if (userDetail.media.size > 8 * 1000 * 1024) {
-        toast.info("Only audios with maximum size of 8MB is allowed");
-        return;
-      }
-    }
+
     if (userDetail.previewUrl) {
       if (userDetail.mediaType === "image") {
         const fd = new FormData();

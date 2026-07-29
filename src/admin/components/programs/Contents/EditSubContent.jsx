@@ -36,20 +36,7 @@ const medias = [
   },
 ];
 
-const formatSize = {
-  image: "Image size must not be above 1mb",
-  video: "Video size should not be above 500mb",
-  audio: "Audio file size should not be above 8mb",
-  document: "Document size should not be above 10mb",
-};
-
-// max size (MB) per media type, matching the create flow
-const sizeLimits = {
-  image: 1,
-  video: 500,
-  document: 10,
-  audio: 8,
-};
+const formatSize = {};
 
 // upload a single file for the given media type and return its hosted url
 const uploadMedia = async (mediaType, file) => {
@@ -112,12 +99,6 @@ const EditSubContent = ({ close, refetch, item }) => {
     if (userDetail.media) {
       if (!userDetail.mediaType) {
         toast.info("Please select a media type");
-        setIsBusy(false);
-        return;
-      }
-      const maxBytes = sizeLimits[userDetail.mediaType] * 1000 * 1024;
-      if (userDetail.media.size > maxBytes) {
-        toast.info(formatSize[userDetail.mediaType]);
         setIsBusy(false);
         return;
       }
