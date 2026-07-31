@@ -191,7 +191,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
             <label>Description</label>
             <div>
               <textarea
-                rows={4}
+                rows={8}
                 placeholder="Enter Description"
                 value={userDetail.description}
                 onChange={(e) => handleChange("description", e.target.value)}
