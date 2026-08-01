@@ -43,6 +43,8 @@ jobs:
             ${{ steps.image.outputs.path }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          build-args: |
+            VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}
 
       - name: Deploy to Dokploy
         uses: qbix-tech/dokploy-deploy-action@v1
