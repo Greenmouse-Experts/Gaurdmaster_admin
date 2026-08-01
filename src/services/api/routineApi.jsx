@@ -58,21 +58,36 @@ export const uploadAudio = async (payload) => {
     .then((response) => response.data);
 };
 
-export const getNotify = async () => {
-  return axios.get(`/notifications`).then((response) => response.data);
+export const getNotify = async (params = {}) => {
+  const { page = 1, pageSize = 10, orderBy = "createdDate", sortOrder = "DESC" } = params;
+  return axios
+    .get(`/notifications/admin?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}&sortOrder=${sortOrder}`)
+    .then((response) => response.data);
 };
 
-export const getReadNotify = async () => {
-  return axios.get(`/notifications/read`).then((response) => response.data);
+export const getReadNotify = async (params = {}) => {
+  const { page = 1, pageSize = 10, orderBy = "createdDate", sortOrder = "DESC" } = params;
+  return axios
+    .get(`/notifications/read?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}&sortOrder=${sortOrder}`)
+    .then((response) => response.data);
 };
 
-export const getUnreadNotify = async () => {
-  return axios.get(`/notifications/unread`).then((response) => response.data);
+export const getUnreadNotify = async (params = {}) => {
+  const { page = 1, pageSize = 10, orderBy = "createdDate", sortOrder = "DESC" } = params;
+  return axios
+    .get(`/notifications/unread?page=${page}&pageSize=${pageSize}&orderBy=${orderBy}&sortOrder=${sortOrder}`)
+    .then((response) => response.data);
 };
 
 export const markUserNotify = async (id) => {
   return axios
     .patch(`/notifications/mark-as-read/${id}`)
+    .then((response) => response.data);
+};
+
+export const markAllNotify = async () => {
+  return axios
+    .patch(`/notifications/mark-all-as-read`)
     .then((response) => response.data);
 };
 

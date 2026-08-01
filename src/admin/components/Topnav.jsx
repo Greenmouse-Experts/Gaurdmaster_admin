@@ -17,7 +17,7 @@ import { IoLogOutOutline } from "react-icons/io5";
 import useAuth from "../../hooks/useAuth";
 import useModal from "../../hooks/useModal";
 import { useQuery } from "@tanstack/react-query";
-import { getNotify } from "../../services/api/routineApi";
+import { getUnreadNotify } from "../../services/api/routineApi";
 
 export const Topnav = ({ toggleSidebar }) => {
   const popup = () => {
@@ -46,7 +46,6 @@ export const Topnav = ({ toggleSidebar }) => {
     }; // eslint-disable-next-line
   }, []);
 
-  const datas = [];
   const [activeDropdown, setActiveDropdown] = useState(false);
   const { signOut } = useAuth();
   const logout = () => {
@@ -54,8 +53,8 @@ export const Topnav = ({ toggleSidebar }) => {
   };
   const { Modal, setShowModal } = useModal();
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ["notify"],
-    queryFn: () => getNotify(admin.role),
+    queryKey: ["notify-bell"],
+    queryFn: () => getUnreadNotify({ pageSize: 5 }),
   });
   return (
     <>
@@ -70,7 +69,7 @@ export const Topnav = ({ toggleSidebar }) => {
           <div onClick={popup} ref={bellIconRef} className="bell">
             <div className="bell_icon cursor-pointer">
               <GoBell />
-              <span>{data?.data?.length}</span>
+              <span>{data?.count ?? 0}</span>
             </div>
 
             {activeDropdown && (
@@ -78,14 +77,15 @@ export const Topnav = ({ toggleSidebar }) => {
                 {data?.data?.length > 0 ? (
                   <div>
                     <div className="add_head">
-                      <p>Notification</p>{" "}
+                      <p>Notification</p>
                     </div>
                     {data?.data?.slice(0, 4).map((item) => (
                       <div key={item.id}>
                         <div className="bell_body">
                           <GoBell className="shrink-0" />
                           <div>
-                            <h3 className="!fs-500">{item.body}</h3>
+                            {item.title && <h3 className="!fs-500 fw-600">{item.title}</h3>}
+                            <h3 className={item.title ? "!fs-400" : "!fs-500"}>{item.body}</h3>
                           </div>
                         </div>
                       </div>
@@ -93,10 +93,9 @@ export const Topnav = ({ toggleSidebar }) => {
                   </div>
                 ) : (
                   <div>
-                    {" "}
                     <div className="add_head">
-                      <p>Notification</p>{" "}
-                    </div>{" "}
+                      <p>Notification</p>
+                    </div>
                     <p className="no_body">No Notifications</p>
                   </div>
                 )}
