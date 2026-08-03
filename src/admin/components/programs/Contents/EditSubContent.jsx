@@ -56,7 +56,7 @@ const EditSubContent = ({ close, refetch, item }) => {
   });
   const [isBusy, setIsBusy] = useState(false);
   const [mediaType, setMediaType] = useState(
-    medias.find((m) => m.value === item?.mediaType)?.accepts || ""
+    medias.find((m) => m.value === item?.mediaType)?.accepts || "",
   );
   const [userDetail, setUserDetail] = useState({
     title: item?.title || "",
@@ -168,6 +168,7 @@ const EditSubContent = ({ close, refetch, item }) => {
             <label>Description</label>
             <div>
               <textarea
+                className="w-full"
                 rows={8}
                 placeholder="Enter Description"
                 value={userDetail.description}
@@ -201,7 +202,9 @@ const EditSubContent = ({ close, refetch, item }) => {
             </div>
             <div className="mt-6">
               <p>Course Media</p>
-              <p className="fs-400 italic">{formatSize[userDetail.mediaType]}</p>
+              <p className="fs-400 italic">
+                {formatSize[userDetail.mediaType]}
+              </p>
               <div className="mt-3 border p-4 place-center relative">
                 {userDetail.media === "" ? (
                   <p
@@ -249,7 +252,9 @@ const EditSubContent = ({ close, refetch, item }) => {
                   type="file"
                   accept={mediaType}
                   disabled={mediaType === ""}
-                  onChange={(e) => handleChange("previewUrl", e.target.files[0])}
+                  onChange={(e) =>
+                    handleChange("previewUrl", e.target.files[0])
+                  }
                   className="absolute z-10 top-0 left-0 w-full h-full opacity-0"
                 />
               </div>

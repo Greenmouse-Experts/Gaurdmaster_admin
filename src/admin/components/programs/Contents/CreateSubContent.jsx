@@ -33,8 +33,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
       name: "media",
       value: "document",
       naming: "File/Document",
-      accepts:
-        ".doc,.docx,.ppt,.pptx,.pdf",
+      accepts: ".doc,.docx,.ppt,.pptx,.pdf",
     },
     {
       name: "media",
@@ -43,7 +42,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
       accepts: "audio/mp3,audio/*;capture=microphone",
     },
   ];
-  const formatSize = {}
+  const formatSize = {};
   const [userDetail, setUserDetail] = useState({
     title: "",
     description: "",
@@ -109,10 +108,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
   const submitAction = async (e) => {
     e.preventDefault();
     setIsBusy(true);
-    if (
-      userDetail.media === "" ||
-      userDetail.title === ""
-    ) {
+    if (userDetail.media === "" || userDetail.title === "") {
       toast.info("Please fill the required fields");
       return;
     }
@@ -125,7 +121,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
           .then((data) => {
             setUserDetail({ ...userDetail, previewUrl: data.image });
           })
-          .catch(() => { });
+          .catch(() => {});
       } else if (userDetail.mediaType === "video") {
         const fd = new FormData();
         fd.append("video", userDetail.previewUrl);
@@ -133,7 +129,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
           .then((data) => {
             setUserDetail({ ...userDetail, previewUrl: data.video });
           })
-          .catch(() => { });
+          .catch(() => {});
       } else if (userDetail.mediaType === "document") {
         const fd = new FormData();
         fd.append("doc", userDetail.previewUrl);
@@ -141,7 +137,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
           .then((data) => {
             setUserDetail({ ...userDetail, previewUrl: data.doc });
           })
-          .catch(() => { });
+          .catch(() => {});
       } else if (userDetail.mediaType === "audio") {
         const fd = new FormData();
         fd.append("audio", userDetail.previewUrl);
@@ -149,12 +145,15 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
           .then((data) => {
             setUserDetail({ ...userDetail, previewUrl: data.audio });
           })
-          .catch(() => { });
+          .catch(() => {});
       } else {
       }
     }
     const fd = new FormData();
-    fd.append(userDetail.mediaType === "document" ? "doc" : userDetail.mediaType, userDetail.media);
+    fd.append(
+      userDetail.mediaType === "document" ? "doc" : userDetail.mediaType,
+      userDetail.media,
+    );
     mutation.mutate(fd);
   };
   return (
@@ -194,6 +193,7 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
                 rows={8}
                 placeholder="Enter Description"
                 value={userDetail.description}
+                className="w-full"
                 onChange={(e) => handleChange("description", e.target.value)}
               />
             </div>
@@ -220,12 +220,15 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
             </div>
             <div className="mt-6">
               <p>Course Media</p>
-              <p className="fs-400 italic">{formatSize[userDetail.mediaType]}</p>
+              <p className="fs-400 italic">
+                {formatSize[userDetail.mediaType]}
+              </p>
               <div className="mt-3 border p-4 place-center relative">
                 {userDetail.media === "" ? (
                   <p
-                    className={`text-white relative z-0 !syne px-6 py-2 my-6 rounded-lg ${mediaType === "" ? "bg-gray-300" : "bg-gray-900"
-                      }`}
+                    className={`text-white relative z-0 !syne px-6 py-2 my-6 rounded-lg ${
+                      mediaType === "" ? "bg-gray-300" : "bg-gray-900"
+                    }`}
                   >
                     Click To Upload
                   </p>
@@ -249,8 +252,9 @@ const CreateSubContent = ({ id, courseId, close, refetch }) => {
               <div className="mt-3 border p-4 place-center relative">
                 {userDetail.previewUrl === "" ? (
                   <p
-                    className={`text-white relative z-0 !syne px-6 py-2 my-6 rounded-lg ${mediaType === "" ? "bg-gray-300" : "bg-gray-900"
-                      }`}
+                    className={`text-white relative z-0 !syne px-6 py-2 my-6 rounded-lg ${
+                      mediaType === "" ? "bg-gray-300" : "bg-gray-900"
+                    }`}
                   >
                     Click To Upload
                   </p>
