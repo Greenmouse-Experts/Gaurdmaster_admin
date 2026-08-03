@@ -1,0 +1,9 @@
+node_modules
+dist
+.git
+.gitignore
+.github
+*.md
+bun.lock
+.env.local
+.env.development
