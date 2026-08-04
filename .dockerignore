@@ -4,6 +4,6 @@ dist
 .gitignore
 .github
 *.md
-bun.lock
+package-lock.json
 .env.local
 .env.development
